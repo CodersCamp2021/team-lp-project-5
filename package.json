@@ -1,11 +1,12 @@
 {
-  "name": "react-node-app",
+  "name": "team-lp-project-5",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "build": "cd client && npm install && npm run build",
+    "prepare": "husky install"
   },
   "engines": {
     "node": "16.x"
@@ -13,8 +14,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  
+  "prettier": {
+    "singleQuote": false,
+    "trailingComma": "all"
+  },
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
