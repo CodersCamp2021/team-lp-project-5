@@ -1,4 +1,4 @@
-import { createStyles } from "@mantine/core";
+import { createStyles, Text } from "@mantine/core";
 import React from "react";
 
 const useStyles = createStyles((theme) => ({
@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <footer className={classes.footer}>
-      @CodersCamp2021-team-lp-project-5
+      <Text sx={{ fontSize: "16px" }}>@CodersCamp2021-team-lp-project-5</Text>
     </footer>
   );
 };

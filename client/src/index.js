@@ -14,6 +14,13 @@ ReactDOM.render(
       white: "#EEEEEE",
       black: "#222831",
       fontFamily: "Cabin, sans-serif",
+      fontSizes: {
+        xs: "20px",
+        sm: "30px",
+        md: "40px",
+        lg: "48px",
+        xl: "80px",
+      },
       headings: {
         fontFamily: "Cabin, sans-serif",
         fontWeight: 700,
