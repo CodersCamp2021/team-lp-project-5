@@ -1,5 +1,9 @@
 import React from "react";
-import { createStyles, Container, Box, Textarea, Text } from "@mantine/core";
+import { createStyles, Container, Box, Textarea, Text, Button, Group } from "@mantine/core";
+import { DatePicker, TimeInput} from '@mantine/dates';
+import { BsClock, BsCircleFill, BsChevronDown} from "react-icons/bs";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -21,6 +25,7 @@ const useStyles = createStyles((theme) => ({
 
 const AddTask = () => {
   const { classes } = useStyles();
+  let navigate = useNavigate();
   return (
     <Container
       p="md"
@@ -32,6 +37,24 @@ const AddTask = () => {
       //         alignItems: 'center',
       //       },})}
     >
+    <Text align="right"><Button onClick = {() => {
+        navigate("/")
+        }}
+          rightIcon={<CgClose size={25}/>}
+          styles={{
+            root: {
+              paddingRight: 5,
+              backgroundColor: "#393E46",
+              '&:hover': {
+            backgroundColor: "#393E46",
+          },
+            },
+            rightIcon: {
+              marginLeft: 0,
+            },
+          }}
+        >
+        </Button></Text>
       <Box>
         <Text
           className={classes.titlesNames}
@@ -67,6 +90,39 @@ const AddTask = () => {
         >
           DATE AND TIME
         </Text>
+        <Group position="apart">
+        <DatePicker allowLevelChange={false} placeholder="DD-MM-YYYY" />
+        <TimeInput format="12" defaultValue={new Date()} icon={<BsClock size={16} />}/>
+        <Button
+          radius={18}
+          rightIcon={<BsCircleFill size={35}/>}
+          styles={{
+            root: {
+              paddingRight: 0,
+            },
+            rightIcon: {
+              marginLeft: 15,
+            },
+          }}
+        >
+        </Button>
+        <Button
+          rightIcon={<BsChevronDown size={25}/>}
+          styles={{
+            root: {
+              paddingRight: 5,
+              backgroundColor: "#393E46",
+              '&:hover': {
+            backgroundColor: "#393E46",
+          },
+            },
+            rightIcon: {
+              marginLeft: 15,
+            },
+          }}
+        >MORE
+        </Button>
+        </Group>
       </Box>
     </Container>
   );
