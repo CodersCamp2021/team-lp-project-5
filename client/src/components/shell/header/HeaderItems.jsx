@@ -23,7 +23,11 @@ const HeaderItems = ({ opened, setOpened }) => {
           opened={searchPopover}
           onClose={() => setSearchPopover(false)}
           target={
-            <BsSearch onClick={() => setSearchPopover((o) => !o)} size={30} />
+            <BsSearch
+              onClick={() => setSearchPopover((o) => !o)}
+              onMouseLeave={() => setSearchPopover(false)}
+              size={30}
+            />
           }
           width={110}
           position="bottom"
@@ -39,7 +43,11 @@ const HeaderItems = ({ opened, setOpened }) => {
           opened={bellPopover}
           onClose={() => setBellPopover(false)}
           target={
-            <BsBell onClick={() => setBellPopover((o) => !o)} size={30} />
+            <BsBell
+              onClick={() => setBellPopover((o) => !o)}
+              onMouseLeave={() => setBellPopover(false)}
+              size={30}
+            />
           }
           width={110}
           position="bottom"
