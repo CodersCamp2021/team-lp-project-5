@@ -1,39 +1,9 @@
-import { Box, Button, createStyles, List, Text } from "@mantine/core";
 import React from "react";
-
+import { Box, Button, List, Text } from "@mantine/core";
 import { BsCardText, BsCalendar4, BsPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const useStyles = createStyles((theme) => ({
-  button: {
-    backgroundColor: theme.colors.primary[6],
-    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-    fontSize: 28,
-    lineHeight: "34px",
-    letterSpacing: "0.1em",
-    fontWeight: 700,
-    width: 260,
-    height: 55,
-    marginBottom: 30,
-    "&:hover": {
-      backgroundColor: theme.colors.primary[8],
-    },
-  },
-
-  listItem: {
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "center",
-    width: "100%",
-    color: theme.colors.navbarText,
-    textDecoration: "none",
-    height: 70,
-    "&:hover": {
-      color: theme.colors.lightBg,
-      backgroundColor: theme.colors.highlightBg,
-    },
-  },
-}));
+import { useNavbarItemsStyles } from "../../../hooks/styles/use-navbar-styles";
 
 const MenuItems = [
   {
@@ -47,7 +17,7 @@ const MenuItems = [
 ];
 
 const NavbarItems = () => {
-  const { classes } = useStyles();
+  const { classes } = useNavbarItemsStyles();
 
   return (
     <Box>
