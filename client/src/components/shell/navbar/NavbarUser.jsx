@@ -21,9 +21,7 @@ const NavbarUser = () => {
           alt="User Photo"
         />
       </Box>
-      <Text weight="bold" className={classes.userNames}>
-        Jakub Czerwiński{" "}
-      </Text>
+      <Text className={classes.userNames}>Jakub Czerwiński </Text>
     </React.Fragment>
   );
 };

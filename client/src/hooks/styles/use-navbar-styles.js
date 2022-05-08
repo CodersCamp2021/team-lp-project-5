@@ -37,6 +37,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
   userNames: {
     fontSize: 36,
+    fontWeight: 600,
     color: "#FFFFFF",
     textAlign: "center",
     wordSpacing: "100vw",
@@ -65,6 +66,7 @@ export const useNavbarStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    fontWeight: 300,
   },
 }));
 
@@ -78,10 +80,10 @@ export const useNavbarItemsStyles = createStyles((theme) => ({
     fontSize: 28,
     lineHeight: "34px",
     letterSpacing: "0.1em",
-    fontWeight: 700,
+    fontWeight: 500,
     width: 260,
     height: 55,
-    marginBottom: 30,
+    margin: "20px 0",
     "&:hover": {
       backgroundColor: theme.colors.primary[8],
     },
@@ -92,6 +94,7 @@ export const useNavbarItemsStyles = createStyles((theme) => ({
     justifyContent: "center",
     textAlign: "center",
     width: "100%",
+    fontWeight: 300,
     color: theme.colors.navbarText,
     textDecoration: "none",
     height: 70,
