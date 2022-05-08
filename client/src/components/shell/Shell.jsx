@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AppShell, Text, Box } from "@mantine/core";
 
-import Header from "./Header";
+import Header from "./header/Header";
 import Navbar from "./navbar/Navbar.jsx";
 import { useShellStyles } from "../../hooks/styles/use-shell-styles";
 
