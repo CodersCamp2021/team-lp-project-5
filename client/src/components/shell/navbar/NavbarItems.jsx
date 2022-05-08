@@ -4,6 +4,7 @@ import { BsCardText, BsCalendar4, BsPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 import { useNavbarItemsStyles } from "../../../hooks/styles/use-navbar-styles";
+import { useMediaQuery } from "@mantine/hooks";
 
 const MenuItems = [
   {
@@ -18,6 +19,7 @@ const MenuItems = [
 
 const NavbarItems = () => {
   const { classes } = useNavbarItemsStyles();
+  const isXsScreen = useMediaQuery("(min-width: 576px)");
 
   return (
     <Box>
@@ -37,16 +39,16 @@ const NavbarItems = () => {
       >
         <Button
           radius={15}
-          rightIcon={<BsPlus size={35} />}
+          className={classes.button}
+          rightIcon={<BsPlus size={isXsScreen ? 35 : 26} />}
           styles={{
             root: {
-              paddingRight: 0,
+              paddingRight: isXsScreen ? 0 : 5,
             },
             rightIcon: {
-              marginLeft: 15,
+              marginLeft: isXsScreen ? 15 : 5,
             },
           }}
-          className={classes.button}
         >
           ADD TASK
         </Button>
