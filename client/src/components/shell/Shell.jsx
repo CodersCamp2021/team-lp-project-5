@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AppShell, Text, Box, createStyles } from "@mantine/core";
 
 import Header from "./Header";
-import Navbar from "./Navbar.jsx";
+import Navbar from "./navbar/Navbar.jsx";
 
 const useStyles = createStyles((theme) => ({
   shell: {

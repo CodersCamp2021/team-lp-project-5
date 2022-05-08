@@ -39,6 +39,7 @@ ReactDOM.render(
           "#244547",
           "#233C3D",
         ],
+        navbarText: "#C4C4C4",
         lightBg: "#393E46",
         darkBg: "#222831",
         highlightBg: "#EAEAEA",
