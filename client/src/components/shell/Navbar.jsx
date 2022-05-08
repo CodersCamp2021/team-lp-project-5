@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, createStyles, Image, Navbar, Text, Title } from "@mantine/core";
+import { Box, createStyles, Image, Navbar, Text, Title, Button } from "@mantine/core";
+import { BsPlus } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -41,6 +43,7 @@ const useStyles = createStyles((theme) => ({
 
 const AppNavbar = ({ opened }) => {
   const { classes } = useStyles();
+  let navigate = useNavigate();
 
   return (
     <Navbar
@@ -67,6 +70,23 @@ const AppNavbar = ({ opened }) => {
         </Text>
       </Navbar.Section>
       <Navbar.Section grow>Navbar</Navbar.Section>
+      <Button onClick = {() => {
+        navigate("/AddTask")
+        }}
+          radius={15}
+          rightIcon={<BsPlus size={35} />}
+          styles={{
+            root: {
+              paddingRight: 0,
+            },
+            rightIcon: {
+              marginLeft: 15,
+            },
+          }}
+          className={classes.button}
+        >
+          ADD TASK
+        </Button>
       <Navbar.Section>Log out</Navbar.Section>
     </Navbar>
   );

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { AppShell, Text, Box, createStyles } from "@mantine/core";
+import { Route, Routes } from 'react-router-dom';
 
 import Header from "./Header";
 import Navbar from "./Navbar.jsx";
+import AddTask from "../AddTask/AddTask";
 
 const useStyles = createStyles((theme) => ({
   shell: {
@@ -29,8 +31,13 @@ const Shell = () => {
       <Box>
         <Text>Content</Text>
       </Box>
+    <Routes>
+      <Route path="/addTask" element={<AddTask />} />
+    </Routes>
     </AppShell>
   );
 };
+
+
 
 export default Shell;
