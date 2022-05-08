@@ -16,7 +16,17 @@ const AppNavbar = ({ opened }) => {
       py="md"
       hiddenBreakpoint="sm"
       hidden={!opened}
-      width={{ base: 320 }}
+      width={{ base: "unset", sm: 320 }}
+      styles={{
+        root: {
+          "@media (max-width: 768px)": {
+            minHeight: "calc(100vh - 80px)",
+          },
+          "@media (min-width: 768px)": {
+            minHeight: "100vh",
+          },
+        },
+      }}
       className={classes.navbar}
     >
       <Navbar.Section className={classes.navbarTop}>

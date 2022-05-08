@@ -14,4 +14,14 @@ export const useShellStyles = createStyles((theme) => ({
       },
     },
   },
+  smallShell: {
+    main: {
+      [theme.fn.smallerThan("sm")]: {
+        display: "none",
+      },
+      [theme.fn.largerThan("sm")]: {
+        display: "block",
+      },
+    },
+  },
 }));

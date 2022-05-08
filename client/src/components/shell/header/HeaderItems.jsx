@@ -9,6 +9,7 @@ const HeaderItems = ({ opened, setOpened }) => {
   const [bellPopover, setBellPopover] = useState(false);
   const { classes } = useHeaderStyles();
   const theme = useMantineTheme();
+
   return (
     <Box className={classes.headerItemsWrapper}>
       <Burger
