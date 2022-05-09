@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from "./Header";
 import Navbar from "./Navbar.jsx";
-import AddTask from "../AddTask/AddTask";
+import AddTask from "../addTask/AddTask";
 
 const useStyles = createStyles((theme) => ({
   shell: {
