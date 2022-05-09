@@ -10,6 +10,8 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+app.use(express.json());
+
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
@@ -19,7 +21,7 @@ app.get("/api", (req, res) => {
 });
 
 // Routers
-app.use("/user", userRouter);
+app.use("/api/user", userRouter);
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
