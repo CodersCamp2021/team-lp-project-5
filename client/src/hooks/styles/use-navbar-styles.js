@@ -13,7 +13,6 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   navbarTop: {
-    minHeight: 410,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
@@ -25,7 +24,7 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   userImage: {
-    margin: "0 auto",
+    margin: "15px auto",
     width: 160,
     height: 160,
     border: `5px solid ${theme.colors.primary[6]}`,
@@ -52,7 +51,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
   navbarBottom: {
     width: "100%",
-    minHeight: 70,
+    minHeight: 60,
     fontSize: 32,
     textDecoration: "none",
     color: theme.colors.navbarText,
@@ -113,7 +112,7 @@ export const useNavbarItemsStyles = createStyles((theme) => ({
     fontWeight: 300,
     color: theme.colors.navbarText,
     textDecoration: "none",
-    height: 70,
+    height: 60,
     "&:hover": {
       color: theme.colors.lightBg,
       backgroundColor: theme.colors.highlightBg,
