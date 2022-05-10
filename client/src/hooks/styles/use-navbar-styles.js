@@ -13,7 +13,6 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   navbarTop: {
-    minHeight: 410,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
@@ -25,7 +24,7 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   userImage: {
-    margin: "0 auto",
+    margin: "15px auto",
     width: 160,
     height: 160,
     border: `5px solid ${theme.colors.primary[6]}`,
