@@ -1,10 +1,8 @@
-import { Box } from '@mantine/core'
-import React from 'react'
+import { Box } from "@mantine/core";
+import React from "react";
 
 const Collections = () => {
-  return (
-    <Box sx={{ minHeight: '35vh'}}></Box>
-    )
-}
+  return <Box sx={{ flex: 3.5 }}>Collections</Box>;
+};
 
-export default Collections
+export default Collections;
