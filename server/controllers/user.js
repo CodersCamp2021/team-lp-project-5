@@ -16,7 +16,18 @@ export default class UserController {
     return { message: "User created" };
   };
 
-  static login = async (body) => {
-    console.log(body);
+  static login = async ({ body, session }) => {
+    const client = await pool.connect();
+    const user = await client.query(
+      `SELECT * FROM users WHERE username='${body.username}';`,
+    );
+    if (!user) {
+      throw new Error("User with this username does not exist.");
+    }
+    session.userId = body.username;
+    await client.query(
+      `UPDATE users SET session='${session.email}' WHERE username='${body.username}';`,
+    );
+    return { message: "Logged in successfully." };
   };
 }
