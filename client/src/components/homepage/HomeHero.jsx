@@ -5,10 +5,17 @@ const HomeHero = () => {
   return (
     <Box
       sx={(theme) => ({
-        [theme.fn.smallerThan("md")]: { flexDirection: "column" },
+        [theme.fn.smallerThan("md")]: {
+          flexDirection: "column",
+          marginTop: "60px",
+        },
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        msTransform: "translate(-50%, -60%)",
+        transform: "translate(-50%, -60%)",
       })}
     >
       <Box
@@ -21,6 +28,7 @@ const HomeHero = () => {
           [theme.fn.largerThan("md")]: {
             height: "436px",
             maxWidth: "500px",
+            minWidth: "460px",
           },
           display: "flex",
           flexDirection: "column",
@@ -72,15 +80,22 @@ const HomeHero = () => {
           Get started
         </Button>
       </Box>
-      <Image
-        sx={(theme) => ({
-          [theme.fn.smallerThan("sm")]: { width: "268px", height: "200px" },
-          [theme.fn.largerThan("sm")]: { width: "536px", height: "4 00px" },
-          marginBottom: "30px",
-        })}
-        src="https://lukaszadam.com/monitor.svg"
-        withPlaceholder
-      />
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Image
+          sx={(theme) => ({
+            [theme.fn.smallerThan("sm")]: { width: "301px", height: "225px" },
+            [theme.fn.largerThan("sm")]: {
+              width: "536px",
+              height: "400px",
+            },
+            marginBottom: "30px",
+          })}
+          src="https://lukaszadam.com/monitor.svg"
+          withPlaceholder
+        />
+      </Box>
     </Box>
   );
 };
