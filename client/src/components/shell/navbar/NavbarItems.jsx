@@ -10,10 +10,12 @@ const MenuItems = [
   {
     icon: <BsCardText />,
     text: "Overview",
+    path: "/",
   },
   {
     icon: <BsCalendar4 />,
     text: "Calendar",
+    path: "/calendar",
   },
 ];
 
@@ -57,7 +59,7 @@ const NavbarItems = () => {
             key={item.text}
             icon={item.icon}
             component={Link}
-            to="/"
+            to={item.path}
             className={classes.listItem}
           >
             <Text size="32px">{item.text}</Text>
