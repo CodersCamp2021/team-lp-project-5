@@ -69,6 +69,9 @@ const HomeHero = () => {
             [theme.fn.smallerThan("md")]: {
               marginTop: "20px",
             },
+            "&:hover": {
+              backgroundColor: theme.colors.primary[8],
+            },
             maxWidth: "170px",
             fontSize: "26px",
             fontWeight: "normal",

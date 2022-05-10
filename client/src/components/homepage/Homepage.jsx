@@ -1,5 +1,4 @@
 import { Anchor, Box, Text } from "@mantine/core";
-import React from "react";
 import Footer from "./Footer";
 import HomeHero from "./HomeHero";
 import Logo from "./Logo";
