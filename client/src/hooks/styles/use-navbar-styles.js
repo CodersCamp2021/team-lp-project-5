@@ -51,7 +51,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
   navbarBottom: {
     width: "100%",
-    minHeight: 70,
+    minHeight: 60,
     fontSize: 32,
     textDecoration: "none",
     color: theme.colors.navbarText,
@@ -112,7 +112,7 @@ export const useNavbarItemsStyles = createStyles((theme) => ({
     fontWeight: 300,
     color: theme.colors.navbarText,
     textDecoration: "none",
-    height: 70,
+    height: 60,
     "&:hover": {
       color: theme.colors.lightBg,
       backgroundColor: theme.colors.highlightBg,
