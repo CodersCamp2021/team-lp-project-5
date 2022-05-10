@@ -18,16 +18,24 @@ export default class UserController {
 
   static login = async ({ body, session }) => {
     const client = await pool.connect();
-    const user = await client.query(
-      `SELECT * FROM users WHERE username='${body.username}';`,
-    );
+    const user = await client.query(`SELECT * FROM users WHERE username=$1;`, [
+      body.username,
+    ]);
     if (!user) {
       throw new Error("User with this username does not exist.");
     }
-    session.userId = body.username;
-    await client.query(
-      `UPDATE users SET session='${session.email}' WHERE username='${body.username}';`,
-    );
+    if (body.password != user.rows[0].password) {
+      throw new Error("Invalid password.");
+    }
+    if (user.rows[0].session) {
+      session.userId = user.rows[0].user_id;
+    } else {
+      await client.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
+        JSON.stringify(session),
+        body.username,
+      ]);
+      session.userId = user.rows[0].user_id;
+    }
     return { message: "Logged in successfully." };
   };
 }
