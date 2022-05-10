@@ -3,7 +3,7 @@ import pool from "../db/setup.js";
 export default class UserController {
   static register = async (body) => {
     const client = await pool.connect();
-    const userCreated = await client.query(
+    await client.query(
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
         body.username,
@@ -14,5 +14,9 @@ export default class UserController {
       ],
     );
     return { message: "User created" };
+  };
+
+  static login = async (body) => {
+    console.log(body);
   };
 }
