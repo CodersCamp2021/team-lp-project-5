@@ -8,28 +8,16 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   const theme = useMantineTheme();
   const matches = useMediaQuery("(min-width: 860px)");
   const today = new Date();
-  const [value, setValue] = useState(today);
-
-  useEffect(() => {
-    //TODO: handle date change -> display tasks for that day
-    console.log(value);
-  }, [value]);
 
   return (
     <MantineCalendar
       value={selectedDate}
       onChange={setSelectedDate}
       size={matches ? "xl" : "md"}
-      dayStyle={(date) =>
-        date.getDate() === today.getDate() &&
-        date.getFullYear() === today.getFullYear() &&
-        date.getMonth() === today.getMonth()
-          ? { backgroundColor: theme.colors.primary[6], color: "#ffffff" }
-          : null
-      }
       styles={(theme) => ({
         selected: {
-          border: `2px solid ${theme.colors.primary[6]}`,
+          boxShadow: `inset 0px 0px 0px 2px ${theme.colors.primary[6]}`,
+          background: `transparent !important`,
         },
         calendarHeaderLevel: {
           textTransform: "uppercase",
