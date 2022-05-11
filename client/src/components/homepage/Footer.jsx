@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import React from "react";
-import { useFooterStyles } from "../../hooks/styles/use-footer-styles";
+import { useFooterStyles } from "../../hooks/styles/use-homepage-styles";
 
 const Footer = () => {
   const { classes } = useFooterStyles();

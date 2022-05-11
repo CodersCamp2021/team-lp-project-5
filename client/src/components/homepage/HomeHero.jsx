@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Image, Text, Button } from "@mantine/core";
-import { useHomeHeroStyles } from "../../hooks/styles/use-homehero-styles";
+import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
 
 const HomeHero = () => {
   const { classes } = useHomeHeroStyles();
