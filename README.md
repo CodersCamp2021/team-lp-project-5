@@ -13,7 +13,7 @@
 - [Krzysztof Prońko](https://github.com/Ruud1990)
 - [Paweł Stępień](https://github.com/pastepi)
 
-# 🖼️ Timey - App Overview
+# 🌄 Timey - App Overview
 
 This is a monorepo for the frontend and backend of our project.
 
@@ -31,9 +31,9 @@ Deployed on Heroku:
 - Task management - add/edit/delete
 - Dashboard and calendar views
 
-# 🔧 Used Tech
+# 🛠️ Used Tech
 
-## 📚 Frontend:
+## 🎨 Frontend:
 
 - [React Query](https://react-query.tanstack.com/)
 - [React Router](https://reactrouter.com/)
@@ -46,7 +46,7 @@ Deployed on Heroku:
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 
-## Global:
+## 🌎 Global:
 
 - [Husky](https://typicode.github.io/husky/#/)
 - [Lint-staged](https://github.com/okonet/lint-staged)
@@ -54,7 +54,7 @@ Deployed on Heroku:
 - [Figma](https://www.figma.com/)
 - [Trello](https://trello.com/)
 
-# 🏃 How to use
+# 🔑 How to use
 
 ### **Installing dependencies**
 
@@ -88,7 +88,7 @@ Running frontend only:
 
 `cd client && npm start`
 
-## Additional info
+## \*️⃣ Additional info
 
 This monorepo was set up by following the guide by Reed Barger:
 
