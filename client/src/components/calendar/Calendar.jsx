@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Calendar as MantineCalendar } from "@mantine/dates";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMantineTheme } from "@mantine/core";
+import { checkIfTheSameDay } from "../../utils/checkIfTheSameDay";
 
-const Calendar = () => {
+const Calendar = ({ selectedDate, setSelectedDate }) => {
   const theme = useMantineTheme();
   const matches = useMediaQuery("(min-width: 860px)");
   const today = new Date();
@@ -16,8 +17,8 @@ const Calendar = () => {
 
   return (
     <MantineCalendar
-      value={value}
-      onChange={setValue}
+      value={selectedDate}
+      onChange={setSelectedDate}
       size={matches ? "xl" : "md"}
       dayStyle={(date) =>
         date.getDate() === today.getDate() &&
@@ -47,6 +48,17 @@ const Calendar = () => {
         },
         weekday: { fontSize: 16, textTransform: "uppercase" },
       })}
+      dayStyle={(date) => {
+        const isTheSameDay = checkIfTheSameDay(date, today);
+        if (isTheSameDay) {
+          return {
+            backgroundColor: theme.colors.primary[6],
+            color: "#ffffff",
+          };
+        } else {
+          return null;
+        }
+      }}
     />
   );
 };

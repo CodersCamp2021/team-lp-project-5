@@ -1,5 +1,7 @@
 import { Box, ScrollArea, Stack, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
+import { checkIfTheSameDay } from "../../utils/checkIfTheSameDay";
+import EmptyTasksTitle from "./EmptyTasksTitle";
 import SingleTask from "./SingleTask";
 
 const DUMMY_TASKS = [
@@ -10,6 +12,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, fuga?",
     priority: 1,
     isDone: false,
+    date: new Date("May 11, 2022"),
   },
   {
     task_id: "2",
@@ -18,6 +21,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, maxime.",
     priority: 2,
     isDone: false,
+    date: new Date("May 10, 2022"),
   },
   {
     task_id: "3",
@@ -26,6 +30,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, consequatur!",
     priority: 1,
     isDone: true,
+    date: new Date("May 12, 2022"),
   },
   {
     task_id: "4",
@@ -34,6 +39,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, doloremque!",
     priority: 3,
     isDone: true,
+    date: new Date("May 13, 2022"),
   },
   {
     task_id: "5",
@@ -42,6 +48,7 @@ const DUMMY_TASKS = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, tenetur.",
     priority: 1,
     isDone: false,
+    date: new Date("May 14, 2022"),
   },
   {
     task_id: "6",
@@ -50,6 +57,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, laudantium?",
     priority: 2,
     isDone: true,
+    date: new Date("May 15, 2022"),
   },
   {
     task_id: "7",
@@ -58,6 +66,7 @@ const DUMMY_TASKS = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, eligendi.",
     priority: 1,
     isDone: false,
+    date: new Date("May 15, 2022"),
   },
   {
     task_id: "8",
@@ -66,11 +75,21 @@ const DUMMY_TASKS = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ipsum!",
     priority: 3,
     isDone: true,
+    date: new Date("May 17, 2022"),
   },
 ];
 
-const Tasks = () => {
+const Tasks = ({ selectedDate }) => {
   const theme = useMantineTheme();
+
+  const filteredTasks = DUMMY_TASKS.filter((task) => {
+    const isSelectedDay = checkIfTheSameDay(task.date, selectedDate);
+    return isSelectedDay ? task : false;
+  });
+
+  const tasks = filteredTasks.map((task) => (
+    <SingleTask key={task.task_id} task={task} />
+  ));
 
   return (
     <Box
@@ -92,9 +111,7 @@ const Tasks = () => {
       </Text>
       <ScrollArea style={{ height: 650 }}>
         <Stack style={{ gap: 20, width: "100%" }}>
-          {DUMMY_TASKS.map((task) => (
-            <SingleTask key={task.task_id} task={task} />
-          ))}
+          {!!filteredTasks.length ? tasks : <EmptyTasksTitle />}
         </Stack>
       </ScrollArea>
     </Box>
