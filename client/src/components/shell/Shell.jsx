@@ -18,6 +18,11 @@ const Shell = () => {
       styles={{
         main: {
           padding: "0 70px",
+
+          [theme.fn.smallerThan("lg")]: {
+            padding: "0 50px",
+          },
+
           [theme.fn.smallerThan("sm")]: {
             padding: "0 40px",
           },
