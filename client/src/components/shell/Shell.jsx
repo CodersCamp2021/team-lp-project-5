@@ -14,7 +14,7 @@ const Shell = () => {
   return (
     <AppShell
       className={opened ? classes.smallShell : classes.shell}
-      styles={{ main: { padding: 0 } }}
+      styles={{ main: { padding: "0 70px" } }}
       navbar={<Navbar opened={opened} />}
       header={<Header opened={opened} setOpened={setOpened} />}
     >

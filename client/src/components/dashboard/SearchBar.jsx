@@ -20,6 +20,7 @@ const SearchBar = () => {
       <TextInput
         variant="unstyled"
         placeholder="Look for a task"
+        spellCheck={false}
         mr={30}
         styles={{
           root: {

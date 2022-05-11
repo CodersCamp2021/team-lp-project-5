@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, createStyles, Text } from "@mantine/core";
+import { Box, createStyles, Title } from "@mantine/core";
 
 import SearchBar from "./SearchBar";
 
@@ -9,23 +9,22 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0 70px",
   },
 
   greetingText: {
-    fontSize: 48,
-    fontWeight: 500,
     textShadow: theme.other.mainShadow,
     color: theme.white,
   },
 }));
 
-const Header = () => {
+const Header = ({ firstName = "User" }) => {
   const { classes } = useStyles();
 
   return (
     <Box className={classes.headerWrapper}>
-      <Text className={classes.greetingText}>What's up, Jakub!</Text>
+      <Title className={classes.greetingText} order={1}>
+        What's up, {firstName}!
+      </Title>
       <SearchBar />
     </Box>
   );
