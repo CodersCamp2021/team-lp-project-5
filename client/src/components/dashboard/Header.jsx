@@ -9,11 +9,22 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-  },
 
-  greetingText: {
-    textShadow: theme.other.mainShadow,
-    color: theme.white,
+    [theme.fn.smallerThan(997)]: {
+      minHeight: 150,
+      flexDirection: "column",
+      justifyContent: "space-evenly",
+    },
+
+    h1: {
+      textShadow: theme.other.mainShadow,
+      whiteSpace: "nowrap",
+      color: theme.white,
+
+      [theme.fn.smallerThan("xl")]: {
+        fontSize: 32,
+      },
+    },
   },
 }));
 
@@ -22,9 +33,7 @@ const Header = ({ firstName = "User" }) => {
 
   return (
     <Box className={classes.headerWrapper}>
-      <Title className={classes.greetingText} order={1}>
-        What's up, {firstName}!
-      </Title>
+      <Title order={1}>What's up, {firstName}!</Title>
       <SearchBar />
     </Box>
   );

@@ -1,8 +1,9 @@
-import { Box, createStyles, ScrollArea, Title } from "@mantine/core";
+import { Box, createStyles, Divider, ScrollArea, Title } from "@mantine/core";
 import React from "react";
 
 const useStyles = createStyles((theme) => ({
   listsWrapper: {
+    position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "130px",
@@ -21,6 +22,17 @@ const useStyles = createStyles((theme) => ({
 
       [theme.fn.smallerThan("xl")]: {
         fontSize: 24,
+      },
+    },
+
+    ".mantine-Divider-root": {
+      position: "absolute",
+      right: "31.5%",
+      height: "80%",
+      alignSelf: "center",
+
+      [theme.fn.smallerThan(1300)]: {
+        display: "none",
       },
     },
   },
@@ -187,6 +199,7 @@ const Lists = () => {
           </div>
         </ScrollArea>
       </Box>
+      <Divider orientation="vertical" size="sm" />
       <Box className={classes.singleListWrapper}>
         <Title order={4}>LEFTOVERS</Title>
         <ScrollArea type="always" offsetScrollbars>
