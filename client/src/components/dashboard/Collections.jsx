@@ -1,37 +1,10 @@
 import React from "react";
-import { Box, createStyles, ScrollArea, Title } from "@mantine/core";
 
-const useStyles = createStyles((theme) => ({
-  collectionsWrapper: {
-    flex: 3.5,
-
-    h3: {
-      color: theme.colors.primary[6],
-      textShadow: theme.other.mainShadow,
-      letterSpacing: "0.2em",
-
-      [theme.fn.smallerThan("xl")]: {
-        fontSize: 28,
-      },
-
-      [theme.fn.smallerThan(997)]: {
-        textAlign: "center",
-      },
-
-      [theme.fn.smallerThan("xs")]: {
-        fontSize: 24,
-      },
-    },
-  },
-
-  scrollArea: {
-    width: "100%",
-    maxHeight: 220,
-  },
-}));
+import { Box, ScrollArea, Title } from "@mantine/core";
+import { useCollectionsStyles } from "../../hooks/styles/use-dashboard-styles";
 
 const Collections = () => {
-  const { classes } = useStyles();
+  const { classes } = useCollectionsStyles();
 
   return (
     <Box className={classes.collectionsWrapper}>

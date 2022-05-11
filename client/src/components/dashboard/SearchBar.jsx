@@ -1,30 +1,11 @@
 import React from "react";
-import { Box, createStyles, TextInput, useMantineTheme } from "@mantine/core";
+
+import { useSearchBarStyles } from "../../hooks/styles/use-dashboard-styles";
+import { Box, TextInput, useMantineTheme } from "@mantine/core";
 import { BsSearch } from "react-icons/bs";
 
-const useStyles = createStyles((theme) => ({
-  searchBarWrapper: {
-    color: theme.colors.primary[6],
-    display: "flex",
-    justifyItems: "center",
-    alignItems: "center",
-
-    svg: {
-      [theme.fn.smallerThan("xl")]: {
-        height: 34,
-        width: 34,
-      },
-
-      [theme.fn.smallerThan("xs")]: {
-        height: 26,
-        width: 26,
-      },
-    },
-  },
-}));
-
 const SearchBar = () => {
-  const { classes } = useStyles();
+  const { classes } = useSearchBarStyles();
   const theme = useMantineTheme();
 
   return (

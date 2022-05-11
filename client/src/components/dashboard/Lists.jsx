@@ -1,56 +1,10 @@
-import { Box, createStyles, Divider, ScrollArea, Title } from "@mantine/core";
 import React from "react";
 
-const useStyles = createStyles((theme) => ({
-  listsWrapper: {
-    position: "relative",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "130px",
-    height: "100%",
-
-    [theme.fn.smallerThan("xl")]: {
-      gap: "80px",
-    },
-
-    h4: {
-      color: theme.colors.primary[6],
-      textShadow: theme.other.mainShadow,
-      letterSpacing: "0.2em",
-      textAlign: "center",
-      paddingBottom: 10,
-
-      [theme.fn.smallerThan("xl")]: {
-        fontSize: 24,
-      },
-    },
-
-    ".mantine-Divider-root": {
-      position: "absolute",
-      right: "31.5%",
-      height: "80%",
-      alignSelf: "center",
-
-      [theme.fn.smallerThan(1300)]: {
-        display: "none",
-      },
-    },
-  },
-
-  singleListWrapper: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-
-    "&> div": {
-      height: "42vh",
-      marginBottom: 40,
-    },
-  },
-}));
+import { Box, Divider, ScrollArea, Title } from "@mantine/core";
+import { useListsStyles } from "../../hooks/styles/use-dashboard-styles";
 
 const Lists = () => {
-  const { classes } = useStyles();
+  const { classes } = useListsStyles();
 
   return (
     <Box className={classes.listsWrapper}>
