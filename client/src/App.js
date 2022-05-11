@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Homepage from "./components/homepage/Homepage";
