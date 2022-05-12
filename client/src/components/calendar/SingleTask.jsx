@@ -1,7 +1,6 @@
 import { Group, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
-import { taskPriorities } from "../../utils/taskPriorities";
 
 const SingleTask = ({ task }) => {
   const theme = useMantineTheme();
@@ -32,7 +31,7 @@ const SingleTask = ({ task }) => {
       }}
     >
       <BsDashLg
-        color={taskPriorities[priority]}
+        color={theme.other.taskPriorities[priority]}
         size="2.5rem"
         style={{
           transform: "rotate(90deg) translateY(50%)",
