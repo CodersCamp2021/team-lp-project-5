@@ -4,13 +4,12 @@ import expressSession from "express-session";
 import { userRouter } from "./routes/user.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import dotenv from "dotenv";
+import "dotenv/config";
 
-dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());
