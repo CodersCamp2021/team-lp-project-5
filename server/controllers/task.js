@@ -13,7 +13,7 @@ export default class TaskController {
   static changeTaskStatusOrPriority = async (body) => {
     const client = await pool.connect();
     await client.query(
-      `UPDATE tasks SET priority=$1, status=$2 WHERE task_id=$3;`,
+      `UPDATE tasks SET priority=COALESCE($1,priority), status=COALESCE($2,status) WHERE task_id=$3;`,
       [body.priority, body.status, body.task_id],
     );
     return { message: "Task changed" };

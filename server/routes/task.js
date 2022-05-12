@@ -1,19 +1,19 @@
 import express from "express";
-import TaskControler from "../controllers/task.js";
+import TaskController from "../controllers/task.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const response = await TaskControler.createTask(req.body);
+    const response = await TaskController.createTask(req.body);
     return res.status(201).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
 });
 
-router.post("/changeStatus", async (req, res) => {
+router.put("/changeStatus", async (req, res) => {
   try {
-    const response = await TaskControler.changeTaskStatusOrPriority(req.body);
+    const response = await TaskController.changeTaskStatusOrPriority(req.body);
     return res.status(201).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
