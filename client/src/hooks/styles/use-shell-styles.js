@@ -5,6 +5,7 @@ import { createStyles } from "@mantine/core";
  */
 export const useShellStyles = createStyles((theme) => ({
   shell: {
+    backgroundColor: theme.colors.darkBg,
     main: {
       [theme.fn.smallerThan("sm")]: {
         minHeight: "calc(100vh - 80px)",

@@ -7,7 +7,6 @@ const useLogoStyles = createStyles((theme) => ({
     letterSpacing: "0.2em",
     textShadow: theme.other.mainShadow,
     marginRight: "-0.2em",
-    paddingBottom: 10,
 
     [theme.fn.smallerThan("xs")]: {
       fontSize: 36,
