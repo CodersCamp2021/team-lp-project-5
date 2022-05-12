@@ -30,18 +30,18 @@ export default class UserController {
     if (user.rows[0].session) {
       session.userId = user.rows[0].user_id;
     } else {
+      session.userId = user.rows[0].user_id;
       await client.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
         JSON.stringify(session),
         body.username,
       ]);
-      session.userId = user.rows[0].user_id;
     }
     return { message: "Logged in successfully." };
   };
 
   static logout = async (req, res) => {
     const client = await pool.connect();
-    await client.query(`DELETE FROM users WHERE user_id=$1;`, [
+    await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
       req.session.userId,
     ]);
     delete req.session.userId;
