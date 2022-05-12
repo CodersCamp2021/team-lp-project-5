@@ -2,8 +2,14 @@ import * as yup from "yup";
 
 const loginSchema = yup.object({
   body: yup.object({
-    username: yup.string().required(),
-    password: yup.string().required(),
+    email: yup.string().required("Email is required!").email("Invalid email!"),
+    password: yup
+      .string()
+      .required("Password is required!")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character",
+      ),
   }),
 });
 
