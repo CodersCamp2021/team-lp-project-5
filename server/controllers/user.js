@@ -39,8 +39,12 @@ export default class UserController {
     return { message: "Logged in successfully." };
   };
 
-  static logout = async ({ body, session }) => {
-    console.log(body);
-    console.log(session);
+  static logout = async (req, res) => {
+    const client = await pool.connect();
+    await client.query(`DELETE FROM users WHERE user_id=$1;`, [
+      req.session.userId,
+    ]);
+    delete req.session.userId;
+    res.json({ message: "Logged out successfully." });
   };
 }
