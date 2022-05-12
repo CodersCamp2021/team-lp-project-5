@@ -23,4 +23,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 });
+
+router.post("/logout", UserController.logout);
+
 export { router as userRouter };

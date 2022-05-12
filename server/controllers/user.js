@@ -38,4 +38,9 @@ export default class UserController {
     }
     return { message: "Logged in successfully." };
   };
+
+  static logout = async ({ body, session }) => {
+    console.log(body);
+    console.log(session);
+  };
 }
