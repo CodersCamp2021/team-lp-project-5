@@ -109,7 +109,7 @@ const Tasks = ({ selectedDate }) => {
       >
         Tasks
       </Text>
-      <ScrollArea style={{ height: 650 }}>
+      <ScrollArea style={{ maxHeight: 650 }}>
         <Stack style={{ gap: 20, width: "100%" }}>
           {!!filteredTasks.length ? tasks : <EmptyTasksTitle />}
         </Stack>
