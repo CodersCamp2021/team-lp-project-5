@@ -28,6 +28,10 @@ const SingleTask = ({ task }) => {
         borderRadius: 15,
         position: "relative",
         cursor: "pointer",
+
+        display: "flex",
+        flexWrap: "nowrap",
+        gap: "20px",
       }}
     >
       <BsDashLg
@@ -46,6 +50,9 @@ const SingleTask = ({ task }) => {
           fontSize: 18,
           color: "#eeeeee",
           textDecorationLine: isDone ? "line-through" : "",
+
+          overflow: "hidden",
+          maxWidth: "20ch",
         }}
       >
         {title}
