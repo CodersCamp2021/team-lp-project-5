@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import { userRouter } from "./routes/user.js";
+import { taskRouter } from "./routes/task.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -22,6 +23,7 @@ app.get("/api", (req, res) => {
 
 // Routers
 app.use("/api/user", userRouter);
+app.use("/api/task", taskRouter);
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
