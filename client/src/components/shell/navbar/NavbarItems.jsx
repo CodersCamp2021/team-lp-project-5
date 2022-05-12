@@ -19,7 +19,7 @@ const MenuItems = [
   },
 ];
 
-const NavbarItems = () => {
+const NavbarItems = ({ setOpened }) => {
   const { classes } = useNavbarItemsStyles();
   const isXsScreen = useMediaQuery("(min-width: 576px)");
 
@@ -60,6 +60,7 @@ const NavbarItems = () => {
             icon={item.icon}
             component={Link}
             to={item.path}
+            onClick={() => setOpened(false)}
             className={classes.listItem}
           >
             <Text size="32px">{item.text}</Text>

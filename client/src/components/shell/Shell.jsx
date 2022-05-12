@@ -14,21 +14,25 @@ const Shell = () => {
 
   return (
     <AppShell
+      fixed
       className={opened ? classes.smallShell : classes.shell}
       styles={{
         main: {
-          padding: "0 70px",
+          paddingLeft: 390,
+          paddingRight: 70,
+          paddingBottom: 0,
 
           [theme.fn.smallerThan("lg")]: {
-            padding: "0 50px",
+            paddingLeft: 370,
+            paddingRight: 50,
           },
 
           [theme.fn.smallerThan("sm")]: {
-            padding: "0 40px",
+            padding: "80px 40px 0",
           },
         },
       }}
-      navbar={<Navbar opened={opened} />}
+      navbar={<Navbar opened={opened} setOpened={setOpened} />}
       header={<Header opened={opened} setOpened={setOpened} />}
     >
       <Box>

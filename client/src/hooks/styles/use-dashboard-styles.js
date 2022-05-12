@@ -58,6 +58,10 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
 
+    [theme.fn.smallerThan(1297)]: {
+      marginTop: 20,
+    },
+
     [theme.fn.smallerThan(997)]: {
       minHeight: 150,
       flexDirection: "column",
