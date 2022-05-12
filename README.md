@@ -88,7 +88,7 @@ Running frontend only:
 
 `cd client && npm start`
 
-## \*️⃣ Additional info
+## *️⃣ Additional info
 
 This monorepo was set up by following the guide by Reed Barger:
 
