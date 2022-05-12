@@ -1,5 +1,6 @@
-import { Box, ScrollArea, Stack, Text, useMantineTheme } from "@mantine/core";
+import { Box, ScrollArea, Stack, Text } from "@mantine/core";
 import React from "react";
+import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { checkIfTheSameDay } from "../../utils/checkIfTheSameDay";
 import EmptyTasksTitle from "./EmptyTasksTitle";
 import SingleTask from "./SingleTask";
@@ -80,7 +81,7 @@ const DUMMY_TASKS = [
 ];
 
 const Tasks = ({ selectedDate }) => {
-  const theme = useMantineTheme();
+  const { classes } = useCalendarPageStyles();
 
   const filteredTasks = DUMMY_TASKS.filter((task) => {
     const isSelectedDay = checkIfTheSameDay(task.date, selectedDate);
@@ -92,25 +93,10 @@ const Tasks = ({ selectedDate }) => {
   ));
 
   return (
-    <Box
-      style={{
-        width: "100%",
-        maxWidth: "450px",
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 36,
-          fontWeight: "bold",
-          textTransform: "uppercase",
-          color: theme.colors.primary[6],
-          textAlign: "center",
-        }}
-      >
-        Tasks
-      </Text>
-      <ScrollArea style={{ maxHeight: 650 }}>
-        <Stack style={{ gap: 20, width: "100%" }}>
+    <Box className={classes.tasks}>
+      <Text className={classes.tasksHeader}>Tasks</Text>
+      <ScrollArea className={classes.tasksScrollArea}>
+        <Stack className={classes.tasksContainer}>
           {!!filteredTasks.length ? tasks : <EmptyTasksTitle />}
         </Stack>
       </ScrollArea>

@@ -40,4 +40,22 @@ export const useCalendarPageStyles = createStyles((theme) => ({
       paddingBottom: "50px",
     },
   },
+  tasks: {
+    width: "100%",
+    maxWidth: "450px",
+  },
+  tasksHeader: {
+    fontSize: 36,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    color: theme.colors.primary[6],
+    textAlign: "center",
+  },
+  tasksScrollArea: {
+    height: 450,
+  },
+  tasksContainer: {
+    gap: 20,
+    width: "100%",
+  },
 }));
