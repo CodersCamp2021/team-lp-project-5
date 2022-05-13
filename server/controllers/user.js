@@ -38,4 +38,12 @@ export default class UserController {
     }
     return { message: "Logged in successfully." };
   };
+
+  static getUserTasks = async (req) => {
+    const client = await pool.connect();
+    const tasks = await client.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
+      req.params.userId,
+    ]);
+    return { tasks: tasks.rows };
+  };
 }
