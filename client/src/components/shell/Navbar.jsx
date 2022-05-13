@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, createStyles, Image, Navbar, Text, Title, Button} from "@mantine/core";
-import { BsPlus } from "react-icons/bs";
+import { Box, createStyles, Image, Navbar, Text, Title } from "@mantine/core";
 import { AddTask } from "../addTask/AddTask"
 
 

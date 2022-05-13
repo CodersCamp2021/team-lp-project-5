@@ -20,12 +20,12 @@ import {useState} from "react";
 export const AddTask = () => {
   const { classes } = useAddTaskStyles();
   const [opened, setOpened] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [more, setMore] = useState(false);
 
 
   return (
   <>
-    <Modal
+    <Modal size="lg"
       opened={opened}
       onClose={() => setOpened(false)} >
       <Container p="md" className={classes.container}>
@@ -86,7 +86,7 @@ export const AddTask = () => {
                 },
               }}
             ></Button>
-            <Button onClick={() => setOpen((o) => !o)}
+            <Button onClick={() => setMore((o) => !o)}
               rightIcon={<BsChevronDown size={25} />}
               styles={{
                 root: {
@@ -104,7 +104,7 @@ export const AddTask = () => {
               MORE
             </Button>
           </Group></Box>
-        <Collapse in={opened}><Text
+        <Collapse in={more}><Text
           pt="md"
           className={classes.titlesNames}
           sx={(theme) => ({
