@@ -18,4 +18,10 @@ export default class TaskController {
     );
     return { message: "Task changed" };
   };
+
+  static deleteTask = async (body) => {
+    const client = await pool.connect();
+    await client.query(`DELETE FROM tasks WHERE task_id=$1;`, [body.task_id]);
+    return { message: "Task Deleted" };
+  };
 }
