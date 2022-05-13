@@ -73,7 +73,6 @@ const AppNavbar = () => {
       </Navbar.Section>
       <Navbar.Section grow>Navbar</Navbar.Section>
      <AddTask>
-     
      </AddTask>
       <Navbar.Section>Log out</Navbar.Section>
     </Navbar>
