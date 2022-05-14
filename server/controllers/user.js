@@ -46,6 +46,25 @@ export default class UserController {
     return { message: "Logged in successfully." };
   };
 
+  static getUserTasks = async (req) => {
+    const client = await pool.connect();
+    const checkIfUserExist = await client.query(
+      `SELECT user_id FROM users WHERE user_id=$1;`,
+      [req.params.userId],
+    );
+    if (!checkIfUserExist.rowCount) {
+      return { message: "User with this ID does not exist" };
+    }
+    const tasks = await client.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
+      req.params.userId,
+    ]);
+    if (tasks.rowCount) {
+      return { tasks: tasks.rows };
+    } else {
+      return { message: "No tasks found for this user" };
+    }
+  };
+  
   static logout = async ({ session }) => {
     const client = await pool.connect();
     await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
