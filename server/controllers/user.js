@@ -54,7 +54,7 @@ export default class UserController {
     if (tasks.rowCount) {
       return { tasks: tasks.rows };
     } else {
-      return { message: "No task found for this user" };
+      return { message: "No tasks found for this user" };
     }
   };
 }
