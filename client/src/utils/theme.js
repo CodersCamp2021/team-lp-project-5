@@ -11,6 +11,7 @@ export const theme = {
       h2: { fontSize: 44 },
       h3: { fontSize: 40 },
       h4: { fontSize: 36 },
+      h5: { fontSize: 32 },
     },
   },
   colors: {

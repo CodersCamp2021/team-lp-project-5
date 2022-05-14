@@ -43,8 +43,8 @@ export const useCollectionsStyles = createStyles((theme) => ({
   },
 
   scrollArea: {
-    width: "100%",
-    maxHeight: 220,
+    maxWidth: "100%",
+    height: 250,
   },
 }));
 

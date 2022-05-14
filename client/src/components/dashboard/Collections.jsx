@@ -2,6 +2,7 @@ import React from "react";
 
 import { Box, ScrollArea, Title } from "@mantine/core";
 import { useCollectionsStyles } from "../../hooks/styles/use-dashboard-styles";
+import CollectionCard from "./CollectionCard";
 
 const Collections = () => {
   const { classes } = useCollectionsStyles();
@@ -11,8 +12,18 @@ const Collections = () => {
       <Title order={3} className={classes.collectionsTitle}>
         COLLECTIONS
       </Title>
-      <ScrollArea className={classes.scrollArea}>
-        <div></div>
+      <ScrollArea type="always" offsetScrollbars className={classes.scrollArea}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 70,
+          }}
+        >
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+          <CollectionCard />
+        </Box>
       </ScrollArea>
     </Box>
   );
