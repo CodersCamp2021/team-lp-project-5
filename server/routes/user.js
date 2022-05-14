@@ -23,4 +23,15 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 });
+
+router.post("/logout", async (req, res) => {
+  try {
+    const response = await UserController.logout(req);
+    res.clearCookie("team-lp-project-5");
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
 export { router as userRouter };
