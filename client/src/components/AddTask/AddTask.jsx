@@ -1,5 +1,5 @@
 import React from "react";
-import { useAddTaskStyles } from "../../hooks/styles/use-addTask-styles.js";
+import { useAddTaskStyles } from "../../hooks/styles/use-add-task-styles.js";
 import {
   Box,
   Textarea,
@@ -30,6 +30,11 @@ export const AddTask = () => {
         transitionDuration={600}
         transitionTimingFunction="ease"
         className={classes.modalContainer}
+        styles={(theme) => ({
+          modal: {
+            backgroundColor: theme.colors.lightBg,
+          },
+        })}
       >
         <Box>
           <Text className={classes.titlesNames}>TITLE</Text>
@@ -46,6 +51,10 @@ export const AddTask = () => {
             allowLevelChange={false}
             placeholder="DD-MM-YYYY"
             minDate={new Date()}
+            styles={(theme) => ({
+              placeholder: theme.white,
+              value: theme.white,
+            })}
           />
           <TimeInput
             format="12"
@@ -60,7 +69,6 @@ export const AddTask = () => {
                 paddingRight: 0,
                 backgroundColor: "#00ADB5",
               },
-
               rightIcon: {
                 marginLeft: 15,
               },
@@ -69,18 +77,18 @@ export const AddTask = () => {
           <Button
             onClick={() => setMore((o) => !o)}
             rightIcon={<BsChevronDown size={25} />}
-            styles={{
+            styles={(theme) => ({
               root: {
                 paddingRight: 5,
-                backgroundColor: "#1A1B1E",
+                backgroundColor: theme.colors.lightBg,
                 "&:hover": {
-                  backgroundColor: "#1A1B1E",
+                  backgroundColor: theme.colors.lightBg,
                 },
               },
               rightIcon: {
                 marginLeft: 15,
               },
-            }}
+            })}
           >
             MORE
           </Button>
@@ -90,64 +98,19 @@ export const AddTask = () => {
             COLLECTIONS
           </Text>
           <Group position="left">
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#00ADB5",
-                  color: "#393E46",
-                },
-              }}
-            >
+            <Button radius={15} className={classes.collectionButton}>
               personal
             </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#00ADB5",
-                  color: "#393E46",
-                },
-              }}
-            >
+            <Button radius={15} className={classes.collectionButton}>
               bussiness
             </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#00ADB5",
-                  color: "#393E46",
-                },
-              }}
-            >
+            <Button radius={15} className={classes.collectionButton}>
               friends
             </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#00ADB5",
-                  color: "#393E46",
-                },
-              }}
-            >
+            <Button radius={15} className={classes.collectionButton}>
               family
             </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#00ADB5",
-                  color: "#393E46",
-                },
-              }}
-            >
+            <Button radius={15} className={classes.collectionButton}>
               hobby
             </Button>
           </Group>
@@ -162,6 +125,9 @@ export const AddTask = () => {
                 root: {
                   backgroundColor: "#E06262",
                   color: "#393E46",
+                  "&:hover": {
+                    backgroundColor: "#E06262",
+                  },
                 },
               }}
             >
@@ -174,6 +140,9 @@ export const AddTask = () => {
                 root: {
                   backgroundColor: "#EEB45E",
                   color: "#393E46",
+                  "&:hover": {
+                    backgroundColor: "#EEB45E",
+                  },
                 },
               }}
             >
@@ -186,6 +155,9 @@ export const AddTask = () => {
                 root: {
                   backgroundColor: "#7BD650",
                   color: "#393E46",
+                  "&:hover": {
+                    backgroundColor: "#7BD650",
+                  },
                 },
               }}
             >
@@ -208,12 +180,15 @@ export const AddTask = () => {
             rightIcon={
               <RiDeleteBinLine className={classes.deleteIcon} size={20} />
             }
-            styles={{
+            styles={(theme) => ({
               root: {
-                backgroundColor: "#222831",
+                backgroundColor: theme.colors.darkBg,
                 color: "#E06262",
+                "&:hover": {
+                  backgroundColor: theme.colors.darkBg,
+                },
               },
-            }}
+            })}
           >
             DELETE
           </Button>
@@ -223,11 +198,14 @@ export const AddTask = () => {
             className={classes.button}
             closeOnEscape
             closeOnClickOutside
-            styles={{
+            styles={(theme) => ({
               root: {
-                backgroundColor: "#222831",
+                backgroundColor: theme.colors.darkBg,
+                "&:hover": {
+                  backgroundColor: theme.colors.darkBg,
+                },
               },
-            }}
+            })}
           >
             CANCEL
           </Button>
@@ -237,6 +215,9 @@ export const AddTask = () => {
             styles={{
               root: {
                 backgroundColor: "#00ADB5",
+                "&:hover": {
+                  backgroundColor: "#00ADB5",
+                },
               },
             }}
           >
