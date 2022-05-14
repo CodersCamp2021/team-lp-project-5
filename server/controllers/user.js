@@ -46,7 +46,7 @@ export default class UserController {
       [req.params.userId],
     );
     if (!checkIfUserExist.rowCount) {
-      return { message: "User with this ID not exist" };
+      return { message: "User with this ID does not exist" };
     }
     const tasks = await client.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
       req.params.userId,
