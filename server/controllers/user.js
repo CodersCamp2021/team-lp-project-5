@@ -39,12 +39,11 @@ export default class UserController {
     return { message: "Logged in successfully." };
   };
 
-  static logout = async (req, res) => {
+  static logout = async ({ session }) => {
     const client = await pool.connect();
     await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
-      req.session.userId,
+      session.userId,
     ]);
-    delete req.session.userId;
-    res.json({ message: "Logged out successfully." });
+    return { message: "Logged out successfully." };
   };
 }
