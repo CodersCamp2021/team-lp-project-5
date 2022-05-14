@@ -13,13 +13,7 @@ const Collections = () => {
         COLLECTIONS
       </Title>
       <ScrollArea type="always" offsetScrollbars className={classes.scrollArea}>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 70,
-            width: 0,
-          }}
-        >
+        <Box className={classes.collectionsContent}>
           <CollectionCard />
           <CollectionCard />
           <CollectionCard />

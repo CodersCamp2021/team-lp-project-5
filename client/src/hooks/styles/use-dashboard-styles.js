@@ -58,6 +58,10 @@ export const useCollectionsStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
 
+    [theme.fn.smallerThan(1280)]: {
+      margin: "30px 0",
+    },
+
     h4: {
       color: theme.colors.primary[6],
       textShadow: theme.other.mainShadow,
@@ -80,6 +84,50 @@ export const useCollectionsStyles = createStyles((theme) => ({
   scrollArea: {
     height: 250,
     marginTop: 15,
+
+    [theme.fn.smallerThan("xl")]: {
+      height: 180,
+    },
+  },
+
+  collectionsContent: {
+    display: "flex",
+    gap: 70,
+    width: 0,
+  },
+
+  collectionCard: {
+    minWidth: 365,
+    height: 220,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    boxShadow: theme.other.mainShadow,
+    backgroundColor: theme.colors.lightBg,
+    borderRadius: "15px",
+
+    [theme.fn.smallerThan("xl")]: {
+      minWidth: 250,
+      height: 150,
+    },
+
+    h5: {
+      color: theme.white,
+      fontWeight: 400,
+      lineHeight: "32px",
+
+      [theme.fn.smallerThan("xl")]: {
+        fontSize: 24,
+      },
+    },
+  },
+
+  taskNumber: {
+    fontSize: 24,
+
+    [theme.fn.smallerThan("xl")]: {
+      fontSize: 18,
+    },
   },
 }));
 
