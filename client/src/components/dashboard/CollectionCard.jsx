@@ -11,10 +11,15 @@ import { useMediaQuery } from "@mantine/hooks";
 
 import { useCollectionsStyles } from "../../hooks/styles/use-dashboard-styles";
 
-const CollectionCard = () => {
+const CollectionCard = ({ title, finished, total }) => {
   const { classes } = useCollectionsStyles();
   const isSmaller = useMediaQuery("(max-width: 1400px)");
   const theme = useMantineTheme();
+
+  const percentage = React.useMemo(
+    () => Math.trunc((finished / total) * 100),
+    [finished, total],
+  );
 
   return (
     <Card
@@ -23,12 +28,12 @@ const CollectionCard = () => {
     >
       <Box>
         <Text className={classes.taskNumber} color={theme.colors.primary[6]}>
-          42 tasks
+          {total} tasks
         </Text>
-        <Title order={5}>Personal</Title>
+        <Title order={5}>{title}</Title>
       </Box>
       <Progress
-        value={50}
+        value={percentage}
         size={isSmaller ? "md" : "xl"}
         radius="lg"
         color={theme.colors.primary[6]}
