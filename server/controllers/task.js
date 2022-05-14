@@ -24,8 +24,7 @@ export default class TaskController {
     const outcome = await client.query(`DELETE FROM tasks WHERE task_id=$1;`, [
       body.task_id,
     ]);
-    console.log(outcome);
-    if (outcome.rowCount == 1) {
+    if (outcome.rowCount === 1) {
       return { message: "Task Deleted" };
     } else {
       return { message: "No task with that ID" };
