@@ -41,9 +41,20 @@ export default class UserController {
 
   static getUserTasks = async (req) => {
     const client = await pool.connect();
+    const checkIfUserExist = await client.query(
+      `SELECT user_id FROM users WHERE user_id=$1;`,
+      [req.params.userId],
+    );
+    if (!checkIfUserExist.rowCount) {
+      return { message: "User with this ID not exist" };
+    }
     const tasks = await client.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
       req.params.userId,
     ]);
-    return { tasks: tasks.rows };
+    if (tasks.rowCount) {
+      return { tasks: tasks.rows };
+    } else {
+      return { message: "No task found for this user" };
+    }
   };
 }
