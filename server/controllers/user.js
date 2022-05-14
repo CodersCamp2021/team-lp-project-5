@@ -1,15 +1,18 @@
 import pool from "../db/setup.js";
+import bcrypt from "bcrypt";
 
 export default class UserController {
   static register = async (body) => {
     const client = await pool.connect();
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(body.password, salt);
     await client.query(
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
         body.username,
         body.first_name,
         body.second_name,
-        body.password,
+        hashedPassword,
         body.email,
       ],
     );
@@ -24,7 +27,11 @@ export default class UserController {
     if (!user) {
       throw new Error("User with this username does not exist.");
     }
-    if (body.password != user.rows[0].password) {
+    const validPassword = await bcrypt.compare(
+      body.password,
+      user.rows[0].password,
+    );
+    if (!validPassword) {
       throw new Error("Invalid password.");
     }
     if (user.rows[0].session) {
