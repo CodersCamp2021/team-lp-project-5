@@ -30,7 +30,7 @@ const SearchBar = () => {
             color: theme.colors.primary[6],
             width: "25vw",
             minWidth: 220,
-            fontSize: 48,
+            fontSize: 44,
             height: 70,
             lineHeight: "60px",
 

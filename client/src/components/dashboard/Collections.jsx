@@ -9,7 +9,7 @@ const Collections = () => {
 
   return (
     <Box className={classes.collectionsWrapper}>
-      <Title order={3} className={classes.collectionsTitle}>
+      <Title order={4} className={classes.collectionsTitle}>
         COLLECTIONS
       </Title>
       <ScrollArea type="always" offsetScrollbars className={classes.scrollArea}>
@@ -17,6 +17,7 @@ const Collections = () => {
           sx={{
             display: "flex",
             gap: 70,
+            width: 0,
           }}
         >
           <CollectionCard />

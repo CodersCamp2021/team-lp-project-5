@@ -17,38 +17,6 @@ export const useDashboardStyles = createStyles((theme) => ({
 }));
 
 /**
- * Collections
- */
-export const useCollectionsStyles = createStyles((theme) => ({
-  collectionsWrapper: {
-    flex: 3.5,
-
-    h3: {
-      color: theme.colors.primary[6],
-      textShadow: theme.other.mainShadow,
-      letterSpacing: "0.2em",
-
-      [theme.fn.smallerThan("xl")]: {
-        fontSize: 28,
-      },
-
-      [theme.fn.smallerThan(997)]: {
-        textAlign: "center",
-      },
-
-      [theme.fn.smallerThan("xs")]: {
-        fontSize: 24,
-      },
-    },
-  },
-
-  scrollArea: {
-    maxWidth: "100%",
-    height: 250,
-  },
-}));
-
-/**
  * Header
  */
 export const useDashboardHeaderStyles = createStyles((theme) => ({
@@ -68,7 +36,7 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
       justifyContent: "space-evenly",
     },
 
-    h1: {
+    h2: {
       textShadow: theme.other.mainShadow,
       whiteSpace: "nowrap",
       color: theme.white,
@@ -77,6 +45,41 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
         fontSize: 32,
       },
     },
+  },
+}));
+
+/**
+ * Collections
+ */
+export const useCollectionsStyles = createStyles((theme) => ({
+  collectionsWrapper: {
+    flex: 3.5,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+
+    h4: {
+      color: theme.colors.primary[6],
+      textShadow: theme.other.mainShadow,
+      letterSpacing: "0.2em",
+
+      [theme.fn.smallerThan("xl")]: {
+        fontSize: 28,
+      },
+
+      [theme.fn.smallerThan(997)]: {
+        textAlign: "center",
+      },
+
+      [theme.fn.smallerThan("xs")]: {
+        fontSize: 24,
+      },
+    },
+  },
+
+  scrollArea: {
+    height: 250,
+    marginTop: 15,
   },
 }));
 
@@ -92,10 +95,11 @@ export const useListsStyles = createStyles((theme) => ({
     height: "100%",
 
     [theme.fn.smallerThan("xl")]: {
-      gap: "80px",
+      columnGap: "80px",
+      rowGap: "20px",
     },
 
-    h4: {
+    h5: {
       color: theme.colors.primary[6],
       textShadow: theme.other.mainShadow,
       letterSpacing: "0.2em",
