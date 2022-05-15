@@ -64,7 +64,7 @@ export default class UserController {
       return { message: "No tasks found for this user" };
     }
   };
-  
+
   static logout = async ({ session }) => {
     const client = await pool.connect();
     await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [

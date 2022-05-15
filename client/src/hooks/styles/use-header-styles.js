@@ -8,6 +8,7 @@ export const useHeaderStyles = createStyles((theme) => ({
     [theme.fn.smallerThan("sm")]: {
       height: 80,
     },
+
     [theme.fn.largerThan("sm")]: {
       height: 0,
       display: "none",
