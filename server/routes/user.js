@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const response = await UserController.login(req);
+    const response = await UserController.login(req, res);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
@@ -32,7 +32,7 @@ router.get("/:userId/tasks", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 });
-    
+
 router.post("/logout", async (req, res) => {
   try {
     const response = await UserController.logout(req);
@@ -42,6 +42,5 @@ router.post("/logout", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 });
-
 
 export { router as userRouter };

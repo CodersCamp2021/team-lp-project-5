@@ -1,6 +1,5 @@
 import path from "path";
 import express from "express";
-import expressSession from "express-session";
 import { userRouter } from "./routes/user.js";
 import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
@@ -15,17 +14,6 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());
-app.use(
-  expressSession({
-    name: "team-lp-project-5",
-    resave: false,
-    saveUninitialized: false,
-    secret: "aaa",
-    cookie: {
-      maxAge: 30000,
-    },
-  }),
-);
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
