@@ -28,10 +28,10 @@ const SearchBar = () => {
           },
           input: {
             color: theme.colors.primary[6],
-            width: "25vw",
+            width: "22vw",
             minWidth: 220,
-            fontSize: 44,
-            height: 70,
+            fontSize: 36,
+            height: 80,
             lineHeight: "60px",
 
             [theme.fn.smallerThan("xl")]: {
@@ -56,7 +56,7 @@ const SearchBar = () => {
           },
         }}
       />
-      <BsSearch size={44} />
+      <BsSearch size={36} />
     </Box>
   );
 };

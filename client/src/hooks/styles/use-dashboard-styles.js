@@ -25,10 +25,7 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-
-    [theme.fn.smallerThan(1297)]: {
-      marginTop: 20,
-    },
+    marginTop: 20,
 
     [theme.fn.smallerThan(997)]: {
       minHeight: 150,
@@ -36,7 +33,7 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
       justifyContent: "space-evenly",
     },
 
-    h2: {
+    h4: {
       textShadow: theme.other.mainShadow,
       whiteSpace: "nowrap",
       color: theme.white,
@@ -61,28 +58,28 @@ export const useCollectionsStyles = createStyles((theme) => ({
     [theme.fn.smallerThan(1280)]: {
       margin: "30px 0",
     },
+  },
 
-    h4: {
-      color: theme.colors.primary[6],
-      textShadow: theme.other.mainShadow,
-      letterSpacing: "0.2em",
+  collectionsTitle: {
+    color: theme.colors.primary[6],
+    textShadow: theme.other.mainShadow,
+    letterSpacing: "0.2em",
 
-      [theme.fn.smallerThan("xl")]: {
-        fontSize: 28,
-      },
+    [theme.fn.smallerThan("xl")]: {
+      fontSize: 28,
+    },
 
-      [theme.fn.smallerThan(997)]: {
-        textAlign: "center",
-      },
+    [theme.fn.smallerThan(997)]: {
+      textAlign: "center",
+    },
 
-      [theme.fn.smallerThan("xs")]: {
-        fontSize: 24,
-      },
+    [theme.fn.smallerThan("xs")]: {
+      fontSize: 24,
     },
   },
 
   scrollArea: {
-    height: 250,
+    height: 210,
     marginTop: 15,
 
     [theme.fn.smallerThan("xl")]: {
@@ -97,8 +94,8 @@ export const useCollectionsStyles = createStyles((theme) => ({
   },
 
   collectionCard: {
-    minWidth: 365,
-    height: 220,
+    minWidth: 305,
+    height: 180,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -115,6 +112,7 @@ export const useCollectionsStyles = createStyles((theme) => ({
       color: theme.white,
       fontWeight: 400,
       lineHeight: "32px",
+      fontSize: 28,
 
       [theme.fn.smallerThan("xl")]: {
         fontSize: 24,
@@ -123,7 +121,7 @@ export const useCollectionsStyles = createStyles((theme) => ({
   },
 
   taskNumber: {
-    fontSize: 24,
+    fontSize: 22,
 
     [theme.fn.smallerThan("xl")]: {
       fontSize: 18,
@@ -136,11 +134,12 @@ export const useCollectionsStyles = createStyles((theme) => ({
  */
 export const useListsStyles = createStyles((theme) => ({
   listsWrapper: {
+    flex: 1.5,
     position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "130px",
-    height: "100%",
+    paddingTop: 15,
 
     [theme.fn.smallerThan("xl")]: {
       columnGap: "80px",
@@ -153,6 +152,11 @@ export const useListsStyles = createStyles((theme) => ({
       letterSpacing: "0.2em",
       textAlign: "center",
       paddingBottom: 10,
+      fontSize: 28,
+
+      [theme.fn.largerThan("xl")]: {
+        paddingBottom: 0,
+      },
 
       [theme.fn.smallerThan("xl")]: {
         fontSize: 24,
@@ -174,10 +178,10 @@ export const useListsStyles = createStyles((theme) => ({
   singleListWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
 
     "&> div": {
-      height: "42vh",
+      height: "34vh",
       marginBottom: 40,
     },
   },

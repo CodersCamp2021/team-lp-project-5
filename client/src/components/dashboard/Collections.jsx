@@ -36,7 +36,7 @@ const Collections = () => {
 
   return (
     <Box className={classes.collectionsWrapper}>
-      <Title order={4} className={classes.collectionsTitle}>
+      <Title order={5} className={classes.collectionsTitle}>
         COLLECTIONS
       </Title>
       <ScrollArea type="always" offsetScrollbars className={classes.scrollArea}>

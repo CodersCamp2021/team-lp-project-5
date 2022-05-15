@@ -34,7 +34,7 @@ const CollectionCard = ({ title, finished, total }) => {
       </Box>
       <Progress
         value={percentage}
-        size={isSmaller ? "md" : "xl"}
+        size={isSmaller ? "md" : "lg"}
         radius="lg"
         color={theme.colors.primary[6]}
         styles={{
