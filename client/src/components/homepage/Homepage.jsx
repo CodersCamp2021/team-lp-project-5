@@ -1,23 +1,17 @@
 import React, { useState } from "react";
-import { Anchor, Box, Text, Modal } from "@mantine/core";
+import { Anchor, Box, Text } from "@mantine/core";
 import Footer from "./Footer";
 import HomeHero from "./HomeHero";
 import Logo from "../Logo.jsx";
 import { useHomepageStyles } from "../../hooks/styles/use-homepage-styles";
-// import SingInModal from "./SingInModal.jsx";
+import SingInModal from "./SingInModal.jsx";
 
 const Homepage = () => {
   const { classes } = useHomepageStyles();
-  const [loginOpened, setLoginOpened] = useState(false);
+  const [opened, setOpened] = useState(false);
   return (
     <>
-      <Modal opened={loginOpened} onClose={() => setLoginOpened(false)}>
-        Title
-      </Modal>
-      {/* <SingInModal
-        opened={loginOpened}
-        setOpened={() => setLoginOpened(false)}
-      /> */}
+      <SingInModal opened={opened} setOpened={() => setOpened(false)} />
       <Box className={classes.navbarContainer}>
         <Logo />
         <Box className={classes.singInContainer}>
@@ -27,7 +21,7 @@ const Homepage = () => {
           <Anchor
             size="xl"
             className={classes.anchor}
-            onClick={() => setLoginOpened(true)}
+            onClick={() => setOpened(true)}
           >
             Sign in
           </Anchor>

@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { registrationSchema } from "../../utils/registrationSchema";
-import { useStyles } from "./Input";
+import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import Input from "./Input";
 
 const forms = [
@@ -28,8 +28,12 @@ const forms = [
   },
 ];
 
-const SignUpModal = (opened, setOpened) => {
-  const { classes } = useStyles();
+const handleSubmit = (values) => {
+  console.log(values);
+};
+
+const SignUpModal = ({ opened, setOpened }) => {
+  const { classes } = useModalStyles();
   const form = useForm({
     schema: yupResolver(registrationSchema),
     initialValues: {
@@ -43,8 +47,15 @@ const SignUpModal = (opened, setOpened) => {
   });
 
   return (
-    <Modal opened={opened} onClose={() => setOpened(false)} centered size="xl">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <Modal
+      opened={opened}
+      onClose={() => setOpened(false)}
+      centered
+      size="xl"
+      title="Sign up"
+      className={classes.modal}
+    >
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <SimpleGrid
           cols={2}
           breakpoints={[{ maxWidth: 650, cols: 1, spacing: "sm" }]}

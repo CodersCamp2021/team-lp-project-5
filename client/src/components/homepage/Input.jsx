@@ -1,20 +1,9 @@
 import { TextInput } from "@mantine/core";
 import React from "react";
-import { createStyles } from "@mantine/core";
-
-export const useStyles = createStyles(() => ({
-  inputField: {
-    label: {
-      textTransform: "uppercase",
-      fontWeight: 700,
-      fontSize: "16px",
-      paddingTop: "4px",
-    },
-  },
-}));
+import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 
 const Input = ({ label, placeholder, formProps }) => {
-  const { classes } = useStyles();
+  const { classes } = useModalStyles();
 
   return (
     <TextInput

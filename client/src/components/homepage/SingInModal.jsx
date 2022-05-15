@@ -1,16 +1,16 @@
 import React from "react";
-import {
-  Modal,
-  Box,
-  Button,
-  Group,
-  TextInput,
-  PasswordInput,
-} from "@mantine/core";
+import { Modal, Box, Button, Group, PasswordInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { loginSchema } from "../../utils/loginSchema";
+import Input from "./Input";
+import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 
-const SingInModal = (opened, setOpened) => {
+const handleSubmit = (values) => {
+  console.log(values);
+};
+
+const SingInModal = ({ opened, setOpened }) => {
+  const { classes } = useModalStyles();
   const form = useForm({
     schema: yupResolver(loginSchema),
     initialValues: {
@@ -20,10 +20,16 @@ const SingInModal = (opened, setOpened) => {
   });
 
   return (
-    <Modal opened={opened} onClose={() => setOpened(false)} centered>
+    <Modal
+      opened={opened}
+      onClose={() => setOpened(false)}
+      centered
+      title="Sign in"
+      className={classes.modal}
+    >
       <Box sx={{ maxWidth: 320 }} mx="auto">
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
-          <TextInput
+        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+          <Input
             required
             label="Email"
             placeholder="example@mail.com"
@@ -33,7 +39,7 @@ const SingInModal = (opened, setOpened) => {
             required
             label="Password"
             placeholder="Your password"
-            mt="sm"
+            className={classes.inputField}
             {...form.getInputProps("password")}
           />
 
