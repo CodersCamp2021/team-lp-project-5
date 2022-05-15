@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Box, Button, Group, PasswordInput } from "@mantine/core";
+import { Modal, Button, Group, PasswordInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { loginSchema } from "../../utils/loginSchema";
 import Input from "./Input";
@@ -27,27 +27,25 @@ const SignInModal = ({ opened, setOpened }) => {
       title="Sign in"
       className={classes.modal}
     >
-      <Box sx={{ maxWidth: 320 }} mx="auto">
-        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-          <Input
-            required
-            label="Email"
-            placeholder="example@mail.com"
-            {...form.getInputProps("email")}
-          />
-          <PasswordInput
-            required
-            label="Password"
-            placeholder="Your password"
-            className={classes.inputField}
-            {...form.getInputProps("password")}
-          />
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <Input
+          required
+          label="Email"
+          placeholder="example@mail.com"
+          formProps={form.getInputProps("email")}
+        />
+        <PasswordInput
+          required
+          label="Password"
+          placeholder="Your password"
+          className={classes.inputField}
+          {...form.getInputProps("password")}
+        />
 
-          <Group position="right" mt="xl">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
+        <Group position="right" mt="xl">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
     </Modal>
   );
 };
