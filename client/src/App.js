@@ -11,7 +11,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Shell />} />
+        <Route path="/*" element={<Shell />} />
         <Route path="/home" element={<Homepage />} />
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
