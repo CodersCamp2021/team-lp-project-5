@@ -1,5 +1,7 @@
 import express from "express";
 import UserController from "../controllers/user.js";
+import loginRequired from "../../common/middlewares.js";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -33,7 +35,7 @@ router.get("/:userId/tasks", async (req, res) => {
   }
 });
 
-router.post("/logout", async (req, res) => {
+router.post("/logout", loginRequired, async (req, res) => {
   try {
     const response = await UserController.logout(req);
     res.clearCookie("team-lp-project-5");

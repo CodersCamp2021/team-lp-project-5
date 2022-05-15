@@ -35,9 +35,9 @@ export default class UserController {
     if (!validPassword) {
       throw new Error("Invalid password.");
     }
-    const userSessionId = user.rows[0].session;
-    if (userSessionId) {
-      res.cookie("team-lp-project-5", userSessionId);
+    const userSessionIdExist = user.rows[0].session;
+    if (userSessionIdExist) {
+      res.cookie("team-lp-project-5", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
       await client.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
@@ -67,10 +67,10 @@ export default class UserController {
     }
   };
 
-  static logout = async ({ session }) => {
+  static logout = async (req) => {
     const client = await pool.connect();
     await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
-      session.userId,
+      req.session.userId,
     ]);
     return { message: "Logged out successfully." };
   };

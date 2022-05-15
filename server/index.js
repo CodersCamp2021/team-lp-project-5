@@ -1,5 +1,6 @@
 import path from "path";
 import express from "express";
+import cookieParser from "cookie-parser";
 import { userRouter } from "./routes/user.js";
 import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
