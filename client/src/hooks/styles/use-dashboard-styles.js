@@ -113,6 +113,9 @@ export const useCollectionsStyles = createStyles((theme) => ({
       fontWeight: 400,
       lineHeight: "32px",
       fontSize: 28,
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
 
       [theme.fn.smallerThan("xl")]: {
         fontSize: 24,

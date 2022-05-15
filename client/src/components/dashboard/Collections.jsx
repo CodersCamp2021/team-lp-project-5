@@ -7,7 +7,7 @@ import CollectionCard from "./CollectionCard";
 const DUMMY_COLLECTIONS = [
   {
     id: 1,
-    title: "Personal",
+    title: "Personalasdasdasdasdasds",
     finished: 22,
     total: 50,
   },

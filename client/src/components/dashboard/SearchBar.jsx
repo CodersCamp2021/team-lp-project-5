@@ -16,26 +16,29 @@ const SearchBar = () => {
         spellCheck={false}
         styles={{
           root: {
-            height: 72,
-            marginRight: 30,
-            borderBottom: `4px solid ${theme.colors.primary[6]}`,
+            height: 43,
+            marginRight: 20,
+            borderBottom: `3px solid ${theme.colors.primary[6]}`,
 
             [theme.fn.smallerThan("xl")]: {
               height: 50,
               marginRight: 15,
               borderBottom: `2px solid ${theme.colors.primary[6]}`,
             },
+
+            [theme.fn.smallerThan("xs")]: {
+              height: 46,
+              marginRight: 10,
+            },
           },
           input: {
             color: theme.colors.primary[6],
-            width: "22vw",
+            width: "18vw",
             minWidth: 220,
-            fontSize: 36,
-            height: 80,
+            fontSize: 32,
             lineHeight: "60px",
 
             [theme.fn.smallerThan("xl")]: {
-              width: "18vw",
               fontSize: 32,
               height: 50,
               lineHeight: "40px",
@@ -56,7 +59,7 @@ const SearchBar = () => {
           },
         }}
       />
-      <BsSearch size={36} />
+      <BsSearch size={32} />
     </Box>
   );
 };
