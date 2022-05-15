@@ -27,7 +27,7 @@ const NavbarItems = ({ setOpened }) => {
     <Box>
       <List
         center
-        size={32}
+        size={28}
         styles={{
           root: {
             display: "flex",
@@ -35,7 +35,7 @@ const NavbarItems = ({ setOpened }) => {
             alignItems: "center",
           },
           itemIcon: {
-            marginRight: "21px",
+            marginRight: "14px",
           },
         }}
       >
@@ -63,7 +63,7 @@ const NavbarItems = ({ setOpened }) => {
             onClick={() => setOpened(false)}
             className={classes.listItem}
           >
-            <Text size="32px">{item.text}</Text>
+            <Text size="28px">{item.text}</Text>
           </List.Item>
         ))}
       </List>

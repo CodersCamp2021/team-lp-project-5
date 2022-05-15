@@ -17,38 +17,6 @@ export const useDashboardStyles = createStyles((theme) => ({
 }));
 
 /**
- * Collections
- */
-export const useCollectionsStyles = createStyles((theme) => ({
-  collectionsWrapper: {
-    flex: 3.5,
-
-    h3: {
-      color: theme.colors.primary[6],
-      textShadow: theme.other.mainShadow,
-      letterSpacing: "0.2em",
-
-      [theme.fn.smallerThan("xl")]: {
-        fontSize: 28,
-      },
-
-      [theme.fn.smallerThan(997)]: {
-        textAlign: "center",
-      },
-
-      [theme.fn.smallerThan("xs")]: {
-        fontSize: 24,
-      },
-    },
-  },
-
-  scrollArea: {
-    width: "100%",
-    maxHeight: 220,
-  },
-}));
-
-/**
  * Header
  */
 export const useDashboardHeaderStyles = createStyles((theme) => ({
@@ -57,10 +25,7 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-
-    [theme.fn.smallerThan(1297)]: {
-      marginTop: 20,
-    },
+    marginTop: 20,
 
     [theme.fn.smallerThan(997)]: {
       minHeight: 150,
@@ -68,7 +33,7 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
       justifyContent: "space-evenly",
     },
 
-    h1: {
+    h4: {
       textShadow: theme.other.mainShadow,
       whiteSpace: "nowrap",
       color: theme.white,
@@ -81,26 +46,120 @@ export const useDashboardHeaderStyles = createStyles((theme) => ({
 }));
 
 /**
+ * Collections
+ */
+export const useCollectionsStyles = createStyles((theme) => ({
+  collectionsWrapper: {
+    flex: 3.5,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+
+    [theme.fn.smallerThan(1280)]: {
+      margin: "30px 0",
+    },
+  },
+
+  collectionsTitle: {
+    color: theme.colors.primary[6],
+    textShadow: theme.other.mainShadow,
+    letterSpacing: "0.2em",
+
+    [theme.fn.smallerThan("xl")]: {
+      fontSize: 28,
+    },
+
+    [theme.fn.smallerThan(997)]: {
+      textAlign: "center",
+    },
+
+    [theme.fn.smallerThan("xs")]: {
+      fontSize: 24,
+    },
+  },
+
+  scrollArea: {
+    height: 210,
+    marginTop: 15,
+
+    [theme.fn.smallerThan("xl")]: {
+      height: 180,
+    },
+  },
+
+  collectionsContent: {
+    display: "flex",
+    gap: 70,
+    width: 0,
+  },
+
+  collectionCard: {
+    minWidth: 305,
+    height: 180,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    boxShadow: theme.other.mainShadow,
+    backgroundColor: theme.colors.lightBg,
+    borderRadius: "15px",
+
+    [theme.fn.smallerThan("xl")]: {
+      minWidth: 250,
+      height: 150,
+    },
+
+    h5: {
+      color: theme.white,
+      fontWeight: 400,
+      lineHeight: "32px",
+      fontSize: 28,
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+
+      [theme.fn.smallerThan("xl")]: {
+        fontSize: 24,
+      },
+    },
+  },
+
+  taskNumber: {
+    fontSize: 22,
+
+    [theme.fn.smallerThan("xl")]: {
+      fontSize: 18,
+    },
+  },
+}));
+
+/**
  * Lists
  */
 export const useListsStyles = createStyles((theme) => ({
   listsWrapper: {
+    flex: 1.5,
     position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "130px",
-    height: "100%",
+    paddingTop: 15,
 
     [theme.fn.smallerThan("xl")]: {
-      gap: "80px",
+      columnGap: "80px",
+      rowGap: "20px",
     },
 
-    h4: {
+    h5: {
       color: theme.colors.primary[6],
       textShadow: theme.other.mainShadow,
       letterSpacing: "0.2em",
       textAlign: "center",
       paddingBottom: 10,
+      fontSize: 28,
+
+      [theme.fn.largerThan("xl")]: {
+        paddingBottom: 0,
+      },
 
       [theme.fn.smallerThan("xl")]: {
         fontSize: 24,
@@ -122,10 +181,10 @@ export const useListsStyles = createStyles((theme) => ({
   singleListWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
 
     "&> div": {
-      height: "42vh",
+      height: "34vh",
       marginBottom: 40,
     },
   },

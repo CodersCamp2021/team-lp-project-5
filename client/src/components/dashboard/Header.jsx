@@ -9,7 +9,7 @@ const Header = ({ firstName = "User" }) => {
 
   return (
     <Box className={classes.headerWrapper}>
-      <Title order={1}>What's up, {firstName}!</Title>
+      <Title order={4}>What&apos;s up, {firstName}!</Title>
       <SearchBar />
     </Box>
   );

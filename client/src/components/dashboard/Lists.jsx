@@ -9,7 +9,7 @@ const Lists = () => {
   return (
     <Box className={classes.listsWrapper}>
       <Box className={classes.singleListWrapper}>
-        <Title order={4}>TODAY</Title>
+        <Title order={5}>TODAY</Title>
         <ScrollArea type="always" offsetScrollbars>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -103,7 +103,7 @@ const Lists = () => {
         </ScrollArea>
       </Box>
       <Box className={classes.singleListWrapper}>
-        <Title order={4}>TOMORROW</Title>
+        <Title order={5}>TOMORROW</Title>
         <ScrollArea type="always" offsetScrollbars>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -155,7 +155,7 @@ const Lists = () => {
       </Box>
       <Divider orientation="vertical" size="sm" />
       <Box className={classes.singleListWrapper}>
-        <Title order={4}>LEFTOVERS</Title>
+        <Title order={5}>LEFTOVERS</Title>
         <ScrollArea type="always" offsetScrollbars>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
