@@ -149,12 +149,16 @@ export const useListsStyles = createStyles((theme) => ({
       rowGap: "20px",
     },
 
+    [theme.fn.smallerThan("sm")]: {
+      columnGap: "20px",
+    },
+
     h5: {
       color: theme.colors.primary[6],
       textShadow: theme.other.mainShadow,
       letterSpacing: "0.2em",
       textAlign: "center",
-      paddingBottom: 10,
+      paddingBottom: 20,
       fontSize: 28,
 
       [theme.fn.largerThan("xl")]: {
@@ -168,7 +172,7 @@ export const useListsStyles = createStyles((theme) => ({
 
     ".mantine-Divider-root": {
       position: "absolute",
-      right: "31.5%",
+      right: "32.5%",
       height: "80%",
       alignSelf: "center",
 
@@ -181,13 +185,19 @@ export const useListsStyles = createStyles((theme) => ({
   singleListWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
 
     "&> div": {
       height: "34vh",
       marginBottom: 40,
     },
   },
+
+  // emptyListWrapper: {
+  //   "&> div": {
+  //     height: 70,
+  //     marginBottom: 20,
+  //   },
+  // },
 
   tasksWrapper: {
     width: "97%",

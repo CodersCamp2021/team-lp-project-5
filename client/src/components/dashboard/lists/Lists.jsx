@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Divider, ScrollArea, Title } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { useListsStyles } from "../../../hooks/styles/use-dashboard-styles";
 import { checkIfTheSameDay, getTomorrow } from "../../../utils/dateHelpers";
@@ -94,7 +95,7 @@ const DUMMY_TASKS = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ipsum!",
     priority: 3,
     status: false,
-    date: new Date("May 14, 2022"),
+    date: new Date("May 17, 2022"),
   },
 ];
 
@@ -102,6 +103,7 @@ const Lists = () => {
   const { classes } = useListsStyles();
   const today = new Date();
   const tomorrow = getTomorrow();
+  const areListsStacked = useMediaQuery("(max-width: 1279px)");
 
   const todayList = React.useMemo(
     () => DUMMY_TASKS.filter((task) => checkIfTheSameDay(task.date, today)),
@@ -121,20 +123,53 @@ const Lists = () => {
 
   return (
     <Box className={classes.listsWrapper}>
-      <Box className={classes.singleListWrapper}>
+      <Box
+        className={classes.singleListWrapper}
+        sx={
+          areListsStacked && {
+            "&> div": {
+              minHeight: 70,
+              height: todayList.length * 86,
+              marginBottom: 20,
+            },
+          }
+        }
+      >
         <Title order={5}>TODAY</Title>
         <ScrollArea type="always" offsetScrollbars>
           <TaskList tasks={todayList} />
         </ScrollArea>
       </Box>
-      <Box className={classes.singleListWrapper}>
+      <Box
+        className={classes.singleListWrapper}
+        sx={
+          areListsStacked && {
+            "&> div": {
+              minHeight: 70,
+              height: tomorrowList.length * 86,
+              marginBottom: 20,
+            },
+          }
+        }
+      >
         <Title order={5}>TOMORROW</Title>
         <ScrollArea type="always" offsetScrollbars>
           <TaskList tasks={tomorrowList} />
         </ScrollArea>
       </Box>
       <Divider orientation="vertical" size="sm" />
-      <Box className={classes.singleListWrapper}>
+      <Box
+        className={classes.singleListWrapper}
+        sx={
+          areListsStacked && {
+            "&> div": {
+              minHeight: 70,
+              height: leftoversList.length * 86,
+              marginBottom: 20,
+            },
+          }
+        }
+      >
         <Title order={5}>LEFTOVERS</Title>
         <ScrollArea type="always" offsetScrollbars>
           <TaskList tasks={leftoversList} leftovers={true} />
