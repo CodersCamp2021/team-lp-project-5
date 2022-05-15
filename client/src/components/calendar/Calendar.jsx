@@ -2,7 +2,7 @@ import React from "react";
 import { Calendar as MantineCalendar } from "@mantine/dates";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMantineTheme } from "@mantine/core";
-import { checkIfTheSameDay } from "../../utils/checkIfTheSameDay";
+import { checkIfTheSameDay } from "../../utils/dateHelpers";
 
 const Calendar = ({ selectedDate, setSelectedDate }) => {
   const theme = useMantineTheme();

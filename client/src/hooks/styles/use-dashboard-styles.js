@@ -188,6 +188,15 @@ export const useListsStyles = createStyles((theme) => ({
       marginBottom: 40,
     },
   },
+
+  tasksWrapper: {
+    width: "97%",
+  },
+
+  placeholderText: {
+    fontSize: 26,
+    paddingTop: 15,
+  },
 }));
 
 /**
