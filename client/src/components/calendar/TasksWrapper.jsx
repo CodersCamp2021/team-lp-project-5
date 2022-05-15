@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, ScrollArea } from "@mantine/core";
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 
