@@ -8,7 +8,6 @@ const SingleTask = ({ task }) => {
 
   const handleClick = () => {
     //TODO: handle onClick - mark task as done/undone
-    console.log("click");
   };
 
   const icon = isDone ? (

@@ -98,7 +98,7 @@ const Tasks = ({ selectedDate }) => {
       <Text className={classes.tasksHeader}>Tasks</Text>
       <TasksWrapper isScroll={filteredTasks.length > 5}>
         <Stack className={classes.tasksContainer}>
-          {!!filteredTasks.length ? tasks : <EmptyTasksTitle />}
+          {filteredTasks.length ? tasks : <EmptyTasksTitle />}
         </Stack>
       </TasksWrapper>
     </Box>
