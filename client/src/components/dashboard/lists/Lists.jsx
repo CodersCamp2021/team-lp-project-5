@@ -106,18 +106,26 @@ const Lists = () => {
   const areListsStacked = useMediaQuery("(max-width: 1279px)");
 
   const todayList = React.useMemo(
-    () => DUMMY_TASKS.filter((task) => checkIfTheSameDay(task.date, today)),
+    () =>
+      DUMMY_TASKS.filter((task) => checkIfTheSameDay(task.date, today)).sort(
+        (a, b) => a.priority - b.priority,
+      ),
     [DUMMY_TASKS],
   );
 
   const tomorrowList = React.useMemo(
-    () => DUMMY_TASKS.filter((task) => checkIfTheSameDay(task.date, tomorrow)),
+    () =>
+      DUMMY_TASKS.filter((task) => checkIfTheSameDay(task.date, tomorrow)).sort(
+        (a, b) => a.priority - b.priority,
+      ),
     [DUMMY_TASKS],
   );
 
   const leftoversList = React.useMemo(
     () =>
-      DUMMY_TASKS.filter((task) => task.status === false && task.date < today),
+      DUMMY_TASKS.filter(
+        (task) => task.status === false && task.date < today,
+      ).sort((a, b) => a.priority - b.priority),
     [DUMMY_TASKS],
   );
 
