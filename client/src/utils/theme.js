@@ -30,6 +30,18 @@ export const theme = {
       "#244547",
       "#233C3D",
     ],
+    dark: [
+      "#C1C2C5", // text color
+      "#A6A7AB",
+      "#909296",
+      "#5C5F66",
+      "#373A40",
+      "#2C2E33",
+      "#25262B",
+      "#222831", // background color
+      "#141517",
+      "#101113",
+    ],
     navbarText: "#C4C4C4",
     lightBg: "#393E46",
     darkBg: "#222831",
