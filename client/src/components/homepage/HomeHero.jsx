@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Image, Text, Button } from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
-import SignUpModal from "./SingUpModal";
+import SignUpModal from "./SignUpModal";
 
 const HomeHero = () => {
   const { classes } = useHomeHeroStyles();

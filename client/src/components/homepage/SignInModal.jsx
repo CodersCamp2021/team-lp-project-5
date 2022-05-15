@@ -9,7 +9,7 @@ const handleSubmit = (values) => {
   console.log(values);
 };
 
-const SingInModal = ({ opened, setOpened }) => {
+const SignInModal = ({ opened, setOpened }) => {
   const { classes } = useModalStyles();
   const form = useForm({
     schema: yupResolver(loginSchema),
@@ -52,4 +52,4 @@ const SingInModal = ({ opened, setOpened }) => {
   );
 };
 
-export default SingInModal;
+export default SignInModal;
