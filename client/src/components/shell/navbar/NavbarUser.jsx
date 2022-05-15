@@ -9,7 +9,7 @@ const NavbarUser = () => {
   const isXsScreen = useMediaQuery("(max-width: 576px)");
 
   return (
-    <React.Fragment>
+    <Box sx={{ paddingTop: 10 }}>
       <Box>
         <Image
           imageProps={{
@@ -25,7 +25,7 @@ const NavbarUser = () => {
         />
       </Box>
       <Text className={classes.userNames}>Jakub Czerwiński </Text>
-    </React.Fragment>
+    </Box>
   );
 };
 
