@@ -1,9 +1,10 @@
-import { Box, ScrollArea, Stack, Text } from "@mantine/core";
+import { Box, Stack, Text } from "@mantine/core";
 import React from "react";
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { checkIfTheSameDay } from "../../utils/checkIfTheSameDay";
 import EmptyTasksTitle from "./EmptyTasksTitle";
 import SingleTask from "./SingleTask";
+import TasksWrapper from "./TasksWrapper";
 
 const DUMMY_TASKS = [
   {
@@ -95,11 +96,11 @@ const Tasks = ({ selectedDate }) => {
   return (
     <Box className={classes.tasks}>
       <Text className={classes.tasksHeader}>Tasks</Text>
-      <ScrollArea className={classes.tasksScrollArea}>
+      <TasksWrapper isScroll={filteredTasks.length > 5}>
         <Stack className={classes.tasksContainer}>
           {!!filteredTasks.length ? tasks : <EmptyTasksTitle />}
         </Stack>
-      </ScrollArea>
+      </TasksWrapper>
     </Box>
   );
 };
