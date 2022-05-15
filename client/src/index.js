@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-
 import { theme } from "./utils/theme";
+import App from "./App";
 
 ReactDOM.render(
   <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
