@@ -13,7 +13,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "no-console": "off",
+    "no-console": "warn",
     "react/prop-types": "off"
   }
 }
