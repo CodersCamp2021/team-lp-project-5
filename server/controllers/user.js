@@ -46,6 +46,7 @@ export default class UserController {
       ]);
       res.cookie("team-lp-project-5", sessionToken);
     }
+    return { message: "Logged in successfully." };
   };
 
   static getUserTasks = async (req) => {
