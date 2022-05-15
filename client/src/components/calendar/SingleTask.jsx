@@ -45,14 +45,13 @@ const SingleTask = ({ task }) => {
       />
       {icon}
       <Text
+        lineClamp={1}
         style={{
           textTransform: "capitalize",
           fontSize: 18,
           color: "#eeeeee",
           textDecorationLine: isDone ? "line-through" : "",
-
-          overflow: "hidden",
-          maxWidth: "20ch",
+          maxWidth: "90%",
         }}
       >
         {title}
