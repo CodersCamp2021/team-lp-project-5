@@ -37,5 +37,12 @@ export const theme = {
     leftoverBg: "#555D69",
   },
 
-  other: { mainShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" },
+  other: {
+    mainShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    taskPriorities: {
+      1: "#F63232",
+      2: "#FBB501",
+      3: "#6EDB53",
+    },
+  },
 };
