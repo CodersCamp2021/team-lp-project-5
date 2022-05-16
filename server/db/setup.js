@@ -3,7 +3,7 @@ import "dotenv/config";
 const { Pool } = pkg;
 
 export const pool = new Pool({
-  connectionString: `postgres://${process.env.DATABASE_USERNAME}:${process.env.PASSWORD}@${process.env.HOST}:5432/db69l3jbpjp7rh`,
+  connectionString: `${process.env.DATABASE_URL}`,
   ssl: {
     rejectUnauthorized: false,
   },
