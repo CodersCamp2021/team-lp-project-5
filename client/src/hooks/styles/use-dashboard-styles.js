@@ -192,13 +192,6 @@ export const useListsStyles = createStyles((theme) => ({
     },
   },
 
-  // emptyListWrapper: {
-  //   "&> div": {
-  //     height: 70,
-  //     marginBottom: 20,
-  //   },
-  // },
-
   tasksWrapper: {
     width: "97%",
   },
