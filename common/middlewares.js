@@ -22,28 +22,6 @@ export const loginRequired = async (req, res, next) => {
   }
 };
 
-// Not needed probably
-// export const checkIfUserMatchUserIdFromParams = async (req, res, next) => {
-//   try {
-//     const checkIfUserExist = await pool.query(
-//       `SELECT user_id FROM users WHERE user_id=$1;`,
-//       [req.params.userId],
-//     );
-//     if (!checkIfUserExist.rowCount) {
-//       return { message: "User with this ID does not exist" };
-//     }
-//     if (req.params.userId == req.session.userId) {
-//       next();
-//     } else {
-//       return res
-//         .status(403)
-//         .json({ message: "You are not allowed to do this" });
-//     }
-//   } catch (error) {
-//     return res.status(400).json({ error: error.message });
-//   }
-// };
-
 export const checkIfUserIsTaskOwner = async (req, res, next) => {
   try {
     const taskExist = await pool.query(
