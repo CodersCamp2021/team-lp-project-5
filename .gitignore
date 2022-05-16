@@ -28,3 +28,4 @@ client/yarn-error.log*
 
 node_modules
 server/.env
+.env
