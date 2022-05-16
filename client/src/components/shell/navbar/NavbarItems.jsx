@@ -10,14 +10,16 @@ const MenuItems = [
   {
     icon: <BsCardText />,
     text: "Overview",
+    path: "/",
   },
   {
     icon: <BsCalendar4 />,
     text: "Calendar",
+    path: "/calendar",
   },
 ];
 
-const NavbarItems = () => {
+const NavbarItems = ({ setOpened }) => {
   const { classes } = useNavbarItemsStyles();
   const isXsScreen = useMediaQuery("(min-width: 576px)");
 
@@ -25,7 +27,7 @@ const NavbarItems = () => {
     <Box>
       <List
         center
-        size={32}
+        size={28}
         styles={{
           root: {
             display: "flex",
@@ -33,7 +35,7 @@ const NavbarItems = () => {
             alignItems: "center",
           },
           itemIcon: {
-            marginRight: "21px",
+            marginRight: "14px",
           },
         }}
       >
@@ -57,10 +59,11 @@ const NavbarItems = () => {
             key={item.text}
             icon={item.icon}
             component={Link}
-            to="/"
+            to={item.path}
+            onClick={() => setOpened(false)}
             className={classes.listItem}
           >
-            <Text size="32px">{item.text}</Text>
+            <Text size="28px">{item.text}</Text>
           </List.Item>
         ))}
       </List>

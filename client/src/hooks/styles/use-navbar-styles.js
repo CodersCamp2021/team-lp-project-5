@@ -39,7 +39,7 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   userNames: {
-    fontSize: 36,
+    fontSize: 32,
     fontWeight: 600,
     color: "#FFFFFF",
     textAlign: "center",
@@ -51,8 +51,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
   navbarBottom: {
     width: "100%",
-    minHeight: 60,
-    fontSize: 32,
+    fontSize: 28,
     textDecoration: "none",
     color: theme.colors.navbarText,
 
@@ -63,7 +62,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
     svg: {
       verticalAlign: "middle",
-      marginRight: "21px",
+      marginRight: "14px",
     },
 
     [theme.fn.smallerThan("xs")]: {
@@ -72,7 +71,7 @@ export const useNavbarStyles = createStyles((theme) => ({
   },
 
   logoutWrapper: {
-    height: "100%",
+    minHeight: 60,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -87,13 +86,13 @@ export const useNavbarItemsStyles = createStyles((theme) => ({
   button: {
     backgroundColor: theme.colors.primary[6],
     boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-    fontSize: 28,
+    fontSize: 26,
     lineHeight: "34px",
     letterSpacing: "0.1em",
     fontWeight: 500,
     width: 260,
     height: 55,
-    margin: "20px 0",
+    margin: "30px 0 20px",
     "&:hover": {
       backgroundColor: theme.colors.primary[8],
     },
