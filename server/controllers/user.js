@@ -44,7 +44,7 @@ export default class UserController {
       ]);
       res.cookie("team-lp-project-5", sessionToken);
     }
-    return { message: "Logged in successfully." };
+    return { message: "Logged in successfully.", userId: user.rows[0].user_id };
   };
 
   static getUserTasks = async (req) => {

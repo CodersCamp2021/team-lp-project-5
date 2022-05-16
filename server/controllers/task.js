@@ -1,25 +1,31 @@
 import pool from "../db/setup.js";
 
 export default class TaskController {
-  static createTask = async (body) => {
+  static createTask = async (req) => {
     await pool.query(
       `INSERT INTO tasks (title, description, user_id, priority, status) VALUES ($1, $2, $3, $4, $5);`,
-      [body.title, body.description, body.user_id, body.priority, body.status],
+      [
+        req.body.title,
+        req.body.description,
+        req.session.userId,
+        req.body.priority,
+        req.body.status,
+      ],
     );
     return { message: "Task created" };
   };
 
-  static changeTaskStatusOrPriority = async (body) => {
+  static changeTaskStatusOrPriority = async (req) => {
     await pool.query(
       `UPDATE tasks SET priority=COALESCE($1,priority), status=COALESCE($2,status) WHERE task_id=$3;`,
-      [body.priority, body.status, body.task_id],
+      [req.body.priority, req.body.status, req.params.taskId],
     );
     return { message: "Task changed" };
   };
 
-  static deleteTask = async (body) => {
+  static deleteTask = async (req) => {
     const outcome = await pool.query(`DELETE FROM tasks WHERE task_id=$1;`, [
-      body.task_id,
+      req.params.taskId,
     ]);
     if (outcome.rowCount === 1) {
       return { message: "Task Deleted" };
