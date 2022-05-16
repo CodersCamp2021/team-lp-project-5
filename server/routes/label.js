@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", loginRequired, async (req, res) => {
   try {
-    const response = await LabelController.createLabel(req.body);
+    const response = await LabelController.createLabel(req);
     return res.status(201).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });

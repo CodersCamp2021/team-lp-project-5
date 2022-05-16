@@ -46,16 +46,24 @@ export const loginRequired = async (req, res, next) => {
 
 export const checkIfUserIsTaskOwner = async (req, res, next) => {
   try {
-    const checkIfUserIsOwner = await pool.query(
-      `SELECT task_id FROM tasks WHERE user_id=$1 AND task_id=$2;`,
-      [req.session.userId, req.params.taskId],
+    const taskExist = await pool.query(
+      `SELECT task_id FROM tasks WHERE task_id=$1;`,
+      [req.params.taskId],
     );
-    if (checkIfUserIsOwner.rowCount) {
-      next();
+    if (taskExist.rowCount) {
+      const checkIfUserIsOwner = await pool.query(
+        `SELECT task_id FROM tasks WHERE user_id=$1 AND task_id=$2;`,
+        [req.session.userId, req.params.taskId],
+      );
+      if (checkIfUserIsOwner.rowCount) {
+        next();
+      } else {
+        return res
+          .status(403)
+          .json({ message: "You are not allowed to do this" });
+      }
     } else {
-      return res
-        .status(403)
-        .json({ message: "You are not allowed to do this" });
+      return res.status(400).json({ message: "Task doesn't exist" });
     }
   } catch (error) {
     return res.status(400).json({ error: error.message });
