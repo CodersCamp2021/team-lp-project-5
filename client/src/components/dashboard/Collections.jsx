@@ -39,7 +39,20 @@ const Collections = () => {
       <Title order={5} className={classes.collectionsTitle}>
         COLLECTIONS
       </Title>
-      <ScrollArea type="always" offsetScrollbars className={classes.scrollArea}>
+      <ScrollArea
+        type="auto"
+        scrollbarSize="7px"
+        offsetScrollbars
+        className={classes.scrollArea}
+        styles={{
+          scrollbar: {
+            borderRadius: 12,
+          },
+          corner: {
+            display: "none",
+          },
+        }}
+      >
         <Box className={classes.collectionsContent}>
           {DUMMY_COLLECTIONS.map(({ id, title, finished, total }) => (
             <CollectionCard

@@ -91,6 +91,7 @@ export const useCollectionsStyles = createStyles((theme) => ({
     display: "flex",
     gap: 70,
     width: 0,
+    margin: "0 4px",
   },
 
   collectionCard: {

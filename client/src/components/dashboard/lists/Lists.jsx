@@ -132,9 +132,18 @@ const Lists = () => {
       <Box className={classes.singleListWrapper}>
         <Title order={5}>TODAY</Title>
         <ScrollArea
-          type="always"
+          scrollbarSize="7px"
+          type="auto"
           offsetScrollbars
           className={classes.listScrollArea}
+          styles={{
+            scrollbar: {
+              borderRadius: 12,
+            },
+            corner: {
+              display: "none",
+            },
+          }}
         >
           <TaskList tasks={todayList} />
         </ScrollArea>
@@ -142,9 +151,18 @@ const Lists = () => {
       <Box className={classes.singleListWrapper}>
         <Title order={5}>TOMORROW</Title>
         <ScrollArea
-          type="always"
+          scrollbarSize="7px"
+          type="auto"
           offsetScrollbars
           className={classes.listScrollArea}
+          styles={{
+            scrollbar: {
+              borderRadius: 12,
+            },
+            corner: {
+              display: "none",
+            },
+          }}
         >
           <TaskList tasks={tomorrowList} />
         </ScrollArea>
@@ -153,9 +171,18 @@ const Lists = () => {
       <Box className={classes.singleListWrapper}>
         <Title order={5}>LEFTOVERS</Title>
         <ScrollArea
-          type="always"
+          scrollbarSize="7px"
+          type="auto"
           offsetScrollbars
           className={classes.listScrollArea}
+          styles={{
+            scrollbar: {
+              borderRadius: 12,
+            },
+            corner: {
+              display: "none",
+            },
+          }}
         >
           <TaskList tasks={leftoversList} leftovers={true} />
         </ScrollArea>
