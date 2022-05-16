@@ -1,6 +1,8 @@
 import express from "express";
 import UserController from "../controllers/user.js";
 import loginRequired from "../../common/middlewares.js";
+import { validator } from "../../common/validators.js";
+import { loginSchema } from "../../client/src/utils/loginSchema.js";
 
 const router = express.Router();
 
@@ -17,7 +19,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", validator(loginSchema), async (req, res) => {
   try {
     const response = await UserController.login(req, res);
     return res.status(200).json(response);
