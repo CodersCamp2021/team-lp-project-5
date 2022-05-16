@@ -1,5 +1,6 @@
 import pool from "../db/setup.js";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 export default class UserController {
   static register = async (body) => {
@@ -19,29 +20,31 @@ export default class UserController {
     return { message: "User created" };
   };
 
-  static login = async ({ body, session }) => {
+  static login = async (req, res) => {
     const client = await pool.connect();
     const user = await client.query(`SELECT * FROM users WHERE username=$1;`, [
-      body.username,
+      req.body.username,
     ]);
     if (!user) {
       throw new Error("User with this username does not exist.");
     }
     const validPassword = await bcrypt.compare(
-      body.password,
+      req.body.password,
       user.rows[0].password,
     );
     if (!validPassword) {
       throw new Error("Invalid password.");
     }
-    if (user.rows[0].session) {
-      session.userId = user.rows[0].user_id;
+    const userSessionIdExist = user.rows[0].session;
+    if (userSessionIdExist) {
+      res.cookie("team-lp-project-5", userSessionIdExist);
     } else {
-      session.userId = user.rows[0].user_id;
+      const sessionToken = crypto.randomBytes(64).toString("base64");
       await client.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
-        JSON.stringify(session),
-        body.username,
+        sessionToken,
+        req.body.username,
       ]);
+      res.cookie("team-lp-project-5", sessionToken);
     }
     return { message: "Logged in successfully." };
   };
@@ -65,10 +68,10 @@ export default class UserController {
     }
   };
 
-  static logout = async ({ session }) => {
+  static logout = async (req) => {
     const client = await pool.connect();
     await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
-      session.userId,
+      req.session.userId,
     ]);
     return { message: "Logged out successfully." };
   };
