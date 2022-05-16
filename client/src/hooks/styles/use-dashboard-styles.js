@@ -137,12 +137,12 @@ export const useCollectionsStyles = createStyles((theme) => ({
  */
 export const useListsStyles = createStyles((theme) => ({
   listsWrapper: {
-    flex: 1.5,
     position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "130px",
     paddingTop: 15,
+    paddingBottom: 40,
 
     [theme.fn.smallerThan("xl")]: {
       columnGap: "80px",
@@ -172,33 +172,38 @@ export const useListsStyles = createStyles((theme) => ({
 
     ".mantine-Divider-root": {
       position: "absolute",
-      right: "32.5%",
+      right: "32%",
       height: "80%",
       alignSelf: "center",
 
-      [theme.fn.smallerThan(1300)]: {
+      [theme.fn.smallerThan(1279)]: {
         display: "none",
       },
+
+      [theme.fn.smallerThan("xl")]: {
+        right: "33%",
+      },
     },
+  },
+
+  listScrollArea: {
+    maxHeight: "34vh",
   },
 
   singleListWrapper: {
     display: "flex",
     flexDirection: "column",
-
-    "&> div": {
-      height: "34vh",
-      marginBottom: 40,
-    },
   },
 
   tasksWrapper: {
     width: "97%",
+    marginBottom: 5,
   },
 
   placeholderText: {
     fontSize: 26,
     paddingTop: 15,
+    paddingLeft: 12,
   },
 }));
 
