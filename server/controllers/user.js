@@ -4,10 +4,9 @@ import crypto from "crypto";
 
 export default class UserController {
   static register = async (body) => {
-    const client = await pool.connect();
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(body.password, salt);
-    await client.query(
+    await pool.query(
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
         body.username,
@@ -21,8 +20,7 @@ export default class UserController {
   };
 
   static login = async (req, res) => {
-    const client = await pool.connect();
-    const user = await client.query(`SELECT * FROM users WHERE username=$1;`, [
+    const user = await pool.query(`SELECT * FROM users WHERE username=$1;`, [
       req.body.username,
     ]);
     if (!user) {
@@ -40,7 +38,7 @@ export default class UserController {
       res.cookie("team-lp-project-5", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
-      await client.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
+      await pool.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
         sessionToken,
         req.body.username,
       ]);
@@ -50,8 +48,7 @@ export default class UserController {
   };
 
   static getUserTasks = async (req) => {
-    const client = await pool.connect();
-    const tasks = await client.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
+    const tasks = await pool.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
       req.params.userId,
     ]);
     if (tasks.rowCount) {
@@ -62,8 +59,7 @@ export default class UserController {
   };
 
   static logout = async (req) => {
-    const client = await pool.connect();
-    await client.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
+    await pool.query(`UPDATE users SET session='' WHERE user_id=$1;`, [
       req.session.userId,
     ]);
     return { message: "Logged out successfully." };
