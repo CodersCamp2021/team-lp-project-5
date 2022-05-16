@@ -1,9 +1,6 @@
 import express from "express";
 import UserController from "../controllers/user.js";
-import {
-  loginRequired,
-  checkIfUserMatchUserIdFromParams,
-} from "../../common/middlewares.js";
+import { loginRequired } from "../../common/middlewares.js";
 
 const router = express.Router();
 
@@ -25,19 +22,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get(
-  "/:userId/tasks",
-  loginRequired,
-  checkIfUserMatchUserIdFromParams,
-  async (req, res) => {
-    try {
-      const response = await UserController.getUserTasks(req);
-      return res.status(200).json(response);
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
-    }
-  },
-);
+router.get("/tasks", loginRequired, async (req, res) => {
+  try {
+    const response = await UserController.getUserTasks(req);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
 
 router.post("/logout", loginRequired, async (req, res) => {
   try {

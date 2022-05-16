@@ -49,7 +49,7 @@ export default class UserController {
 
   static getUserTasks = async (req) => {
     const tasks = await pool.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
-      req.params.userId,
+      req.session.userId,
     ]);
     if (tasks.rowCount) {
       return { tasks: tasks.rows };
