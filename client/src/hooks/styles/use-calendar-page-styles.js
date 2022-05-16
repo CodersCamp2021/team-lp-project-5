@@ -3,7 +3,6 @@ import { createStyles } from "@mantine/core";
 export const useCalendarPageStyles = createStyles((theme) => ({
   container: {
     width: "100%",
-    height: "90vh",
     padding: "0 1rem",
     margin: "0 auto",
     display: "flex",
