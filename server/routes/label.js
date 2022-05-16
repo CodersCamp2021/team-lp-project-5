@@ -12,4 +12,13 @@ router.post("/", loginRequired, async (req, res) => {
   }
 });
 
+router.post("/relation", loginRequired, async (req, res) => {
+  try {
+    const response = await LabelController.createTaskLabelRelation(req);
+    return res.status(201).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
 export { router as labelRouter };
