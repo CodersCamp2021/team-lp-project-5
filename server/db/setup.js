@@ -3,7 +3,9 @@ import "dotenv/config";
 const { Pool } = pkg;
 
 export const pool = new Pool({
-  connectionString: `postgresql://postgres:${process.env.DATABASE_PASSWORD}@localhost:5432/coderscrew`,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-
 export default pool;
