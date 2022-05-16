@@ -5,7 +5,6 @@ import {
   Textarea,
   Text,
   Button,
-  Group,
   SimpleGrid,
   Collapse,
   Modal,
@@ -14,6 +13,8 @@ import { DatePicker, TimeInput } from "@mantine/dates";
 import { BsClock, BsCircleFill, BsChevronDown, BsPlus } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useState } from "react";
+import { Priority } from "./AddTaskPriority";
+import { Collection } from "./AddTaskCollection";
 
 export const AddTask = () => {
   const { classes } = useAddTaskStyles();
@@ -97,73 +98,11 @@ export const AddTask = () => {
           <Text pt="md" className={classes.titlesNames}>
             COLLECTIONS
           </Text>
-          <Group position="left">
-            <Button radius={15} className={classes.collectionButton}>
-              personal
-            </Button>
-            <Button radius={15} className={classes.collectionButton}>
-              bussiness
-            </Button>
-            <Button radius={15} className={classes.collectionButton}>
-              friends
-            </Button>
-            <Button radius={15} className={classes.collectionButton}>
-              family
-            </Button>
-            <Button radius={15} className={classes.collectionButton}>
-              hobby
-            </Button>
-          </Group>
+          <Collection></Collection>
           <Text pt="md" className={classes.titlesNames}>
             PRIORITY
           </Text>
-          <Group position="left">
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#E06262",
-                  color: "#393E46",
-                  "&:hover": {
-                    backgroundColor: "#E06262",
-                  },
-                },
-              }}
-            >
-              urgent
-            </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#EEB45E",
-                  color: "#393E46",
-                  "&:hover": {
-                    backgroundColor: "#EEB45E",
-                  },
-                },
-              }}
-            >
-              important
-            </Button>
-            <Button
-              radius={15}
-              className={classes.button}
-              styles={{
-                root: {
-                  backgroundColor: "#7BD650",
-                  color: "#393E46",
-                  "&:hover": {
-                    backgroundColor: "#7BD650",
-                  },
-                },
-              }}
-            >
-              time waste
-            </Button>
-          </Group>
+          <Priority></Priority>
         </Collapse>
         <SimpleGrid
           cols={3}
@@ -230,7 +169,6 @@ export const AddTask = () => {
         onClick={() => setOpened(true)}
         radius={15}
         rightIcon={<BsPlus size={35} />}
-        // className={classes.button}
         styles={{
           root: {
             width: 150,

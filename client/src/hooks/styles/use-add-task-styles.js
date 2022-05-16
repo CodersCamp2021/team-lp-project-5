@@ -37,17 +37,28 @@ export const useAddTaskStyles = createStyles((theme) => ({
     },
     
   },
-  collectionButton:  {
+  prioritiesButton: 
+   {
     [theme.fn.smallerThan("md")]: {
-      fontSize: 12,
-      width: 90,
+      orientation: "vertical",
+      label: {
+      fontSize: 12},
+      
     },
-    width: 120,
+    label: {
+    backgroundColor: theme.colors.primary[7],
+    color: "#EEEEEE",
+    "&:hover": {
+      backgroundColor: "#E06262",
+    }}
+  },
+
+  collectionButton: {
+    root: {
     backgroundColor: theme.colors.primary[7],
     color: "#393E46",
-    "&:hover": {
-      backgroundColor: theme.colors.primary[7],
-    },
+    }
   },
+
   
 }));
