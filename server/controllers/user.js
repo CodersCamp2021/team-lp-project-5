@@ -10,8 +10,8 @@ export default class UserController {
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
         body.username,
-        body.first_name,
-        body.second_name,
+        body.firstName,
+        body.lastName,
         hashedPassword,
         body.email,
       ],
