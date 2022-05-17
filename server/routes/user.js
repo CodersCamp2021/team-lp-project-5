@@ -43,4 +43,6 @@ router.post("/logout", loginRequired, async (req, res) => {
   }
 });
 
+router.get("/userInfo", loginRequired, async () => {});
+
 export { router as userRouter };

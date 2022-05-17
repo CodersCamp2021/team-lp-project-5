@@ -64,4 +64,6 @@ export default class UserController {
     ]);
     return { message: "Logged out successfully." };
   };
+
+  static getUserInfo = async () => {};
 }
