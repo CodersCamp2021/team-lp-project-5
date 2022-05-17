@@ -21,7 +21,7 @@ export default class UserController {
 
   static login = async (req, res) => {
     const user = await pool.query(`SELECT * FROM users WHERE username=$1;`, [
-      req.body.username,
+      req.body.email,
     ]);
     if (!user) {
       throw new Error("User with this username does not exist.");
@@ -40,7 +40,7 @@ export default class UserController {
       const sessionToken = crypto.randomBytes(64).toString("base64");
       await pool.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
         sessionToken,
-        req.body.username,
+        req.body.email,
       ]);
       res.cookie("team-lp-project-5", sessionToken);
     }
