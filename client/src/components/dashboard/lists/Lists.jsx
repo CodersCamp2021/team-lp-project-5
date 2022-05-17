@@ -3,7 +3,7 @@ import { Box, Divider, ScrollArea, Title } from "@mantine/core";
 
 import { useListsStyles } from "../../../hooks/styles/use-dashboard-styles";
 import { checkIfTheSameDay, getTomorrow } from "../../../utils/dateHelpers";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../../UserContext";
 import TaskList from "./TaskList";
 
 const DUMMY_TASKS = [
@@ -100,10 +100,10 @@ const DUMMY_TASKS = [
 ];
 
 const Lists = () => {
+  const { store } = useContext(UserContext);
   const { classes } = useListsStyles();
   const today = new Date();
   const tomorrow = getTomorrow();
-  const { store } = useContext(UserContext);
 
   const tasks = store.tasks;
   console.log(tasks);
