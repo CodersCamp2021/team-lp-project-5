@@ -91,6 +91,7 @@ export const useCollectionsStyles = createStyles((theme) => ({
     display: "flex",
     gap: 70,
     width: 0,
+    margin: "0 4px",
   },
 
   collectionCard: {
@@ -137,16 +138,20 @@ export const useCollectionsStyles = createStyles((theme) => ({
  */
 export const useListsStyles = createStyles((theme) => ({
   listsWrapper: {
-    flex: 1.5,
     position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "130px",
     paddingTop: 15,
+    paddingBottom: 40,
 
     [theme.fn.smallerThan("xl")]: {
       columnGap: "80px",
       rowGap: "20px",
+    },
+
+    [theme.fn.smallerThan("sm")]: {
+      columnGap: "20px",
     },
 
     h5: {
@@ -154,7 +159,7 @@ export const useListsStyles = createStyles((theme) => ({
       textShadow: theme.other.mainShadow,
       letterSpacing: "0.2em",
       textAlign: "center",
-      paddingBottom: 10,
+      paddingBottom: 20,
       fontSize: 28,
 
       [theme.fn.largerThan("xl")]: {
@@ -168,25 +173,38 @@ export const useListsStyles = createStyles((theme) => ({
 
     ".mantine-Divider-root": {
       position: "absolute",
-      right: "31.5%",
+      right: "32%",
       height: "80%",
       alignSelf: "center",
 
-      [theme.fn.smallerThan(1300)]: {
+      [theme.fn.smallerThan(1279)]: {
         display: "none",
       },
+
+      [theme.fn.smallerThan("xl")]: {
+        right: "33%",
+      },
     },
+  },
+
+  listScrollArea: {
+    maxHeight: "34vh",
   },
 
   singleListWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
+  },
 
-    "&> div": {
-      height: "34vh",
-      marginBottom: 40,
-    },
+  tasksWrapper: {
+    width: "97%",
+    marginBottom: 5,
+  },
+
+  placeholderText: {
+    fontSize: 26,
+    paddingTop: 15,
+    paddingLeft: 12,
   },
 }));
 

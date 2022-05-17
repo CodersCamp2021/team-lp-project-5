@@ -2,7 +2,7 @@ import { Group, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
 
-const SingleTask = ({ task }) => {
+const SingleTask = ({ task, isLeftover }) => {
   const theme = useMantineTheme();
   const { title, priority, isDone } = task;
 
@@ -23,7 +23,9 @@ const SingleTask = ({ task }) => {
         alignItems: "center",
         padding: 20,
         width: "100%",
-        backgroundColor: theme.colors.lightBg,
+        backgroundColor: isLeftover
+          ? theme.colors.leftoverBg
+          : theme.colors.lightBg,
         borderRadius: 15,
         position: "relative",
         cursor: "pointer",
@@ -31,6 +33,7 @@ const SingleTask = ({ task }) => {
         display: "flex",
         flexWrap: "nowrap",
         gap: "20px",
+        boxShadow: theme.other.mainShadow,
       }}
     >
       <BsDashLg
