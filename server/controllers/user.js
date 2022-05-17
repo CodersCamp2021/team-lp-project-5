@@ -66,14 +66,14 @@ export default class UserController {
   };
 
   static getUserInfo = async (req) => {
-    const tasks = await pool.query(
+    const userInfo = await pool.query(
       `SELECT (username, email) FROM tasks WHERE user_id=$1;`,
       [req.session.userId],
     );
-    if (tasks.rowCount) {
-      return { tasks: tasks.rows };
+    if (userInfo.rowCount) {
+      return { userInfo: userInfo.rows };
     } else {
-      return { message: "No tasks found for this user" };
+      return { message: "No user found" };
     }
   };
 }
