@@ -1,14 +1,10 @@
 import express from "express";
 import UserController from "../controllers/user.js";
-import loginRequired from "../../common/middlewares.js";
 import { validator } from "../../common/validators.js";
 import { loginSchema } from "../../client/src/utils/loginSchema.js";
+import { loginRequired } from "../../common/middlewares.js";
 
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 router.post("/", async (req, res) => {
   try {
@@ -28,7 +24,7 @@ router.post("/login", validator(loginSchema), async (req, res) => {
   }
 });
 
-router.get("/:userId/tasks", async (req, res) => {
+router.get("/tasks", loginRequired, async (req, res) => {
   try {
     const response = await UserController.getUserTasks(req);
     return res.status(200).json(response);
