@@ -67,7 +67,7 @@ export default class UserController {
 
   static getUserInfo = async (req) => {
     const userInfo = await pool.query(
-      `SELECT (username, email) FROM tasks WHERE user_id=$1;`,
+      `SELECT (username, email) FROM users WHERE user_id=$1;`,
       [req.session.userId],
     );
     if (userInfo.rowCount) {
