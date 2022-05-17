@@ -11,7 +11,7 @@ const TaskList = ({ tasks, leftovers }) => {
     <Stack className={classes.tasksWrapper}>
       {tasks?.length > 0 ? (
         tasks.map((task) => (
-          <SingleTask key={task.task_id} task={task} isLeftover={leftovers} />
+          <SingleTask key={task.taskId} task={task} isLeftover={leftovers} />
         ))
       ) : (
         <Text className={classes.placeholderText} align="center">

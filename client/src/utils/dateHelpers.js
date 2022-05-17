@@ -1,5 +1,13 @@
+import dayjs from "dayjs";
+
 export const checkIfTheSameDay = (firstDate, secondDate) => {
-  return firstDate.toDateString() === secondDate.toDateString();
+  let firstDateObject;
+  if (!(typeof firstDate.getMonth === "function")) {
+    firstDateObject = new Date(firstDate);
+  } else {
+    firstDateObject = firstDate;
+  }
+  return dayjs(firstDateObject).isSame(dayjs(secondDate), "day");
 };
 
 export const getTomorrow = () => {

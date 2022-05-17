@@ -17,7 +17,7 @@ export const useLocalStorage = () => {
     const updatedTasks = [...tasksInStore, { ...newTask, taskId: newId }];
 
     setTasks(updatedTasks);
-    localStorage.setItem(JSON.stringify(updatedTasks));
+    localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
     return { message: "Task created" };
   };
@@ -35,7 +35,7 @@ export const useLocalStorage = () => {
     const filteredTasks = tasksInStore.filter((task) => task.taskId === id);
     const updatedTasks = [...filteredTasks, { ...updatedTask }];
     setTasks(updatedTasks);
-    localStorage.setItem(JSON.stringify(updatedTasks));
+    localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
     return { message: "Task changed" };
   };
@@ -45,7 +45,7 @@ export const useLocalStorage = () => {
     if (tasksInStore.find((task) => task.id === id)) {
       const updatedTasks = tasksInStore.filter((task) => task.taskId === id);
       setTasks(updatedTasks);
-      localStorage.setItem(JSON.stringify(updatedTasks));
+      localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
       return { message: "Task Deleted" };
     } else {
@@ -57,7 +57,7 @@ export const useLocalStorage = () => {
     const newId = uuidv4();
     const labelsInStore = JSON.parse(localStorage.getItem(LABELS)) || [];
     const updatedLabels = [...labelsInStore, { labelId: newId, title }];
-    localStorage.setItem(JSON.stringify(updatedLabels));
+    localStorage.setItem(LABELS, JSON.stringify(updatedLabels));
 
     return { message: "Label created" };
   };
