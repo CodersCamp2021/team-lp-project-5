@@ -2,11 +2,12 @@ import express from "express";
 import UserController from "../controllers/user.js";
 import { validator } from "../../common/validators.js";
 import { loginSchema } from "../../client/src/utils/loginSchema.mjs";
+import { registrationSchema } from "../../client/src/utils/registrationSchema.mjs";
 import { loginRequired } from "../../common/middlewares.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/register", validator(registrationSchema), async (req, res) => {
   try {
     const response = await UserController.register(req.body);
     return res.status(201).json(response);
