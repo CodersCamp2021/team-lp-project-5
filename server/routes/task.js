@@ -1,32 +1,46 @@
 import express from "express";
 import TaskController from "../controllers/task.js";
+import {
+  loginRequired,
+  checkIfUserIsTaskOwner,
+} from "../../common/middlewares.js";
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", loginRequired, async (req, res) => {
   try {
-    const response = await TaskController.createTask(req.body);
+    const response = await TaskController.createTask(req);
     return res.status(201).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
 });
 
-router.put("/changeStatus", async (req, res) => {
-  try {
-    const response = await TaskController.changeTaskStatusOrPriority(req.body);
-    return res.status(201).json(response);
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-});
+router.put(
+  "/:taskId/changeStatus",
+  loginRequired,
+  checkIfUserIsTaskOwner,
+  async (req, res) => {
+    try {
+      const response = await TaskController.changeTaskStatusOrPriority(req);
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+);
 
-router.delete("/", async (req, res) => {
-  try {
-    const response = await TaskController.deleteTask(req.body);
-    return res.status(200).json(response);
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-});
+router.delete(
+  "/:taskId",
+  loginRequired,
+  checkIfUserIsTaskOwner,
+  async (req, res) => {
+    try {
+      const response = await TaskController.deleteTask(req);
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+);
 
 export { router as taskRouter };
