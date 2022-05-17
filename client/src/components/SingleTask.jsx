@@ -4,13 +4,13 @@ import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
 
 const SingleTask = ({ task, isLeftover }) => {
   const theme = useMantineTheme();
-  const { title, priority, isDone } = task;
+  const { title, priority, status } = task;
 
   const handleClick = () => {
     //TODO: handle onClick - mark task as done/undone
   };
 
-  const icon = isDone ? (
+  const icon = status ? (
     <BsCheckCircleFill size="24px" />
   ) : (
     <BsCircle size="24px" />
@@ -52,7 +52,7 @@ const SingleTask = ({ task, isLeftover }) => {
           textTransform: "capitalize",
           fontSize: 18,
           color: "#eeeeee",
-          textDecorationLine: isDone ? "line-through" : "",
+          textDecorationLine: status ? "line-through" : "",
           maxWidth: "90%",
         }}
       >
