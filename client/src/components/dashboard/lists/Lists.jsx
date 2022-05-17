@@ -23,7 +23,9 @@ const Lists = () => {
   const tomorrowList = React.useMemo(
     () =>
       tasks
-        .filter((task) => dayjs(task.date).isSame(dayjs().add(1, "day"), "day"))
+        .filter((task) =>
+          dayjs(new Date(task.date)).isSame(dayjs().add(1, "day"), "day"),
+        )
         .sort((a, b) => a.priority - b.priority),
     [tasks],
   );
