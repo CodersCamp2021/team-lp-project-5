@@ -20,7 +20,7 @@ export default class UserController {
   };
 
   static login = async (req, res) => {
-    const user = await pool.query(`SELECT * FROM users WHERE username=$1;`, [
+    const user = await pool.query(`SELECT * FROM users WHERE email=$1;`, [
       req.body.email,
     ]);
     if (!user) {
@@ -38,7 +38,7 @@ export default class UserController {
       res.cookie("team-lp-project-5", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
-      await pool.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
+      await pool.query(`UPDATE users SET session=$1 WHERE email=$2;`, [
         sessionToken,
         req.body.email,
       ]);
@@ -67,7 +67,7 @@ export default class UserController {
 
   static getUserInfo = async (req) => {
     const userInfo = await pool.query(
-      `SELECT (username, email) FROM users WHERE user_id=$1;`,
+      `SELECT username, email FROM users WHERE user_id=$1;`,
       [req.session.userId],
     );
     if (userInfo.rowCount) {
