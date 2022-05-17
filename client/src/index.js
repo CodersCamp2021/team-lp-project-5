@@ -2,21 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { BrowserRouter } from "react-router-dom";
 import { theme } from "./utils/theme";
-import { UserProvider } from "./UserContext";
 import App from "./App";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
-    <ModalsProvider>
-      <BrowserRouter>
-        <UserProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalsProvider>
+        <BrowserRouter>
           <App />
-        </UserProvider>
-      </BrowserRouter>
-    </ModalsProvider>
+        </BrowserRouter>
+      </ModalsProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   </MantineProvider>,
   document.getElementById("root"),
 );

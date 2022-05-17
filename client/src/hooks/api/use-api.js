@@ -76,10 +76,11 @@ export const postLabel = async (title) => {
 };
 
 export const useApi = () => {
+  const queryClient = useQueryClient();
+
   const { data: tasks } = useQuery("tasks", fetchTasks, {
     onSuccess: (data) => console.log(data),
   });
-  const queryClient = useQueryClient();
 
   const { mutate: createTask } = useMutation(
     ({ title, description, priority, status }) =>
