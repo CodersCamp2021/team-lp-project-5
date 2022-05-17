@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { registrationSchema } from "../../utils/registrationSchema";
+import { registrationSchema } from "../../utils/registrationSchema.mjs";
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import Input from "./Input";
 
