@@ -8,9 +8,10 @@ import {
   SimpleGrid,
   Collapse,
   Modal,
+  Switch
 } from "@mantine/core";
 import { DatePicker, TimeInput } from "@mantine/dates";
-import { BsClock, BsCircleFill, BsChevronDown, BsPlus } from "react-icons/bs";
+import { BsClock, BsChevronDown, BsPlus } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useState } from "react";
 import { Priority } from "./AddTaskPriority";
@@ -20,6 +21,8 @@ export const AddTask = () => {
   const { classes } = useAddTaskStyles();
   const [opened, setOpened] = useState(false);
   const [more, setMore] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [value, onChange] = useState(new Date());
 
   return (
     <>
@@ -59,22 +62,15 @@ export const AddTask = () => {
           />
           <TimeInput
             format="12"
-            defaultValue={new Date()}
-            icon={<BsClock size={16} />}
+            // defaultValue={new Date()}
+            icon={<BsClock size={16} 
+            value={value} onChange={onChange} 
+            />}
           />
-          <Button
-            radius={18}
-            rightIcon={<BsCircleFill size={35} />}
-            styles={{
-              root: {
-                paddingRight: 0,
-                backgroundColor: "#00ADB5",
-              },
-              rightIcon: {
-                marginLeft: 15,
-              },
-            }}
-          ></Button>
+          <Switch
+          color="cyan"
+          checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)}
+          ></Switch>
           <Button
             onClick={() => setMore((o) => !o)}
             rightIcon={<BsChevronDown size={25} />}
