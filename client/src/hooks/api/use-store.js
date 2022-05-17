@@ -3,9 +3,7 @@ import { useApi } from "./use-api";
 import { useLocalStorage } from "./use-local-storage";
 
 export const useStore = () => {
-  const [userType, setUserType] = useState(
-    JSON.parse(localStorage.getItem("userType")),
-  );
+  const [userType, setUserType] = useState(localStorage.getItem("userType"));
 
   const setGuest = () => {
     setUserType("guest");
@@ -20,7 +18,7 @@ export const useStore = () => {
   const guestStore = useLocalStorage();
   const userStore = useApi();
 
-  const store = userType === "guest" ? guestStore : userStore;
+  const store = userType === "guest" ? userStore : guestStore;
 
   return { store, setGuest, setUser };
 };

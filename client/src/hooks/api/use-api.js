@@ -78,8 +78,11 @@ export const postLabel = async (title) => {
 export const useApi = () => {
   const queryClient = useQueryClient();
 
-  const { data: tasks } = useQuery("tasks", fetchTasks, {
+  const { data: tasks, refetch: getTasks } = useQuery("tasks", fetchTasks, {
     onSuccess: (data) => console.log(data),
+    onError: (error) => console.error(error),
+    enabled: false,
+    placeholderData: [],
   });
 
   const { mutate: createTask } = useMutation(
@@ -129,5 +132,5 @@ export const useApi = () => {
     },
   });
 
-  return { tasks, createTask, changeTask, deleteTask, createLabel };
+  return { tasks, getTasks, createTask, changeTask, deleteTask, createLabel };
 };

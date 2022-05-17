@@ -9,6 +9,8 @@ export const useLocalStorage = () => {
     JSON.parse(localStorage.getItem(TASKS)) || [],
   );
 
+  const getTasks = () => JSON.parse(localStorage.getItem(TASKS));
+
   const createTask = (newTask) => {
     const newId = uuidv4();
     const tasksInStore = JSON.parse(localStorage.getItem(TASKS)) || [];
@@ -60,5 +62,5 @@ export const useLocalStorage = () => {
     return { message: "Label created" };
   };
 
-  return { tasks, createTask, changeTask, deleteTask, createLabel };
+  return { tasks, getTasks, createTask, changeTask, deleteTask, createLabel };
 };

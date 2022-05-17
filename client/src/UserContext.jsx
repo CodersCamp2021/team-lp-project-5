@@ -2,7 +2,7 @@ import React from "react";
 import { createContext } from "react";
 import { useStore } from "./hooks/api/use-store";
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const { store, setGuest, setUser } = useStore();

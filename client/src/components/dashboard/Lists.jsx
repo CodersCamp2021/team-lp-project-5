@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Box, Divider, ScrollArea, Title } from "@mantine/core";
 import { useListsStyles } from "../../hooks/styles/use-dashboard-styles";
+import { UserContext } from "../../UserContext";
 
 const Lists = () => {
   const { classes } = useListsStyles();
+  const { store } = useContext(UserContext);
+
+  const tasks = store.tasks;
+  console.log(tasks);
 
   return (
     <Box className={classes.listsWrapper}>
