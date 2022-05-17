@@ -65,5 +65,15 @@ export default class UserController {
     return { message: "Logged out successfully." };
   };
 
-  static getUserInfo = async () => {};
+  static getUserInfo = async (req) => {
+    const tasks = await pool.query(
+      `SELECT (username, email) FROM tasks WHERE user_id=$1;`,
+      [req.session.userId],
+    );
+    if (tasks.rowCount) {
+      return { tasks: tasks.rows };
+    } else {
+      return { message: "No tasks found for this user" };
+    }
+  };
 }
