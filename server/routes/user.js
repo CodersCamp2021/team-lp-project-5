@@ -1,6 +1,6 @@
 import express from "express";
 import UserController from "../controllers/user.js";
-import { validator } from "../../common/validators.js";
+import { validator } from "../validators/validators.js";
 import { loginSchema } from "../../client/src/utils/loginSchema.mjs";
 import { registrationSchema } from "../../client/src/utils/registrationSchema.mjs";
 import { loginRequired } from "../../common/middlewares.js";
