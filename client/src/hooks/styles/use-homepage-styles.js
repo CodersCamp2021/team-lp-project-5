@@ -65,6 +65,7 @@ export const useHomeHeroStyles = createStyles((theme) => ({
       lineHeight: "100px",
       letterSpacing: "4px",
     },
+    marginBottom: "20px",
     fontSize: "70px",
     lineHeight: "80px",
     letterSpacing: "3px",
