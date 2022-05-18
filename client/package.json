@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@mantine/core": "^4.2.2",
     "@mantine/dates": "^4.2.2",
