@@ -18,7 +18,7 @@ export const useStore = () => {
   const guestStore = useLocalStorage();
   const userStore = useApi();
 
-  const store = userType === "guest" ? userStore : guestStore;
+  const store = userType === "user" ? userStore : guestStore;
 
-  return { store, setGuest, setUser };
+  return { store, userType, setGuest, setUser };
 };

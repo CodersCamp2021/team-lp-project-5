@@ -5,10 +5,10 @@ import { useStore } from "./hooks/api/use-store";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { store, setGuest, setUser } = useStore();
+  const { store, userType, setGuest, setUser } = useStore();
 
   return (
-    <UserContext.Provider value={{ store, setGuest, setUser }}>
+    <UserContext.Provider value={{ store, userType, setGuest, setUser }}>
       {children}
     </UserContext.Provider>
   );

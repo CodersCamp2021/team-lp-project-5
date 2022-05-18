@@ -45,20 +45,7 @@ const Lists = () => {
   return (
     <Box className={classes.listsWrapper}>
       <Box className={classes.singleListWrapper}>
-        <Title
-          onClick={() =>
-            store.createTask({
-              title: "asd",
-              description: "qwe",
-              priority: 3,
-              status: true,
-              date: new Date(),
-            })
-          }
-          order={5}
-        >
-          TODAY
-        </Title>
+        <Title order={5}>TODAY</Title>
         <ScrollArea
           scrollbarSize="7px"
           type="auto"

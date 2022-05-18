@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { UserProvider } from "./UserContext";
 import Homepage from "./components/homepage/Homepage";
 import Shell from "./components/shell/Shell";
+import { UserContext } from "./UserContext";
 
 function App() {
+  const { userType } = useContext(UserContext);
+
   return (
-    <UserProvider>
-      <Routes>
-        <Route path="/*" element={<Shell />} />
-        <Route path="/home" element={<Homepage />} />
-      </Routes>
-    </UserProvider>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          userType === "user" ? (
+            <Shell />
+          ) : userType === "guest" ? (
+            <Shell />
+          ) : (
+            <Homepage />
+          )
+        }
+      />
+    </Routes>
   );
 }
 

@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import { BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./UserContext";
 import { theme } from "./utils/theme";
 import App from "./App";
 
@@ -16,7 +17,9 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ModalsProvider>
         <BrowserRouter>
-          <App />
+          <UserProvider>
+            <App />
+          </UserProvider>
         </BrowserRouter>
       </ModalsProvider>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
