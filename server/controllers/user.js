@@ -23,8 +23,8 @@ export default class UserController {
     const user = await pool.query(`SELECT * FROM users WHERE email=$1;`, [
       req.body.email,
     ]);
-    if (!user) {
-      throw new Error("User with this username does not exist.");
+    if (!user.rowCount) {
+      throw new Error("User with this email does not exist.");
     }
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -67,11 +67,11 @@ export default class UserController {
 
   static getUserInfo = async (req) => {
     const userInfo = await pool.query(
-      `SELECT username, email FROM users WHERE user_id=$1;`,
+      `SELECT username, email, first_name, second_name FROM users WHERE user_id=$1;`,
       [req.session.userId],
     );
     if (userInfo.rowCount) {
-      return { userInfo: userInfo.rows };
+      return { userInfo: userInfo.rows[0] };
     } else {
       return { message: "No user found" };
     }
