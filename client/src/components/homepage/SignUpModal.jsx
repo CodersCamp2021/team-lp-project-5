@@ -82,7 +82,9 @@ const SignUpModal = ({ opened, setOpened }) => {
           />
         </SimpleGrid>
         <Group position="right" mt="xl">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className={classes.button}>
+            Submit
+          </Button>
         </Group>
       </form>
     </Modal>
