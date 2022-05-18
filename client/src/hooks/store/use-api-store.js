@@ -1,97 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-
-export const fetchTasks = async () => {
-  const response = await fetch(
-    process.env.REACT_APP_SERVER_URL + "/user/tasks",
-    {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.json;
-};
-
-export const postTask = async (title, description, priority, status) => {
-  const response = await fetch(process.env.REACT_APP_SERVER_URL + "/task", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title,
-      description,
-      priority,
-      status,
-    }),
-  });
-  return response.json();
-};
-
-export const updateTask = async (id, priority, status) => {
-  const response = await fetch(
-    process.env.REACT_APP_SERVER_URL + `/task/${id}/changeStatus`,
-    {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        priority,
-        status,
-      }),
-    },
-  );
-  return response.json();
-};
-
-export const fetchDeleteTask = async (id) => {
-  const response = await fetch(
-    process.env.REACT_APP_SERVER_URL + `/task/${id}`,
-    {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.json();
-};
-
-export const postLabel = async (title) => {
-  const response = await fetch(process.env.REACT_APP_SERVER_URL + "/label", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ title }),
-  });
-  return response.json();
-};
+import { useMutation, useQueryClient } from "react-query";
+import { useTasks } from "../api/use-tasks";
+import TimeyApiClient from "../api/timey";
 
 export const useApi = () => {
   const queryClient = useQueryClient();
 
-  const { data: tasks, refetch: getTasks } = useQuery("tasks", fetchTasks, {
-    onSuccess: (data) => console.log(data),
-    onError: (error) => console.error(error),
-    enabled: false,
-    placeholderData: [],
-  });
+  const getTasks = (date) => useTasks(date);
 
   const { mutate: createTask } = useMutation(
-    ({ title, description, priority, status }) =>
-      postTask(title, description, priority, status),
+    ({ title, description, priority, status, date }) =>
+      TimeyApiClient.postTask(title, description, priority, status, date),
     {
       onSuccess: (data) => {
         console.log(data);
-        queryClient.invalidateQueries("tasks");
+        queryClient.invalidateQueries(["tasks", data.date]);
       },
       onError: (error) => {
         console.error(error);
@@ -100,11 +22,20 @@ export const useApi = () => {
   );
 
   const { mutate: changeTask } = useMutation(
-    ({ id, priority, status }) => updateTask(id, priority, status),
+    ({ id, title, description, date, priority, status, labels }) =>
+      TimeyApiClient.updateTask(
+        id,
+        title,
+        description,
+        date,
+        priority,
+        status,
+        labels,
+      ),
     {
       onSuccess: (data) => {
         console.log(data);
-        queryClient.invalidateQueries("tasks");
+        queryClient.invalidateQueries(["tasks", data.date]);
       },
       onError: (error) => {
         console.error(error);
@@ -112,25 +43,30 @@ export const useApi = () => {
     },
   );
 
-  const { mutate: deleteTask } = useMutation((id) => fetchDeleteTask(id), {
-    onSuccess: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries("tasks");
+  const { mutate: deleteTask } = useMutation(
+    (id) => TimeyApiClient.fetchDeleteTask(id),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+      },
+      onError: (error) => {
+        console.error(error);
+      },
     },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
+  );
 
-  const { mutate: createLabel } = useMutation((title) => postLabel(title), {
-    onSuccess: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries("labels");
+  const { mutate: createLabel } = useMutation(
+    (title) => TimeyApiClient.postLabel(title),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        queryClient.invalidateQueries("labels");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
     },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
+  );
 
-  return { tasks, getTasks, createTask, changeTask, deleteTask, createLabel };
+  return { getTasks, createTask, changeTask, deleteTask, createLabel };
 };
