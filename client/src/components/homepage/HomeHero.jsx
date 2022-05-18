@@ -3,6 +3,7 @@ import { Box, Image, Text, Button, BackgroundImage } from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
 import SignUpModal from "./SignUpModal";
 import spanImage from "../../assets/span.png";
+import homeImage from "../../assets/homeImage.svg";
 
 const HomeHero = () => {
   const { classes } = useHomeHeroStyles();
@@ -41,11 +42,7 @@ const HomeHero = () => {
         </Button>
       </Box>
       <Box className={classes.imageContainer}>
-        <Image
-          className={classes.image}
-          src="https://lukaszadam.com/monitor.svg"
-          withPlaceholder
-        />
+        <Image className={classes.image} src={homeImage} withPlaceholder />
       </Box>
       <SignUpModal opened={opened} setOpened={setOpened} />
     </Box>
