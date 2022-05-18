@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useApi } from "./use-api";
+import { useApi } from "./use-api-store";
 import { useLocalStorage } from "./use-local-storage";
 
 export const useStore = () => {
