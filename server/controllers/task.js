@@ -3,13 +3,14 @@ import pool from "../db/setup.js";
 export default class TaskController {
   static createTask = async (req) => {
     await pool.query(
-      `INSERT INTO tasks (title, description, user_id, priority, status) VALUES ($1, $2, $3, $4, $5);`,
+      `INSERT INTO tasks (title, description, user_id, priority, status, due_date) VALUES ($1, $2, $3, $4, $5, $6);`,
       [
         req.body.title,
         req.body.description,
         req.session.userId,
         req.body.priority,
         req.body.status,
+        req.body.dueDate,
       ],
     );
     return { message: "Task created" };
