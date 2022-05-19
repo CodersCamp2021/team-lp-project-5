@@ -43,4 +43,13 @@ router.post("/logout", loginRequired, async (req, res) => {
   }
 });
 
+router.get("/userInfo", loginRequired, async (req, res) => {
+  try {
+    const response = await UserController.getUserInfo(req);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
 export { router as userRouter };

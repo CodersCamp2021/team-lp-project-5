@@ -20,11 +20,11 @@ export default class UserController {
   };
 
   static login = async (req, res) => {
-    const user = await pool.query(`SELECT * FROM users WHERE username=$1;`, [
+    const user = await pool.query(`SELECT * FROM users WHERE email=$1;`, [
       req.body.email,
     ]);
-    if (!user) {
-      throw new Error("User with this username does not exist.");
+    if (!user.rowCount) {
+      throw new Error("User with this email does not exist.");
     }
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -38,7 +38,7 @@ export default class UserController {
       res.cookie("team-lp-project-5", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
-      await pool.query(`UPDATE users SET session=$1 WHERE username=$2;`, [
+      await pool.query(`UPDATE users SET session=$1 WHERE email=$2;`, [
         sessionToken,
         req.body.email,
       ]);
@@ -63,5 +63,17 @@ export default class UserController {
       req.session.userId,
     ]);
     return { message: "Logged out successfully." };
+  };
+
+  static getUserInfo = async (req) => {
+    const userInfo = await pool.query(
+      `SELECT username, email, first_name, second_name FROM users WHERE user_id=$1;`,
+      [req.session.userId],
+    );
+    if (userInfo.rowCount) {
+      return { userInfo: userInfo.rows[0] };
+    } else {
+      return { message: "No user found" };
+    }
   };
 }
