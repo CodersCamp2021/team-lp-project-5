@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, Text } from "@mantine/core";
+import { Avatar, Box, Text } from "@mantine/core";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
 import { useMediaQuery } from "@mantine/hooks";
@@ -11,18 +11,15 @@ const NavbarUser = () => {
   return (
     <Box sx={{ paddingTop: 10 }}>
       <Box>
-        <Image
-          imageProps={{
-            draggable: "false",
-          }}
+        <Avatar
+          size="lg"
           width={isXsScreen ? 100 : 130}
           height={isXsScreen ? 100 : 130}
-          radius="50%"
-          className={classes.userImage}
-          src=""
-          alt="User Photo"
-          withPlaceholder
-        />
+          className={classes.avatar}
+          alt="User initials"
+        >
+          JC
+        </Avatar>
       </Box>
       <Text className={classes.userNames}>Jakub Czerwiński </Text>
     </Box>
