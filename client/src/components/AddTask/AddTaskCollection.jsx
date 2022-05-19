@@ -1,6 +1,5 @@
 import { MultiSelect } from "@mantine/core";
 import { useState } from "react";
-import { useAddTaskStyles } from "../../hooks/styles/use-add-task-styles.js";
 
 const data = [
   { value: "personal", label: "personal" },
@@ -12,10 +11,11 @@ const data = [
 
 export const Collection = () => {
   const [value, setValue] = useState([]);
-  const { classes } = useAddTaskStyles();
   return (
     <MultiSelect
-      className={classes.collectionButton}
+    sx={(theme) => ({
+    backgroundColor: theme.colors.darkBg,
+  })}
       value={value}
       onChange={setValue}
       data={data}

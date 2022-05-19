@@ -7,8 +7,7 @@ import {
   Button,
   SimpleGrid,
   Collapse,
-  Modal,
-  Switch
+  Modal
 } from "@mantine/core";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import { BsClock, BsChevronDown, BsPlus } from "react-icons/bs";
@@ -21,8 +20,9 @@ export const AddTask = () => {
   const { classes } = useAddTaskStyles();
   const [opened, setOpened] = useState(false);
   const [more, setMore] = useState(false);
-  const [checked, setChecked] = useState(false);
   const [value, onChange] = useState(new Date());
+
+ 
 
   return (
     <>
@@ -42,35 +42,27 @@ export const AddTask = () => {
       >
         <Box>
           <Text className={classes.titlesNames}>TITLE</Text>
-          <Textarea className={classes.textArea} maxRows={1} required />
+          <Textarea  minRows={1} maxRows={1} required />
           <Text className={classes.titlesNames}>DESCRIPTION</Text>
-          <Textarea maxRows={4} />
+          <Textarea minRows={3} />
         </Box>
         <Text pt="md" className={classes.titlesNames}>
           DATE AND TIME
         </Text>
         <Box className={classes.dateItemsWrapper} gutter="xl">
           <DatePicker
-            className={classes.datePicker}
+            className={classes.datePickerr}
             allowLevelChange={false}
             placeholder="DD-MM-YYYY"
             minDate={new Date()}
-            styles={(theme) => ({
-              placeholder: theme.white,
-              value: theme.white,
-            })}
           />
           <TimeInput
             format="12"
-            // defaultValue={new Date()}
+            defaultValue={new Date()}
             icon={<BsClock size={16} 
             value={value} onChange={onChange} 
             />}
           />
-          <Switch
-          color="cyan"
-          checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)}
-          ></Switch>
           <Button
             onClick={() => setMore((o) => !o)}
             rightIcon={<BsChevronDown size={25} />}
@@ -94,7 +86,7 @@ export const AddTask = () => {
           <Text pt="md" className={classes.titlesNames}>
             COLLECTIONS
           </Text>
-          <Collection></Collection>
+          <Collection className={classes.collectionContainer}></Collection>
           <Text pt="md" className={classes.titlesNames}>
             PRIORITY
           </Text>
@@ -117,13 +109,10 @@ export const AddTask = () => {
             }
             styles={(theme) => ({
               root: {
-                backgroundColor: theme.colors.darkBg,
-                color: "#E06262",
-                "&:hover": {
-                  backgroundColor: theme.colors.darkBg,
-                },
+                 color: "#E06262"
               },
             })}
+            variant="light" color="dark"
           >
             DELETE
           </Button>

@@ -7,9 +7,11 @@ export const useAddTaskStyles = createStyles((theme) => ({
     },
   },
   titlesNames: {
-    fontSize: 22,
+    fontSize: 20,
     color: "#FFFFFF",
     textAlign: "left",
+    fontWeight: "600",
+    letterSpacing: 1,
     marginTop: "5px",
     [theme.fn.smallerThan("md")]: {
       fontSize: 14,
@@ -37,27 +39,20 @@ export const useAddTaskStyles = createStyles((theme) => ({
     },
     
   },
+  
   prioritiesButton: 
    {
     [theme.fn.smallerThan("md")]: {
-      orientation: "vertical",
       label: {
       fontSize: 12},
-      
-    },
+       },
     label: {
     backgroundColor: theme.colors.primary[7],
     color: "#EEEEEE",
     "&:hover": {
       backgroundColor: "#E06262",
-    }}
-  },
-
-  collectionButton: {
-    root: {
-    backgroundColor: theme.colors.primary[7],
-    color: "#393E46",
-    }
+    }},
+  backgroundColor: theme.colors.lightBg,
   },
 
   
