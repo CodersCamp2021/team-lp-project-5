@@ -33,8 +33,8 @@ export const useNavbarStyles = createStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     [theme.fn.smallerThan("xs")]: {
-      width: 130,
-      height: 130,
+      width: 80,
+      height: 80,
     },
     ".mantine-Avatar-placeholder": {
       backgroundColor: theme.colors.dark[5],
