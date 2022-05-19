@@ -1,19 +1,41 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const TASKS = "tasks";
 const LABELS = "labels";
 
-export const useLocalStorage = () => {
+export const useGuestStore = () => {
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem(TASKS)) || [],
   );
 
-  const getTasks = () => JSON.parse(localStorage.getItem(TASKS));
+  const getTasks = (date) => {
+    if (date && tasks.length > 0) {
+      return (
+        JSON.parse(localStorage.getItem(TASKS))
+          ?.filter((task) =>
+            dayjs(new Date(task.date)).isSame(dayjs(date), "day"),
+          )
+          .sort((a, b) => a.priority - b.priority) || []
+      );
+    }
+
+    return JSON.parse(localStorage.getItem(TASKS)) || [];
+  };
+
+  const getLeftoverTasks = () =>
+    JSON.parse(localStorage.getItem(TASKS))
+      ?.filter(
+        (task) =>
+          task.status === false &&
+          dayjs(new Date(task.date)).isBefore(dayjs(), "day"),
+      )
+      .sort((a, b) => a.priority - b.priority) || [];
 
   const createTask = (newTask) => {
     const newId = uuidv4();
-    const tasksInStore = JSON.parse(localStorage.getItem(TASKS)) || [];
+    const tasksInStore = tasks || [];
     const updatedTasks = [...tasksInStore, { ...newTask, taskId: newId }];
 
     setTasks(updatedTasks);
@@ -22,14 +44,26 @@ export const useLocalStorage = () => {
     return { message: "Task created" };
   };
 
-  const changeTask = (id, priority, status) => {
-    const tasksInStore = JSON.parse(localStorage.getItem(TASKS)) || [];
+  const changeTask = (
+    id,
+    title,
+    description,
+    date,
+    priority,
+    status,
+    labels,
+  ) => {
+    const tasksInStore = tasks || [];
     const taskToChange = tasksInStore.find((task) => task.id === id);
 
     const updatedTask = {
       ...taskToChange,
       priority: priority || taskToChange.priority,
       status: status || taskToChange.status,
+      title: title || taskToChange.title,
+      description: description || taskToChange.description,
+      date: date || taskToChange.date,
+      labels: labels || taskToChange.labels,
     };
 
     const filteredTasks = tasksInStore.filter((task) => task.taskId === id);
@@ -41,7 +75,7 @@ export const useLocalStorage = () => {
   };
 
   const deleteTask = (id) => {
-    const tasksInStore = JSON.parse(localStorage.getItem(TASKS)) || [];
+    const tasksInStore = tasks || [];
     if (tasksInStore.find((task) => task.id === id)) {
       const updatedTasks = tasksInStore.filter((task) => task.taskId === id);
       setTasks(updatedTasks);
@@ -62,5 +96,12 @@ export const useLocalStorage = () => {
     return { message: "Label created" };
   };
 
-  return { tasks, getTasks, createTask, changeTask, deleteTask, createLabel };
+  return {
+    getTasks,
+    getLeftoverTasks,
+    createTask,
+    changeTask,
+    deleteTask,
+    createLabel,
+  };
 };

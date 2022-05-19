@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useApi } from "./use-api-store";
-import { useLocalStorage } from "./use-local-storage";
+import { useUserStore } from "./use-user-store";
+import { useGuestStore } from "./use-guest-store";
 
 export const useStore = () => {
   const [userType, setUserType] = useState(localStorage.getItem("userType"));
@@ -15,8 +15,8 @@ export const useStore = () => {
     localStorage.setItem("userType", "user");
   };
 
-  const guestStore = useLocalStorage();
-  const userStore = useApi();
+  const guestStore = useGuestStore();
+  const userStore = useUserStore();
 
   const store = userType === "user" ? userStore : guestStore;
 

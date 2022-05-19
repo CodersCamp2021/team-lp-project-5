@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Divider, ScrollArea, Title } from "@mantine/core";
+import { Box, Button, Divider, ScrollArea, Title } from "@mantine/core";
 import dayjs from "dayjs";
 
 import { useListsStyles } from "../../../hooks/styles/use-dashboard-styles";
@@ -9,42 +9,35 @@ import TaskList from "./TaskList";
 const Lists = () => {
   const { store } = useContext(UserContext);
   const { classes } = useListsStyles();
+  const today = dayjs();
+  const tomorrow = dayjs().add(1, "day");
 
-  const tasks = store.tasks;
-
-  const todayList = React.useMemo(
-    () =>
-      tasks
-        .filter((task) => dayjs(new Date(task.date)).isSame(dayjs(), "day"))
-        .sort((a, b) => a.priority - b.priority),
-    [tasks],
-  );
+  const todayList = React.useMemo(() => store.getTasks(today), [today]);
 
   const tomorrowList = React.useMemo(
-    () =>
-      tasks
-        .filter((task) =>
-          dayjs(new Date(task.date)).isSame(dayjs().add(1, "day"), "day"),
-        )
-        .sort((a, b) => a.priority - b.priority),
-    [tasks],
+    () => store.getTasks(tomorrow),
+    [tomorrow],
   );
 
-  const leftoversList = React.useMemo(
-    () =>
-      tasks
-        .filter(
-          (task) =>
-            task.status === false &&
-            dayjs(new Date(task.date)).isBefore(dayjs(), "day"),
-        )
-        .sort((a, b) => a.priority - b.priority),
-    [tasks],
-  );
+  const leftoversList = store.getLeftoverTasks();
 
   return (
     <Box className={classes.listsWrapper}>
       <Box className={classes.singleListWrapper}>
+        <Button
+          onClick={() =>
+            store.createTask({
+              title: (Math.random() * 10).toFixed(7),
+              description: "newDesc",
+              date: dayjs(),
+              priority: Math.floor(Math.random() * (4 - 1) + 1),
+              status: Math.random() < 0.5,
+              labels: "asd",
+            })
+          }
+        >
+          Add today task
+        </Button>
         <Title order={5}>TODAY</Title>
         <ScrollArea
           scrollbarSize="7px"
@@ -64,6 +57,20 @@ const Lists = () => {
         </ScrollArea>
       </Box>
       <Box className={classes.singleListWrapper}>
+        <Button
+          onClick={() =>
+            store.createTask({
+              title: (Math.random() * 10).toFixed(7),
+              description: "newDesc",
+              date: dayjs().add(1, "day"),
+              priority: Math.floor(Math.random() * (4 - 1) + 1),
+              status: Math.random() < 0.5,
+              labels: "asd",
+            })
+          }
+        >
+          Add tomorrow task
+        </Button>
         <Title order={5}>TOMORROW</Title>
         <ScrollArea
           scrollbarSize="7px"
@@ -84,6 +91,22 @@ const Lists = () => {
       </Box>
       <Divider orientation="vertical" size="sm" />
       <Box className={classes.singleListWrapper}>
+        <Button
+          onClick={() =>
+            store.createTask({
+              title: (Math.random() * 10).toFixed(7),
+              description: "newDesc",
+              date: dayjs().subtract(
+                Math.floor(Math.random() * (4 - 1) + 1),
+                "day",
+              ),
+              priority: Math.floor(Math.random() * (4 - 1) + 1),
+              status: false,
+            })
+          }
+        >
+          Add leftover task
+        </Button>
         <Title order={5}>LEFTOVERS</Title>
         <ScrollArea
           scrollbarSize="7px"

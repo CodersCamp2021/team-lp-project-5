@@ -1,8 +1,9 @@
+/* eslint no-console: 0 */
 import { useMutation, useQueryClient } from "react-query";
 import { useTasks } from "../api/use-tasks";
 import TimeyApiClient from "../api/timey";
 
-export const useApi = () => {
+export const useUserStore = () => {
   const queryClient = useQueryClient();
 
   const getTasks = (date) => useTasks(date);
