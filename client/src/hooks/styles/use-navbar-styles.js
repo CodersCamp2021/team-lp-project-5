@@ -42,6 +42,17 @@ export const useNavbarStyles = createStyles((theme) => ({
     },
   },
 
+  guestText: {
+    padding: "15px 40px 10px",
+    maxWidth: "400px",
+    textAlign: "center",
+    fontSize: "20px",
+  },
+
+  anchor: {
+    fontSize: "20px",
+  },
+
   userNames: {
     fontSize: 32,
     fontWeight: 600,

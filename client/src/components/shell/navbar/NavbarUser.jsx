@@ -15,18 +15,14 @@ const NavbarUser = () => {
     <Box sx={{ paddingTop: 10 }}>
       {isGuest ? (
         <>
-          <Box sx={{}}>
-            <Text
-              sx={{
-                padding: "15px 40px 10px",
-                maxWidth: "400px",
-                textAlign: "center",
-                fontSize: "20px",
-              }}
-            >
+          <Box>
+            <Text className={classes.guestText}>
               You are using app as a guest. If you want to access full
               functionality, please{" "}
-              <Anchor onClick={() => setOpened(true)} sx={{ fontSize: "20px" }}>
+              <Anchor
+                onClick={() => setOpened(true)}
+                className={classes.anchor}
+              >
                 register
               </Anchor>
               .
