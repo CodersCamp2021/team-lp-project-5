@@ -12,12 +12,9 @@ const Lists = () => {
   const today = dayjs();
   const tomorrow = dayjs().add(1, "day");
 
-  const todayList = React.useMemo(() => store.getTasks(today), [today]);
+  const todayList = store.getTasks(today);
 
-  const tomorrowList = React.useMemo(
-    () => store.getTasks(tomorrow),
-    [tomorrow],
-  );
+  const tomorrowList = store.getTasks(tomorrow);
 
   const leftoversList = store.getLeftoverTasks();
 
@@ -53,7 +50,7 @@ const Lists = () => {
             },
           }}
         >
-          <TaskList tasks={todayList} />
+          <TaskList tasks={todayList || []} />
         </ScrollArea>
       </Box>
       <Box className={classes.singleListWrapper}>
@@ -86,7 +83,7 @@ const Lists = () => {
             },
           }}
         >
-          <TaskList tasks={tomorrowList} />
+          <TaskList tasks={tomorrowList || []} />
         </ScrollArea>
       </Box>
       <Divider orientation="vertical" size="sm" />
@@ -122,7 +119,7 @@ const Lists = () => {
             },
           }}
         >
-          <TaskList tasks={leftoversList} leftovers={true} />
+          <TaskList tasks={leftoversList || []} leftovers={true} />
         </ScrollArea>
       </Box>
     </Box>

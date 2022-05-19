@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { Box, Stack, Text } from "@mantine/core";
 
@@ -9,12 +9,23 @@ import SingleTask from "../SingleTask";
 import TasksWrapper from "./TasksWrapper";
 
 const Tasks = ({ selectedDate }) => {
+  const [tasks, setTasks] = useState([]);
   const { classes } = useCalendarPageStyles();
   const { store } = useContext(UserContext);
 
-  const tasks = store.getTasks(dayjs(selectedDate));
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const data = await store.getTasks(dayjs(selectedDate));
+        setTasks(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTasks();
+  }, [selectedDate]);
 
-  const mappedTasks = tasks.map((task) => (
+  const mappedTasks = tasks?.map((task) => (
     <SingleTask key={task.taskId} task={task} />
   ));
 

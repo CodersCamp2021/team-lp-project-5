@@ -1,16 +1,37 @@
 /* eslint no-console: 0 */
 import { useMutation, useQueryClient } from "react-query";
-import { useTasks } from "../api/use-tasks";
 import TimeyApiClient from "../api/timey";
+
+const timeyApi = new TimeyApiClient();
 
 export const useUserStore = () => {
   const queryClient = useQueryClient();
 
-  const getTasks = (date) => useTasks(date);
+  const getTasks = async (date) => {
+    try {
+      const tasks = await queryClient.fetchQuery(["tasks", date], () =>
+        timeyApi.fetchTasks(date),
+      );
+      return tasks;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  const getLeftoverTasks = async () => {
+    try {
+      const tasks = await queryClient.fetchQuery(["tasks", "leftovers"], () =>
+        timeyApi.fetchLeftoverTasks(),
+      );
+      return tasks || [];
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const { mutate: createTask } = useMutation(
-    ({ title, description, priority, status, date }) =>
-      TimeyApiClient.postTask(title, description, priority, status, date),
+    (task) => timeyApi.postTask(task),
     {
       onSuccess: (data) => {
         console.log(data);
@@ -23,16 +44,7 @@ export const useUserStore = () => {
   );
 
   const { mutate: changeTask } = useMutation(
-    ({ id, title, description, date, priority, status, labels }) =>
-      TimeyApiClient.updateTask(
-        id,
-        title,
-        description,
-        date,
-        priority,
-        status,
-        labels,
-      ),
+    (task) => timeyApi.updateTask(task),
     {
       onSuccess: (data) => {
         console.log(data);
@@ -45,7 +57,7 @@ export const useUserStore = () => {
   );
 
   const { mutate: deleteTask } = useMutation(
-    (id) => TimeyApiClient.fetchDeleteTask(id),
+    (id) => timeyApi.fetchDeleteTask(id),
     {
       onSuccess: (data) => {
         console.log(data);
@@ -57,7 +69,7 @@ export const useUserStore = () => {
   );
 
   const { mutate: createLabel } = useMutation(
-    (title) => TimeyApiClient.postLabel(title),
+    (title) => timeyApi.postLabel(title),
     {
       onSuccess: (data) => {
         console.log(data);
@@ -69,5 +81,12 @@ export const useUserStore = () => {
     },
   );
 
-  return { getTasks, createTask, changeTask, deleteTask, createLabel };
+  return {
+    getTasks,
+    getLeftoverTasks,
+    createTask,
+    changeTask,
+    deleteTask,
+    createLabel,
+  };
 };
