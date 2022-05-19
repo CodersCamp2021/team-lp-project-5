@@ -16,7 +16,7 @@ export default class TaskController {
     return { message: "Task created" };
   };
 
-  static changeTaskStatusOrPriority = async (req) => {
+  static changeTaskInfo = async (req) => {
     await pool.query(
       `UPDATE tasks SET priority=COALESCE($1,priority), status=COALESCE($2,status), title=COALESCE($3,title), 
       description=COALESCE($4,description), due_date=COALESCE($5,due_date) WHERE task_id=$6;`,
