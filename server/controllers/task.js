@@ -3,7 +3,7 @@ import pool from "../db/setup.js";
 export default class TaskController {
   static createTask = async (req) => {
     await pool.query(
-      `INSERT INTO tasks (title, description, user_id, priority, status, due_date) VALUES ($1, $2, $3, $4, $5, $6);`,
+      `INSERT INTO tasks (title, description, user_id, priority, status, due_date) VALUES ($1, $2, $3, $4, $5, $7);`,
       [
         req.body.title,
         req.body.description,
@@ -18,8 +18,16 @@ export default class TaskController {
 
   static changeTaskStatusOrPriority = async (req) => {
     await pool.query(
-      `UPDATE tasks SET priority=COALESCE($1,priority), status=COALESCE($2,status) WHERE task_id=$3;`,
-      [req.body.priority, req.body.status, req.params.taskId],
+      `UPDATE tasks SET priority=COALESCE($1,priority), status=COALESCE($2,status), title=COALESCE($3,title), 
+      description=COALESCE($4,description), due_date=COALESCE($5,due_date) WHERE task_id=$6;`,
+      [
+        req.body.priority,
+        req.body.status,
+        req.body.title,
+        req.body.description,
+        req.body.dueDate,
+        req.params.taskId,
+      ],
     );
     return { message: "Task changed" };
   };
