@@ -47,10 +47,23 @@ export default class UserController {
     return { message: "Logged in successfully.", userId: user.rows[0].user_id };
   };
 
-  static getUserTasks = async (req) => {
-    const tasks = await pool.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
-      req.session.userId,
-    ]);
+  static getUserTasksForDay = async (req) => {
+    const tasks = await pool.query(
+      `SELECT * FROM tasks WHERE user_id=$1 AND creation_date=$2;`,
+      [req.session.userId, req.params.creationDate],
+    );
+    if (tasks.rowCount) {
+      return { tasks: tasks.rows };
+    } else {
+      return { message: "No tasks found for this user" };
+    }
+  };
+
+  static getUserTasksUntilDay = async (req) => {
+    const tasks = await pool.query(
+      `SELECT * FROM tasks WHERE user_id=$1 AND creation_date<$2;`,
+      [req.session.userId, req.params.creationDate],
+    );
     if (tasks.rowCount) {
       return { tasks: tasks.rows };
     } else {

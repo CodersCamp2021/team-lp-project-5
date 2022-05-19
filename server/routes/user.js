@@ -25,9 +25,18 @@ router.post("/login", validator(loginSchema), async (req, res) => {
   }
 });
 
-router.get("/tasks", loginRequired, async (req, res) => {
+router.get("/tasks/:creationDate", loginRequired, async (req, res) => {
   try {
-    const response = await UserController.getUserTasks(req);
+    const response = await UserController.getUserTasksForDay(req);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
+router.get("/tasks/until/:creationDate", loginRequired, async (req, res) => {
+  try {
+    const response = await UserController.getUserTasksUntilDay(req);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
