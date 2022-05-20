@@ -26,7 +26,7 @@ const Lists = () => {
             store.createTask({
               title: (Math.random() * 10).toFixed(7),
               description: "newDesc",
-              date: dayjs(),
+              dueDate: dayjs(),
               priority: Math.floor(Math.random() * (4 - 1) + 1),
               status: Math.random() < 0.5,
               labels: "asd",
@@ -59,7 +59,7 @@ const Lists = () => {
             store.createTask({
               title: (Math.random() * 10).toFixed(7),
               description: "newDesc",
-              date: dayjs().add(1, "day"),
+              dueDate: dayjs().add(1, "day"),
               priority: Math.floor(Math.random() * (4 - 1) + 1),
               status: Math.random() < 0.5,
               labels: "asd",
@@ -93,7 +93,7 @@ const Lists = () => {
             store.createTask({
               title: (Math.random() * 10).toFixed(7),
               description: "newDesc",
-              date: dayjs().subtract(
+              dueDate: dayjs().subtract(
                 Math.floor(Math.random() * (4 - 1) + 1),
                 "day",
               ),

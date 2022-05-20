@@ -15,7 +15,7 @@ export const useGuestStore = () => {
       return (
         JSON.parse(localStorage.getItem(TASKS))
           ?.filter((task) =>
-            dayjs(new Date(task.date)).isSame(dayjs(date), "day"),
+            dayjs(new Date(task.dueDate)).isSame(dayjs(date), "day"),
           )
           .sort((a, b) => a.priority - b.priority) || []
       );
@@ -29,7 +29,7 @@ export const useGuestStore = () => {
       ?.filter(
         (task) =>
           task.status === false &&
-          dayjs(new Date(task.date)).isBefore(dayjs(), "day"),
+          dayjs(new Date(task.dueDate)).isBefore(dayjs(), "day"),
       )
       .sort((a, b) => a.priority - b.priority) || [];
 
@@ -48,7 +48,7 @@ export const useGuestStore = () => {
     id,
     title,
     description,
-    date,
+    dueDate,
     priority,
     status,
     labels,
@@ -62,7 +62,7 @@ export const useGuestStore = () => {
       status: status || taskToChange.status,
       title: title || taskToChange.title,
       description: description || taskToChange.description,
-      date: date || taskToChange.date,
+      dueDate: dueDate || taskToChange.dueDate,
       labels: labels || taskToChange.labels,
     };
 

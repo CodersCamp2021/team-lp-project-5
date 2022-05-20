@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
 class TimeyApiClient {
   async fetchTasks(date) {
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/user/tasks/${date}`,
+      process.env.REACT_APP_SERVER_URL + `/user/tasks/${formattedDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -43,6 +45,7 @@ class TimeyApiClient {
 
   async postTask(task) {
     const { title, description, priority, status, date, labels } = task;
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
     const response = await fetch(process.env.REACT_APP_SERVER_URL + "/task", {
       method: "POST",
       credentials: "include",
@@ -54,7 +57,7 @@ class TimeyApiClient {
         description,
         priority,
         status,
-        date,
+        dueDate: formattedDate,
         labels,
       }),
     });

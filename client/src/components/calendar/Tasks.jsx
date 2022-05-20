@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import dayjs from "dayjs";
 import { Box, Stack, Text } from "@mantine/core";
 
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { UserContext } from "../../UserContext";
-import EmptyTasksTitle from "./EmptyTasksTitle";
 import SingleTask from "../SingleTask";
+import EmptyTasksTitle from "./EmptyTasksTitle";
 import TasksWrapper from "./TasksWrapper";
 
 const Tasks = ({ selectedDate }) => {
@@ -16,7 +15,7 @@ const Tasks = ({ selectedDate }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const data = await store.getTasks(dayjs(selectedDate));
+        const data = await store.getTasks(selectedDate);
         setTasks(data);
       } catch (error) {
         console.error(error);

@@ -35,7 +35,7 @@ export const useUserStore = () => {
     {
       onSuccess: (data) => {
         console.log(data);
-        queryClient.invalidateQueries(["tasks", data.date]);
+        queryClient.invalidateQueries(["tasks", data.dueDate]);
       },
       onError: (error) => {
         console.error(error);
@@ -48,7 +48,7 @@ export const useUserStore = () => {
     {
       onSuccess: (data) => {
         console.log(data);
-        queryClient.invalidateQueries(["tasks", data.date]);
+        queryClient.invalidateQueries(["tasks", data.dueDate]);
       },
       onError: (error) => {
         console.error(error);
