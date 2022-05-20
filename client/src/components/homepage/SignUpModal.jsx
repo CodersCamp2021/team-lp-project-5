@@ -1,9 +1,14 @@
 import React from "react";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { registrationSchema } from "../../utils/registrationSchema";
+import { useMutation } from "react-query";
+
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import { registrationSchema } from "../../utils/registrationSchema";
+import TimeyApiClient from "../../hooks/api/timey";
 import Input from "./Input";
+
+const timeyApi = new TimeyApiClient();
 
 const forms = [
   {
@@ -28,10 +33,6 @@ const forms = [
   },
 ];
 
-const handleSubmit = (values) => {
-  console.log(values);
-};
-
 const SignUpModal = ({ opened, setOpened }) => {
   const { classes } = useModalStyles();
   const form = useForm({
@@ -45,6 +46,23 @@ const SignUpModal = ({ opened, setOpened }) => {
       confirmPassword: "",
     },
   });
+
+  const { mutate: register } = useMutation(
+    (values) => timeyApi.register(values),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        setOpened(false);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    },
+  );
+
+  const handleSubmit = (values) => {
+    register(values);
+  };
 
   return (
     <Modal

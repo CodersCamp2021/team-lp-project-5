@@ -1,5 +1,46 @@
 import dayjs from "dayjs";
 class TimeyApiClient {
+  async register(newUser) {
+    const { firstName, lastName, username, email, password } = newUser;
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + `/user/register`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          username,
+          email,
+          password,
+        }),
+      },
+    );
+    return response.json();
+  }
+
+  async login(credentials) {
+    const { email, password } = credentials;
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + `/user/login`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      },
+    );
+    return response.json();
+  }
+
   async fetchTasks(date) {
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
     const response = await fetch(
