@@ -8,12 +8,27 @@ import SignUpModal from "../../homepage/SignUpModal";
 const NavbarUser = () => {
   const { classes } = useNavbarStyles();
   const [opened, setOpened] = useState(false);
-  const isGuest = window.localStorage.getItem("userType") === "guest";
+  const isUser = window.localStorage.getItem("userType") === "user";
   const isXsScreen = useMediaQuery("(max-width: 576px)");
 
   return (
     <Box sx={{ paddingTop: 10 }}>
-      {isGuest ? (
+      {isUser ? (
+        <>
+          <Box>
+            <Avatar
+              size="lg"
+              width={isXsScreen ? 100 : 130}
+              height={isXsScreen ? 100 : 130}
+              className={classes.avatar}
+              alt="User initials"
+            >
+              JC
+            </Avatar>
+          </Box>
+          <Text className={classes.userNames}>Jakub Czerwiński </Text>
+        </>
+      ) : (
         <>
           <Box>
             <Text className={classes.guestText}>
@@ -29,21 +44,6 @@ const NavbarUser = () => {
             </Text>
           </Box>
           <SignUpModal opened={opened} setOpened={setOpened} />
-        </>
-      ) : (
-        <>
-          <Box>
-            <Avatar
-              size="lg"
-              width={isXsScreen ? 100 : 130}
-              height={isXsScreen ? 100 : 130}
-              className={classes.avatar}
-              alt="User initials"
-            >
-              JC
-            </Avatar>
-          </Box>
-          <Text className={classes.userNames}>Jakub Czerwiński </Text>
         </>
       )}
     </Box>
