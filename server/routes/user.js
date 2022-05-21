@@ -53,4 +53,13 @@ router.get("/userInfo", loginRequired, async (req, res) => {
   }
 });
 
+router.get("/labels", loginRequired, async (req, res) => {
+  try {
+    const response = await UserController.getUserLabels(req);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
 export { router as userRouter };
