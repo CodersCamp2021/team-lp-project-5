@@ -51,6 +51,7 @@ export const useNavbarStyles = createStyles((theme) => ({
 
   anchor: {
     fontSize: "20px",
+    color: theme.colors.primary[6],
   },
 
   userNames: {
