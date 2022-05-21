@@ -1,10 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Modal, Text, Group, RingProgress } from "@mantine/core";
-import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import {
+  Button,
+  Modal,
+  Text,
+  Group,
+  RingProgress,
+  Center,
+  ThemeIcon,
+  useMantineTheme,
+} from "@mantine/core";
+import { BsCheckLg } from "react-icons/bs";
 
-const ImportDataModal = ({ opened, setOpened }) => {
+import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import { useUserStore } from "../../hooks/store/use-user-store";
+import { useGuestStore } from "../../hooks/store/use-guest-store";
+
+const ImportDataModal = ({ setOpened }) => {
   const [importing, setImporting] = useState(false);
   const [progress, setProgress] = useState(0);
+  const theme = useMantineTheme();
+  const { getTasks } = useGuestStore();
+  const { createTask } = useUserStore();
   let callback = useRef();
   const { classes } = useModalStyles();
 
@@ -14,26 +30,54 @@ const ImportDataModal = ({ opened, setOpened }) => {
         setProgress(progress + 0.5);
       };
     }
+    if (progress === 100) {
+      const closeModal = setTimeout(() => {
+        setOpened(false);
+      }, 1500);
+      return () => clearTimeout(closeModal);
+    }
   }, [progress, importing]);
 
   useEffect(() => {
+    if (progress === 100) {
+      const resetImporting = setTimeout(() => {
+        setProgress(0);
+        setImporting(false);
+      }, 2000);
+      return () => clearTimeout(resetImporting);
+    }
+  }, [progress]);
+
+  useEffect(() => {
     if (importing) {
-      const interval = setInterval(() => callback.current(), 25);
+      const interval = setInterval(() => callback.current(), 30);
       return () => clearInterval(interval);
     }
   }, [importing]);
 
-  const handleImportClick = () => setImporting(true);
+  const handleImportClick = () => {
+    setImporting(true);
+    const tasks = getTasks();
+    tasks.forEach((task) => {
+      createTask(task);
+    });
+  };
 
   return (
     <Modal
-      opened={opened}
+      opened={true}
       onClose={() => setOpened(false)}
       closeOnClickOutside={false}
       closeOnEscape={false}
       centered
       withCloseButton={false}
-      title={importing ? "Importing your data..." : "Hold it right there!"}
+      title={
+        importing
+          ? progress >= 99
+            ? "Completed!"
+            : "Importing your data..."
+          : "Hold it right there!"
+      }
       padding={40}
       styles={(theme) => ({
         title: {
@@ -49,11 +93,29 @@ const ImportDataModal = ({ opened, setOpened }) => {
       {importing ? (
         <RingProgress
           sx={{ margin: "0 auto" }}
-          sections={[{ value: progress, color: "blue" }]}
+          sections={[
+            {
+              value: progress,
+              color: progress >= 99 ? "teal" : theme.colors.primary[6],
+            },
+          ]}
           label={
-            <Text color="blue" weight={700} align="center" size="xl">
-              {progress.toFixed(0)}%
-            </Text>
+            progress >= 99 ? (
+              <Center>
+                <ThemeIcon color="teal" variant="light" radius="xl" size="xl">
+                  <BsCheckLg size={22} />
+                </ThemeIcon>
+              </Center>
+            ) : (
+              <Text
+                color={theme.colors.primary[6]}
+                weight={700}
+                align="center"
+                size="xl"
+              >
+                {progress.toFixed(0)}%
+              </Text>
+            )
           }
         />
       ) : (

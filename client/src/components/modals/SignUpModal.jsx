@@ -54,17 +54,13 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
   const { mutate: register } = useMutation(
     (values) => timeyApi.register(values),
     {
-      onSuccess: (data) => {
-        console.log(data);
-        setOpened(false);
-        openImport();
-      },
-      onError: (error) => {
+      onSuccess: () => {
         if (userType !== "user" && store.getTasks().length > 0) {
           setOpened(false);
           openImport();
         }
-
+      },
+      onError: (error) => {
         showNotification({
           title: "Something went wrong!",
           message: error.message,
