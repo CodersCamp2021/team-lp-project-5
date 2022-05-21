@@ -23,19 +23,35 @@ export const useNavbarStyles = createStyles((theme) => ({
     width: "100%",
   },
 
-  userImage: {
+  avatar: {
     margin: "15px auto",
-    width: 160,
-    height: 160,
+    width: 100,
+    height: 100,
     border: `5px solid ${theme.colors.primary[6]}`,
-    borderRadius: "50%",
+    borderRadius: "30%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     [theme.fn.smallerThan("xs")]: {
-      width: 130,
-      height: 130,
+      width: 80,
+      height: 80,
     },
+    ".mantine-Avatar-placeholder": {
+      backgroundColor: theme.colors.dark[5],
+      color: theme.colors.dark[1],
+    },
+  },
+
+  guestText: {
+    padding: "15px 40px 10px",
+    maxWidth: "400px",
+    textAlign: "center",
+    fontSize: "20px",
+  },
+
+  anchor: {
+    fontSize: "20px",
+    color: theme.colors.primary[6],
   },
 
   userNames: {
