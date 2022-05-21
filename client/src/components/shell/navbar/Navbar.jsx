@@ -19,7 +19,7 @@ const AppNavbar = ({ opened, setOpened }) => {
       mt={smallScreen && 80}
       hiddenBreakpoint="sm"
       hidden={!opened}
-      width={{ base: "unset", sm: 320 }}
+      width={{ sm: 320 }}
       styles={{
         root: {
           "@media (max-width: 768px)": {

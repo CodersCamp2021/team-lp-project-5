@@ -25,9 +25,9 @@ export const useHeaderStyles = createStyles((theme) => ({
   iconWrapper: {
     color: theme.colors.primary[6],
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
-    width: 88,
+    width: 44,
     marginRight: 25,
     cursor: "pointer",
   },

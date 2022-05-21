@@ -10,6 +10,9 @@ export const useModalStyles = createStyles((theme) => ({
     },
   },
   modal: {
+    ".mantine-Modal-modal": {
+      backgroundColor: theme.colors.dark[4],
+    },
     ".mantine-Modal-title": {
       textTransform: "uppercase",
       fontWeight: 700,

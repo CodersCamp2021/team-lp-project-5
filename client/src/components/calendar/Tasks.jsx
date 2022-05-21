@@ -3,8 +3,8 @@ import { Box, Stack, Text } from "@mantine/core";
 
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { UserContext } from "../../UserContext";
-import SingleTask from "../SingleTask";
 import EmptyTasksTitle from "./EmptyTasksTitle";
+import SingleTask from "../SingleTask";
 import TasksWrapper from "./TasksWrapper";
 
 const Tasks = ({ selectedDate }) => {

@@ -1,30 +1,51 @@
-import React from "react";
-import { Box, Image, Text } from "@mantine/core";
+import React, { useState } from "react";
+import { Anchor, Avatar, Box, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
-import { useMediaQuery } from "@mantine/hooks";
+import SignUpModal from "../../modals/SignUpModal";
 
 const NavbarUser = () => {
   const { classes } = useNavbarStyles();
+  const [opened, setOpened] = useState(false);
+  const isUser = window.localStorage.getItem("userType") === "user";
   const isXsScreen = useMediaQuery("(max-width: 576px)");
 
   return (
     <Box sx={{ paddingTop: 10 }}>
-      <Box>
-        <Image
-          imageProps={{
-            draggable: "false",
-          }}
-          width={isXsScreen ? 100 : 130}
-          height={isXsScreen ? 100 : 130}
-          radius="50%"
-          className={classes.userImage}
-          src=""
-          alt="User Photo"
-          withPlaceholder
-        />
-      </Box>
-      <Text className={classes.userNames}>Jakub Czerwiński </Text>
+      {isUser ? (
+        <>
+          <Box>
+            <Avatar
+              size="lg"
+              width={isXsScreen ? 100 : 130}
+              height={isXsScreen ? 100 : 130}
+              className={classes.avatar}
+              alt="User initials"
+            >
+              JC
+            </Avatar>
+          </Box>
+          <Text className={classes.userNames}>Jakub Czerwiński </Text>
+        </>
+      ) : (
+        <>
+          <Box>
+            <Text className={classes.guestText}>
+              You are using app as a guest. If you want to access full
+              functionality, please{" "}
+              <Anchor
+                onClick={() => setOpened(true)}
+                className={classes.anchor}
+              >
+                register
+              </Anchor>
+              .
+            </Text>
+          </Box>
+          <SignUpModal opened={opened} setOpened={setOpened} />
+        </>
+      )}
     </Box>
   );
 };

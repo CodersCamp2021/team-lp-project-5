@@ -65,6 +65,7 @@ export const useHomeHeroStyles = createStyles((theme) => ({
       lineHeight: "100px",
       letterSpacing: "4px",
     },
+    marginBottom: "20px",
     fontSize: "70px",
     lineHeight: "80px",
     letterSpacing: "3px",
@@ -79,11 +80,11 @@ export const useHomeHeroStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.colors.primary[8],
     },
+    backgroundColor: theme.colors.primary[6],
     maxWidth: "170px",
     fontSize: "26px",
     fontWeight: "normal",
     minHeight: "40px",
-    backgroundColor: theme.colors.primary[6],
     color: theme.white,
   },
   imageContainer: {
