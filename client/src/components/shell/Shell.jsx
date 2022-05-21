@@ -1,43 +1,53 @@
 import React, { useState } from "react";
-import { AppShell, Text, Box, createStyles } from "@mantine/core";
-import { Route, Routes } from 'react-router-dom';
-
-import Header from "./Header";
-import Navbar from "./Navbar.jsx";
-import AddTask from "../addTask/AddTask";
-
-const useStyles = createStyles((theme) => ({
-  shell: {
-    main: {
-      [theme.fn.smallerThan("sm")]: {
-        minHeight: "calc(100vh - 80px)",
-      },
-      [theme.fn.largerThan("sm")]: {
-        minHeight: "100vh",
-      },
-    },
-  },
-}));
+import { AppShell, Box, useMantineTheme } from "@mantine/core";
+import { Route, Routes } from "react-router-dom";
+import { useShellStyles } from "../../hooks/styles/use-shell-styles";
+import Dashboard from "../dashboard/Dashboard";
+import CalendarPage from "../calendar/CalendarPage";
+import Header from "./header/Header";
+import Navbar from "./navbar/Navbar.jsx";
+import AddTask from "../AddTask/AddTask";
 
 const Shell = () => {
   const [opened, setOpened] = useState(false);
-  const { classes } = useStyles();
+  const { classes } = useShellStyles();
+  const theme = useMantineTheme();
+
   return (
     <AppShell
-      className={classes.shell}
-      navbar={<Navbar opened={opened} />}
+      fixed
+      className={opened ? classes.smallShell : classes.shell}
+      styles={{
+        main: {
+          paddingLeft: 390,
+          paddingRight: 70,
+          paddingBottom: 0,
+
+          [theme.fn.smallerThan("lg")]: {
+            paddingLeft: 370,
+            paddingRight: 50,
+          },
+
+          [theme.fn.smallerThan("sm")]: {
+            padding: "80px 40px 0",
+          },
+        },
+      }}
+      navbar={<Navbar opened={opened} setOpened={setOpened} />}
       header={<Header opened={opened} setOpened={setOpened} />}
     >
       <Box>
-        <Text>Content</Text>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/statistics" element={<div>Statistics</div>} />
+          <Route path="/calendar" element={<CalendarPage />} />
+        </Routes>
       </Box>
-    <Routes>
-      <Route path="/addTask" element={<AddTask />} />
-    </Routes>
+      <Routes>
+        <Route path="/addTask" element={<AddTask />} />
+      </Routes>
     </AppShell>
   );
 };
-
-
 
 export default Shell;
