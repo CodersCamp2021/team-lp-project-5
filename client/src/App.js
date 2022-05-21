@@ -1,21 +1,28 @@
-import React from "react";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { QueryClient, QueryClientProvider } from "react-query";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Homepage from "./components/homepage/Homepage";
 import Shell from "./components/shell/Shell";
-
-const queryClient = new QueryClient();
+import { UserContext } from "./UserContext";
 
 function App() {
+  const { userType } = useContext(UserContext);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/*" element={<Shell />} />
-        <Route path="/home" element={<Homepage />} />
-      </Routes>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-    </QueryClientProvider>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          userType === "user" ? (
+            <Shell />
+          ) : userType === "guest" ? (
+            <Shell />
+          ) : (
+            <Homepage />
+          )
+        }
+      />
+    </Routes>
   );
 }
 

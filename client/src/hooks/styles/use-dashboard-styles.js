@@ -189,6 +189,10 @@ export const useListsStyles = createStyles((theme) => ({
 
   listScrollArea: {
     maxHeight: "34vh",
+
+    [theme.fn.largerThan(1279)]: {
+      minHeight: "34vh",
+    },
   },
 
   singleListWrapper: {
