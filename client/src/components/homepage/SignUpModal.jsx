@@ -1,7 +1,9 @@
 import React from "react";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
 import { useMutation } from "react-query";
+import { ImCross } from "react-icons/im";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { registrationSchema } from "../../utils/registrationSchema";
@@ -33,7 +35,7 @@ const forms = [
   },
 ];
 
-const SignUpModal = ({ opened, setOpened }) => {
+const SignUpModal = ({ opened, setOpened, openImport }) => {
   const { classes } = useModalStyles();
   const form = useForm({
     schema: yupResolver(registrationSchema),
@@ -53,9 +55,23 @@ const SignUpModal = ({ opened, setOpened }) => {
       onSuccess: (data) => {
         console.log(data);
         setOpened(false);
+        openImport();
       },
       onError: (error) => {
-        console.log(error);
+        if (
+          JSON.parse(localStorage.getItem("userType")) !== "user" &&
+          JSON.parse(localStorage.getItem("tasks"))?.length > 0
+        ) {
+          setOpened(false);
+          openImport();
+        }
+
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
       },
     },
   );

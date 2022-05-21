@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useModalStyles = createStyles(() => ({
+export const useModalStyles = createStyles((theme) => ({
   inputField: {
     label: {
       textTransform: "uppercase",
@@ -16,5 +16,11 @@ export const useModalStyles = createStyles(() => ({
       fontSize: "20px",
       letterSpacing: "2px",
     },
+  },
+  button: {
+    "&:hover": {
+      backgroundColor: theme.colors.primary[8],
+    },
+    backgroundColor: theme.colors.primary[6],
   },
 }));

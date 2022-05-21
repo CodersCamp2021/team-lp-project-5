@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { Box, Image, Text, Button } from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
 import SignUpModal from "./SignUpModal";
+import ImportDataModal from "./ImportDataModal";
 
 const HomeHero = () => {
-  const { classes } = useHomeHeroStyles();
+  const [importOpened, setImportOpened] = useState(false);
   const [opened, setOpened] = useState(false);
+  const { classes } = useHomeHeroStyles();
+
+  const openImportModal = () => setImportOpened(true);
+
   return (
     <Box className={classes.container}>
       <Box className={classes.leftSide}>
@@ -25,7 +30,12 @@ const HomeHero = () => {
           withPlaceholder
         />
       </Box>
-      <SignUpModal opened={opened} setOpened={setOpened} />
+      <ImportDataModal opened={importOpened} setOpened={setImportOpened} />
+      <SignUpModal
+        opened={opened}
+        setOpened={setOpened}
+        openImport={openImportModal}
+      />
     </Box>
   );
 };

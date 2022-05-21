@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { NotificationsProvider } from "@mantine/notifications";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -18,7 +19,9 @@ ReactDOM.render(
       <ModalsProvider>
         <BrowserRouter>
           <UserProvider>
-            <App />
+            <NotificationsProvider position="top-center" limit={3}>
+              <App />
+            </NotificationsProvider>
           </UserProvider>
         </BrowserRouter>
       </ModalsProvider>

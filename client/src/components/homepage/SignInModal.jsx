@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { Modal, Button, Group, PasswordInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { BsCheckLg } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { loginSchema } from "../../utils/loginSchema";
@@ -26,12 +29,23 @@ const SignInModal = ({ opened, setOpened }) => {
   });
 
   const { mutate: login } = useMutation((values) => timeyApi.login(values), {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      showNotification({
+        title: "Success",
+        message: data.message,
+        icon: <BsCheckLg />,
+        color: "teal",
+      });
       setUser();
       navigate("/", { replace: true });
     },
     onError: (error) => {
-      console.log(error);
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
     },
   });
 
