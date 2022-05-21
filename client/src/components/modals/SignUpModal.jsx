@@ -4,6 +4,7 @@ import { useForm, yupResolver } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { useMutation } from "react-query";
 import { ImCross } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { registrationSchema } from "../../utils/registrationSchema";
@@ -59,6 +60,12 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
           setOpened(false);
           openImport();
         }
+        showNotification({
+          title: "Success",
+          message: "Account created.",
+          icon: <BsCheckLg />,
+          color: "teal",
+        });
       },
       onError: (error) => {
         showNotification({
