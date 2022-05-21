@@ -49,10 +49,17 @@ export default class UserController {
 
   static getUserTasksForDay = async (req) => {
     const tasks = await pool.query(
-      `SELECT * FROM tasks WHERE user_id=$1 AND creation_date=$2;`,
-      [req.session.userId, req.params.creationDate],
+      `SELECT * FROM tasks WHERE user_id=$1 AND due_date=$2;`,
+      [req.session.userId, req.params.dueDate],
     );
     if (tasks.rowCount) {
+      const labels = await pool.query(
+        `SELECT labels.title
+        FROM  labels, tasks, tasks_labels_relation
+        WHERE tasks.task_id = $1 AND tasks.task_id = tasks_labels_relation.task_id AND tasks_labels_relation.label_id = labels.label_id;`,
+        [tasks.rows[0].task_id],
+      );
+      tasks.rows[0].labels = labels.rows;
       return { tasks: tasks.rows };
     } else {
       return { message: "No tasks found for this user" };
@@ -61,10 +68,17 @@ export default class UserController {
 
   static getUserTasksUntilDay = async (req) => {
     const tasks = await pool.query(
-      `SELECT * FROM tasks WHERE user_id=$1 AND creation_date<$2;`,
-      [req.session.userId, req.params.creationDate],
+      `SELECT * FROM tasks WHERE user_id=$1 AND due_date<$2 AND status=$3;`,
+      [req.session.userId, req.params.dueDate, false],
     );
     if (tasks.rowCount) {
+      const labels = await pool.query(
+        `SELECT labels.title
+        FROM  labels, tasks, tasks_labels_relation
+        WHERE tasks.task_id = $1 AND tasks.task_id = tasks_labels_relation.task_id AND tasks_labels_relation.label_id = labels.label_id;`,
+        [tasks.rows[0].task_id],
+      );
+      tasks.rows[0].labels = labels.rows;
       return { tasks: tasks.rows };
     } else {
       return { message: "No tasks found for this user" };
