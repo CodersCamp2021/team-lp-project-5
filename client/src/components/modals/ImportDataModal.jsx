@@ -15,7 +15,7 @@ import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { useUserStore } from "../../hooks/store/use-user-store";
 import { useGuestStore } from "../../hooks/store/use-guest-store";
 
-const ImportDataModal = ({ setOpened }) => {
+const ImportDataModal = ({ opened, setOpened }) => {
   const [importing, setImporting] = useState(false);
   const [progress, setProgress] = useState(0);
   const theme = useMantineTheme();
@@ -65,7 +65,7 @@ const ImportDataModal = ({ setOpened }) => {
 
   return (
     <Modal
-      opened={true}
+      opened={opened}
       onClose={() => setOpened(false)}
       closeOnClickOutside={false}
       closeOnEscape={false}
