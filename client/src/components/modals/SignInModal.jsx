@@ -11,7 +11,7 @@ import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { loginSchema } from "../../utils/loginSchema";
 import TimeyApiClient from "../../hooks/api/timey";
 import { UserContext } from "../../UserContext";
-import Input from "./Input";
+import Input from "../homepage/Input";
 
 const timeyApi = new TimeyApiClient();
 

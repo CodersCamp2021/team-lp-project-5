@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
@@ -8,7 +8,8 @@ import { ImCross } from "react-icons/im";
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { registrationSchema } from "../../utils/registrationSchema";
 import TimeyApiClient from "../../hooks/api/timey";
-import Input from "./Input";
+import { UserContext } from "../../UserContext";
+import Input from "../homepage/Input";
 
 const timeyApi = new TimeyApiClient();
 
@@ -37,6 +38,7 @@ const forms = [
 
 const SignUpModal = ({ opened, setOpened, openImport }) => {
   const { classes } = useModalStyles();
+  const { store, userType } = useContext(UserContext);
   const form = useForm({
     schema: yupResolver(registrationSchema),
     initialValues: {
@@ -58,10 +60,7 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
         openImport();
       },
       onError: (error) => {
-        if (
-          JSON.parse(localStorage.getItem("userType")) !== "user" &&
-          JSON.parse(localStorage.getItem("tasks"))?.length > 0
-        ) {
+        if (userType !== "user" && store.getTasks().length > 0) {
           setOpened(false);
           openImport();
         }
