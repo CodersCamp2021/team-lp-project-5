@@ -16,12 +16,12 @@ router.post("/", loginRequired, async (req, res) => {
 });
 
 router.put(
-  "/:taskId/changeStatus",
+  "/:taskId/changeTaskInfo",
   loginRequired,
   checkIfUserIsTaskOwner,
   async (req, res) => {
     try {
-      const response = await TaskController.changeTaskStatusOrPriority(req);
+      const response = await TaskController.changeTaskInfo(req);
       return res.status(201).json(response);
     } catch (error) {
       return res.status(400).json({ error: error.message });
