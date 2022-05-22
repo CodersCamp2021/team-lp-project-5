@@ -23,7 +23,7 @@ const Tasks = ({ selectedDate }) => {
       }
     };
     fetchTasks();
-  }, [selectedDate]);
+  }, [tasks]);
 
   const mappedTasks = tasks?.map((task) => (
     <SingleTask key={task.taskId} task={task} />

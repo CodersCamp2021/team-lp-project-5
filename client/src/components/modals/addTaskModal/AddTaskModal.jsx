@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Group, Switch, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DatePicker } from "@mantine/dates";
@@ -13,18 +13,16 @@ import dayjs from "dayjs";
 
 import { useAddTaskStyles } from "../../../hooks/styles/use-add-task-styles.js";
 import { addTaskSchema } from "../../../utils/addTaskSchema";
+import { UserContext } from "../../../UserContext.jsx";
 import ConfirmDeleteModal from "./ConfirmDeleteModal.jsx";
 import AddTaskCollapse from "./AddTaskCollapse.jsx";
-
-const handleSubmit = (values) => {
-  console.log(values);
-};
 
 export const AddTaskModal = ({ context, id, innerProps }) => {
   const [collapseOpened, setCollapseOpened] = useState(false);
   const [deleteOpened, setDeleteOpened] = useState(false);
   const { classes: addTaskClasses } = useAddTaskStyles();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const { store } = useContext(UserContext);
 
   const { isEdit, task } = innerProps;
 
@@ -35,7 +33,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
           title: task.title,
           description: task.description,
           dueDate: dayjs(task.dueDate).toDate(),
-          collections: task.collections,
+          labels: task.labels,
           status: task.status,
           priority: task.priority,
         }
@@ -43,7 +41,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
           title: "",
           description: "",
           dueDate: new Date(),
-          collections: [],
+          labels: [],
           status: false,
           priority: 2,
         },
@@ -51,7 +49,14 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
 
   const handleDelete = () => setDeleteOpened(true);
   const closeContextModal = () => context.closeModal(id);
-
+  const handleSubmit = (values) => {
+    if (isEdit) {
+      store.changeTask({ taskId: task.taskId, ...values });
+    } else {
+      store.createTask({ taskId: task.taskId, ...values });
+    }
+    closeContextModal();
+  };
   return (
     <>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
@@ -80,11 +85,12 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
             icon={<BsCalendarEvent />}
             label="DUE DATE"
             {...form.getInputProps("dueDate")}
+            clearable={false}
             required
             dropdownType={isMobile ? "modal" : "popover"}
             styles={{
               input: {
-                width: 180,
+                width: 140,
                 fontSize: 16,
               },
             }}

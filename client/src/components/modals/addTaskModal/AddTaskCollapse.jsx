@@ -36,7 +36,7 @@ const AddTaskCollapse = ({ form, collapseOpened }) => {
           },
           { value: "school", label: "School" },
         ]}
-        {...form.getInputProps("collections")}
+        {...form.getInputProps("labels")}
       />
       <Text className={addTaskClasses.textLabel}>PRIORITY</Text>
       <SegmentedControl

@@ -56,7 +56,6 @@ const SingleTask = ({ task, isLeftover }) => {
       <Text
         lineClamp={1}
         style={{
-          textTransform: "capitalize",
           fontSize: 18,
           color: "#eeeeee",
           textDecorationLine: status ? "line-through" : "",

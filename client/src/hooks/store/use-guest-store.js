@@ -44,30 +44,26 @@ export const useGuestStore = () => {
     return { message: "Task created" };
   };
 
-  const changeTask = (
-    id,
-    title,
-    description,
-    dueDate,
-    priority,
-    status,
-    labels,
-  ) => {
+  const changeTask = (task) => {
+    const { taskId, title, description, priority, status, dueDate, labels } =
+      task;
     const tasksInStore = tasks || [];
-    const taskToChange = tasksInStore.find((task) => task.id === id);
+    const taskToChange = tasksInStore.find((task) => task.taskId === taskId);
 
     const updatedTask = {
       ...taskToChange,
       priority: priority || taskToChange.priority,
-      status: status || taskToChange.status,
+      status: status !== taskToChange.status ? status : taskToChange.status,
       title: title || taskToChange.title,
       description: description || taskToChange.description,
       dueDate: dueDate || taskToChange.dueDate,
       labels: labels || taskToChange.labels,
     };
 
-    const filteredTasks = tasksInStore.filter((task) => task.taskId === id);
+    const filteredTasks = tasksInStore.filter((task) => task.taskId !== taskId);
+
     const updatedTasks = [...filteredTasks, { ...updatedTask }];
+
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
