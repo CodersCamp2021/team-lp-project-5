@@ -85,7 +85,7 @@ export default class UserController {
     if (labelsInfo.rowCount) {
       return { labels: labelsInfo.rows };
     } else {
-      return { message: "No user found" };
+      return { message: "No labels found" };
     }
   };
 }
