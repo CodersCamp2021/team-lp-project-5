@@ -76,4 +76,16 @@ export default class UserController {
       return { message: "No user found" };
     }
   };
+
+  static getUserLabels = async (req) => {
+    const labelsInfo = await pool.query(
+      `SELECT title FROM labels WHERE user_id=$1;`,
+      [req.session.userId],
+    );
+    if (labelsInfo.rowCount) {
+      return { labels: labelsInfo.rows };
+    } else {
+      return { message: "No labels found" };
+    }
+  };
 }
