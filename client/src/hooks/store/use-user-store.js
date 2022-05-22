@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 import { useMutation, useQueryClient } from "react-query";
-import TimeyApiClient from "../api/timey";
+import TimeyApiClient from "../../api/timey";
 
 const timeyApi = new TimeyApiClient();
 

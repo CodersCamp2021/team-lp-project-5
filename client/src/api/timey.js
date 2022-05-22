@@ -1,7 +1,7 @@
 class TimeyApiClient {
-  async fetchTasks(date) {
+  async fetchTasks(dueDate) {
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/user/tasks/${date}`,
+      process.env.REACT_APP_SERVER_URL + `/user/tasks/${dueDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -42,7 +42,7 @@ class TimeyApiClient {
   }
 
   async postTask(task) {
-    const { title, description, priority, status, date, labels } = task;
+    const { title, description, priority, status, dueDate, labels } = task;
     const response = await fetch(process.env.REACT_APP_SERVER_URL + "/task", {
       method: "POST",
       credentials: "include",
@@ -54,7 +54,7 @@ class TimeyApiClient {
         description,
         priority,
         status,
-        date,
+        dueDate,
         labels,
       }),
     });

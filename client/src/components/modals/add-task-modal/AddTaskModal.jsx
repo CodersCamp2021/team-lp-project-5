@@ -9,6 +9,7 @@ import {
   BsTrash,
 } from "react-icons/bs";
 import { useMediaQuery } from "@mantine/hooks";
+import dayjs from "dayjs";
 
 import { useAddTaskStyles } from "../../../hooks/styles/use-add-task-styles.js";
 import { addTaskSchema } from "../../../utils/addTaskSchema";
@@ -24,18 +25,20 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
   const [deleteOpened, setDeleteOpened] = useState(false);
   const { classes: addTaskClasses } = useAddTaskStyles();
 
+  const { isEdit, task } = innerProps;
+
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const form = useForm({
     schema: yupResolver(addTaskSchema),
-    initialValues: innerProps.isEdit
+    initialValues: isEdit
       ? {
-          title: innerProps.task.title,
-          description: innerProps.task.description,
-          dueDate: innerProps.task.dueDate,
-          collections: innerProps.task.collections,
-          status: innerProps.task.status,
-          priority: innerProps.task.priority,
+          title: task.title,
+          description: task.description,
+          dueDate: dayjs(task.dueDate).toDate(),
+          collections: task.collections,
+          status: task.status,
+          priority: task.priority,
         }
       : {
           title: "",
@@ -86,7 +89,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
               },
             }}
           />
-          {innerProps.isEdit && (
+          {isEdit && (
             <Switch
               checked={form.values.status}
               onChange={(event) =>
