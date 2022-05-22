@@ -60,7 +60,6 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
 
   return (
     <Modal
-      withinPortal={true}
       size={600}
       opened={opened}
       title={isEdit ? "Edit Task" : "Create a Task"}

@@ -2,7 +2,7 @@ import { Group, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
 
-const SingleTask = ({ task, isLeftover, handleClick }) => {
+const SingleTask = ({ task, isLeftover }) => {
   const theme = useMantineTheme();
   const { title, priority, status } = task;
 
@@ -14,7 +14,6 @@ const SingleTask = ({ task, isLeftover, handleClick }) => {
 
   return (
     <Group
-      onClick={handleClick}
       style={{
         alignItems: "center",
         padding: 20,

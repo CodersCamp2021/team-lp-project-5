@@ -38,7 +38,6 @@ const Shell = () => {
       <Box>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/statistics" element={<div>Statistics</div>} />
           <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </Box>
