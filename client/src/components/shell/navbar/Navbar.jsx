@@ -1,21 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mantine/hooks";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
-import NavbarItems from "./NavbarItems";
 import Logo from "../../Logo";
+import NavbarItems from "./NavbarItems";
 import NavbarUser from "./NavbarUser";
 import NavbarLogout from "./NavbarLogout";
-import AddTaskModal from "../../modals/addTaskModal/AddTaskModal";
 
 const AppNavbar = ({ opened, setOpened }) => {
-  const [addTaskOpened, setAddTaskOpened] = useState(false);
   const { classes } = useNavbarStyles();
   const smallScreen = useMediaQuery("(max-width: 768px)");
-
-  const openAddTask = () => setAddTaskOpened(true);
 
   return (
     <Navbar
@@ -41,12 +37,11 @@ const AppNavbar = ({ opened, setOpened }) => {
         <NavbarUser />
       </Navbar.Section>
       <Navbar.Section grow className={classes.navbarItems}>
-        <NavbarItems setOpened={setOpened} openAddTask={openAddTask} />
+        <NavbarItems setOpened={setOpened} />
       </Navbar.Section>
       <Navbar.Section className={classes.navbarBottom} component={Link} to="/">
         <NavbarLogout />
       </Navbar.Section>
-      <AddTaskModal opened={addTaskOpened} setOpened={setAddTaskOpened} />
     </Navbar>
   );
 };

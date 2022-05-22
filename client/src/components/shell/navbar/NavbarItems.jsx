@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useNavbarItemsStyles } from "../../../hooks/styles/use-navbar-styles";
 import { useMediaQuery } from "@mantine/hooks";
+import { useModals } from "@mantine/modals";
 
 const MenuItems = [
   {
@@ -19,9 +20,19 @@ const MenuItems = [
   },
 ];
 
-const NavbarItems = ({ setOpened, openAddTask }) => {
+const NavbarItems = ({ setOpened }) => {
+  const modals = useModals();
   const { classes } = useNavbarItemsStyles();
   const isXsScreen = useMediaQuery("(min-width: 576px)");
+
+  const openAddTaskModal = () =>
+    modals.openContextModal("addTaskModal", {
+      title: "Create a Task",
+      innerProps: {
+        task: null,
+        isEdit: false,
+      },
+    });
 
   return (
     <Box>
@@ -40,7 +51,7 @@ const NavbarItems = ({ setOpened, openAddTask }) => {
         }}
       >
         <Button
-          onClick={openAddTask}
+          onClick={openAddTaskModal}
           radius={15}
           className={classes.button}
           rightIcon={<BsPlus size={isXsScreen ? 35 : 26} />}

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Group,
-  Modal,
-  Switch,
-  Textarea,
-  TextInput,
-} from "@mantine/core";
+import { Button, Group, Switch, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DatePicker } from "@mantine/dates";
 import {
@@ -17,7 +10,6 @@ import {
 } from "react-icons/bs";
 import { useMediaQuery } from "@mantine/hooks";
 
-import { useModalStyles } from "../../../hooks/styles/use-modals-styles.js";
 import { useAddTaskStyles } from "../../../hooks/styles/use-add-task-styles.js";
 import { addTaskSchema } from "../../../utils/addTaskSchema";
 import ConfirmDeleteModal from "./ConfirmDeleteModal.jsx";
@@ -27,24 +19,23 @@ const handleSubmit = (values) => {
   console.log(values);
 };
 
-export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
+export const AddTaskModal = ({ context, id, innerProps }) => {
   const [collapseOpened, setCollapseOpened] = useState(false);
   const [deleteOpened, setDeleteOpened] = useState(false);
-  const { classes } = useModalStyles();
   const { classes: addTaskClasses } = useAddTaskStyles();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const form = useForm({
     schema: yupResolver(addTaskSchema),
-    initialValues: isEdit
+    initialValues: innerProps.isEdit
       ? {
-          title: task.title,
-          description: task.description,
-          dueDate: task.dueDate,
-          collections: task.collections,
-          status: task.status,
-          priority: task.priority,
+          title: innerProps.task.title,
+          description: innerProps.task.description,
+          dueDate: innerProps.task.dueDate,
+          collections: innerProps.task.collections,
+          status: innerProps.task.status,
+          priority: innerProps.task.priority,
         }
       : {
           title: "",
@@ -59,14 +50,7 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
   const handleDelete = () => setDeleteOpened(true);
 
   return (
-    <Modal
-      size={600}
-      opened={opened}
-      title={isEdit ? "Edit Task" : "Create a Task"}
-      onClose={() => setOpened(false)}
-      centered
-      className={classes.modal}
-    >
+    <>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <TextInput
           required
@@ -88,8 +72,10 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
             className={addTaskClasses.label}
             minDate={new Date()}
             inputFormat="YYYY-MM-DD"
+            value={form.values.dueDate}
+            onChange={(value) => form.setFieldValue("dueDate", value)}
             icon={<BsCalendarEvent />}
-            label="DATE"
+            label="DUE DATE"
             {...form.getInputProps("dueDate")}
             required
             dropdownType={isMobile ? "modal" : "popover"}
@@ -100,8 +86,12 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
               },
             }}
           />
-          {isEdit && (
+          {innerProps.isEdit && (
             <Switch
+              checked={form.values.status}
+              onChange={(event) =>
+                form.setFieldValue("status", event.currentTarget.checked)
+              }
               size="lg"
               styles={(theme) => ({
                 root: {
@@ -144,7 +134,7 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
             <Button
               variant="outline"
               className={addTaskClasses.cancelButton}
-              onClick={() => setOpened(false)}
+              onClick={() => context.closeModal(id)}
             >
               CANCEL
             </Button>
@@ -155,7 +145,7 @@ export const AddTaskModal = ({ opened, setOpened, isEdit, task }) => {
         </Group>
       </form>
       <ConfirmDeleteModal opened={deleteOpened} setOpened={setDeleteOpened} />
-    </Modal>
+    </>
   );
 };
 

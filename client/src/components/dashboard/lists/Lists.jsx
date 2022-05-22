@@ -26,9 +26,9 @@ const Lists = () => {
             store.createTask({
               title: (Math.random() * 10).toFixed(7),
               description: "newDesc",
-              date: dayjs(),
+              date: new Date(),
               priority: Math.floor(Math.random() * (4 - 1) + 1),
-              status: Math.random() < 0.5,
+              status: Boolean(Math.random() < 0.5),
               labels: "asd",
             })
           }
@@ -61,7 +61,7 @@ const Lists = () => {
               description: "newDesc",
               date: dayjs().add(1, "day"),
               priority: Math.floor(Math.random() * (4 - 1) + 1),
-              status: Math.random() < 0.5,
+              status: Boolean(Math.random() < 0.5),
               labels: "asd",
             })
           }

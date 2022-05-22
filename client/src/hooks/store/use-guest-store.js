@@ -17,7 +17,7 @@ export const useGuestStore = () => {
           ?.filter((task) =>
             dayjs(new Date(task.date)).isSame(dayjs(date), "day"),
           )
-          .sort((a, b) => a.priority - b.priority) || []
+          .sort((a, b) => b.priority - a.priority) || []
       );
     }
 
@@ -31,7 +31,7 @@ export const useGuestStore = () => {
           task.status === false &&
           dayjs(new Date(task.date)).isBefore(dayjs(), "day"),
       )
-      .sort((a, b) => a.priority - b.priority) || [];
+      .sort((a, b) => b.priority - a.priority) || [];
 
   const createTask = (newTask) => {
     const newId = uuidv4();

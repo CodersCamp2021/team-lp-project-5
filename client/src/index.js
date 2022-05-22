@@ -4,9 +4,11 @@ import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
-
 import { BrowserRouter } from "react-router-dom";
+
+import AddTaskModal from "./components/modals/add-task-modal/AddTaskModal";
 import { UserProvider } from "./UserContext";
+import { modalProps } from "./utils/modalProps";
 import { theme } from "./utils/theme";
 import App from "./App";
 
@@ -15,7 +17,10 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
     <QueryClientProvider client={queryClient}>
-      <ModalsProvider>
+      <ModalsProvider
+        modals={{ addTaskModal: AddTaskModal }}
+        modalProps={modalProps}
+      >
         <BrowserRouter>
           <UserProvider>
             <App />

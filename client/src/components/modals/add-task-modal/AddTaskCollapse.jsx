@@ -15,8 +15,20 @@ const AddTaskCollapse = ({ form, collapseOpened }) => {
     <Collapse in={collapseOpened}>
       <MultiSelect
         pt={10}
+        placeholder="Add task to a collection"
+        searchable
+        creatable
+        getCreateLabel={(query) => `+ Create ${query}`}
         className={addTaskClasses.label}
         label="COLLECTIONS"
+        styles={(theme) => ({
+          value: {
+            backgroundColor: theme.colors.primary[8],
+          },
+          label: {
+            fontSize: 15,
+          },
+        })}
         data={[
           {
             value: "work",
