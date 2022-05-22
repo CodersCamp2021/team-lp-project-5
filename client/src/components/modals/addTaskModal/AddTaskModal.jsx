@@ -24,10 +24,9 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
   const [collapseOpened, setCollapseOpened] = useState(false);
   const [deleteOpened, setDeleteOpened] = useState(false);
   const { classes: addTaskClasses } = useAddTaskStyles();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const { isEdit, task } = innerProps;
-
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const form = useForm({
     schema: yupResolver(addTaskSchema),
@@ -51,6 +50,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
   });
 
   const handleDelete = () => setDeleteOpened(true);
+  const closeContextModal = () => context.closeModal(id);
 
   return (
     <>
@@ -124,15 +124,20 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
           </Button>
         </Group>
         <AddTaskCollapse form={form} collapseOpened={collapseOpened} />
-        <Group position="apart" className={addTaskClasses.buttonGroup}>
-          <Button
-            variant="outline"
-            color="red"
-            rightIcon={<BsTrash size={18} />}
-            onClick={handleDelete}
-          >
-            DELETE
-          </Button>
+        <Group
+          position={isEdit ? "apart" : "right"}
+          className={addTaskClasses.buttonGroup}
+        >
+          {isEdit && (
+            <Button
+              variant="outline"
+              color="red"
+              rightIcon={<BsTrash size={18} />}
+              onClick={handleDelete}
+            >
+              DELETE
+            </Button>
+          )}
           <Group>
             <Button
               variant="outline"
@@ -147,7 +152,12 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
           </Group>
         </Group>
       </form>
-      <ConfirmDeleteModal opened={deleteOpened} setOpened={setDeleteOpened} />
+      <ConfirmDeleteModal
+        opened={deleteOpened}
+        setOpened={setDeleteOpened}
+        closeContextModal={closeContextModal}
+        taskId={task?.taskId}
+      />
     </>
   );
 };

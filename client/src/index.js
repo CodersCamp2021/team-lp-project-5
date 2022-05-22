@@ -17,16 +17,16 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
     <QueryClientProvider client={queryClient}>
-      <ModalsProvider
-        modals={{ addTaskModal: AddTaskModal }}
-        modalProps={modalProps}
-      >
-        <BrowserRouter>
-          <UserProvider>
+      <UserProvider>
+        <ModalsProvider
+          modals={{ addTaskModal: AddTaskModal }}
+          modalProps={modalProps}
+        >
+          <BrowserRouter>
             <App />
-          </UserProvider>
-        </BrowserRouter>
-      </ModalsProvider>
+          </BrowserRouter>
+        </ModalsProvider>
+      </UserProvider>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   </MantineProvider>,

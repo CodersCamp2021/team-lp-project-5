@@ -76,8 +76,8 @@ export const useGuestStore = () => {
 
   const deleteTask = (id) => {
     const tasksInStore = tasks || [];
-    if (tasksInStore.find((task) => task.id === id)) {
-      const updatedTasks = tasksInStore.filter((task) => task.taskId === id);
+    if (tasksInStore.find((task) => task.taskId === id)) {
+      const updatedTasks = tasksInStore.filter((task) => task.taskId !== id);
       setTasks(updatedTasks);
       localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 

@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Group, Modal, Text } from "@mantine/core";
 
 import { useModalStyles } from "../../../hooks/styles/use-modals-styles";
 import { useAddTaskStyles } from "../../../hooks/styles/use-add-task-styles";
+import { UserContext } from "../../../UserContext";
 
-const ConfirmDeleteModal = ({ opened, setOpened }) => {
+const ConfirmDeleteModal = ({
+  opened,
+  setOpened,
+  closeContextModal,
+  taskId,
+}) => {
+  const { store } = useContext(UserContext);
   const { classes } = useModalStyles();
   const { classes: addTaskClasses } = useAddTaskStyles();
 
@@ -35,7 +42,15 @@ const ConfirmDeleteModal = ({ opened, setOpened }) => {
         >
           CANCEL
         </Button>
-        <Button color="red" variant="light">
+        <Button
+          color="red"
+          variant="light"
+          onClick={() => {
+            store.deleteTask(taskId);
+            setOpened(false);
+            closeContextModal();
+          }}
+        >
           CONFIRM
         </Button>
       </Group>
