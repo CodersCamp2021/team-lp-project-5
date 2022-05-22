@@ -12,15 +12,27 @@ import {
 import { DatePicker, TimeInput } from "@mantine/dates";
 import { BsClock, BsChevronDown, BsPlus } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useState } from "react";
+import {useContext, useState } from "react";
 import { Priority } from "./AddTaskPriority";
 import { Collection } from "./AddTaskCollection";
 
 export const AddTask = () => {
+  
   const { classes } = useAddTaskStyles();
   const [opened, setOpened] = useState(false);
   const [more, setMore] = useState(false);
-  const [value, onChange] = useState(new Date());
+  const [dateValue, setDateValue] = useState(new Date());
+  const [timeValue, setTimeValue] = useState(new Date());
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const task = { title, description, dateValue, timeValue };
+
+    console.log(task);
+  }
 
  
 
@@ -42,9 +54,13 @@ export const AddTask = () => {
       >
         <Box>
           <Text className={classes.titlesNames}>TITLE</Text>
-          <Textarea  minRows={1} maxRows={1} required />
+          <Textarea value={title}
+          onChange={(e) => setTitle(e.target.value)}
+           minRows={1} maxRows={1} required />
           <Text className={classes.titlesNames}>DESCRIPTION</Text>
-          <Textarea minRows={3} />
+          <Textarea value={description} 
+          onChange={(e) => setDescription(e.target.value)}
+          minRows={3} />
         </Box>
         <Text pt="md" className={classes.titlesNames}>
           DATE AND TIME
@@ -55,12 +71,13 @@ export const AddTask = () => {
             allowLevelChange={false}
             placeholder="DD-MM-YYYY"
             minDate={new Date()}
+            value={dateValue} onChange={(e) => setDateValue(e.target.value)}
           />
           <TimeInput
             format="12"
             defaultValue={new Date()}
+            value={timeValue} onChange={(e) => setTimeValue(e.target.value)} 
             icon={<BsClock size={16} 
-            value={value} onChange={onChange} 
             />}
           />
           <Button
@@ -134,6 +151,8 @@ export const AddTask = () => {
             CANCEL
           </Button>
           <Button
+          onSubmit={handleSubmit}
+          type="submit"
             radius={15}
             className={classes.button}
             styles={{
