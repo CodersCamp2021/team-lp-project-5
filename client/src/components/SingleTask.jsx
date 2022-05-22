@@ -2,13 +2,9 @@ import { Group, Text, useMantineTheme } from "@mantine/core";
 import React from "react";
 import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
 
-const SingleTask = ({ task, isLeftover }) => {
+const SingleTask = ({ task, isLeftover, handleClick }) => {
   const theme = useMantineTheme();
   const { title, priority, status } = task;
-
-  const handleClick = () => {
-    //TODO: handle onClick - mark task as done/undone
-  };
 
   const icon = status ? (
     <BsCheckCircleFill size="24px" />

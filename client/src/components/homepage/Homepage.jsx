@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import HomeHero from "./HomeHero";
 import Logo from "../Logo.jsx";
 import { useHomepageStyles } from "../../hooks/styles/use-homepage-styles";
-import SignInModal from "./SignInModal.jsx";
+import SignInModal from "../modals/SignInModal";
 
 const Homepage = () => {
   const { classes } = useHomepageStyles();

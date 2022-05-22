@@ -6,7 +6,6 @@ import Dashboard from "../dashboard/Dashboard";
 import CalendarPage from "../calendar/CalendarPage";
 import Header from "./header/Header";
 import Navbar from "./navbar/Navbar.jsx";
-import AddTask from "../AddTask/AddTask";
 
 const Shell = () => {
   const [opened, setOpened] = useState(false);
@@ -43,9 +42,6 @@ const Shell = () => {
           <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </Box>
-      <Routes>
-        <Route path="/addTask" element={<AddTask />} />
-      </Routes>
     </AppShell>
   );
 };

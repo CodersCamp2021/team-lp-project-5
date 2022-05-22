@@ -1,59 +1,52 @@
 import { createStyles } from "@mantine/core";
 
 export const useAddTaskStyles = createStyles((theme) => ({
-  modalContainer: {
-    textArea: {
-      backgroundColor: theme.colors.darkBg,
-    },
-  },
-  titlesNames: {
-    fontSize: 20,
-    color: "#FFFFFF",
-    textAlign: "left",
-    fontWeight: "600",
-    letterSpacing: 1,
-    marginTop: "5px",
-    [theme.fn.smallerThan("md")]: {
-      fontSize: 14,
-    },
-  },
-  dateItemsWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  button: {
-    [theme.fn.smallerThan("md")]: {
-      fontSize: 12,
-      width: 90,
-    },
-    width: 120,
-  },
-  textArea: {
-    backgroundColor: theme.colors.darkBg,
-  },
-  datePickerr: {
-    [theme.fn.smallerThan("md")]: {
-      width: 120,
-    },
-    
-  },
-  
-  prioritiesButton: 
-   {
-    [theme.fn.smallerThan("md")]: {
-      label: {
-      fontSize: 12},
-       },
+  label: {
     label: {
-    backgroundColor: theme.colors.primary[7],
-    color: "#EEEEEE",
-    "&:hover": {
-      backgroundColor: "#E06262",
-    }},
-  backgroundColor: theme.colors.lightBg,
+      fontSize: 18,
+      fontWeight: 500,
+      letterSpacing: "0.1em",
+      color: theme.white,
+      marginTop: 16,
+      marginBottom: 0,
+    },
   },
 
-  
+  textLabel: {
+    fontSize: 18,
+    fontWeight: 500,
+    letterSpacing: "0.1em",
+    color: theme.white,
+    marginTop: 16,
+    marginBottom: 0,
+  },
+
+  collapseButton: {
+    color: theme.white,
+    fontSize: 18,
+    fontWeight: 500,
+
+    "&:hover": {
+      backgroundColor: "#30505266",
+    },
+  },
+
+  buttonGroup: {
+    paddingTop: 20,
+  },
+
+  cancelButton: {
+    color: theme.colors.primary[7],
+    borderColor: theme.colors.primary[7],
+    "&:hover": {
+      backgroundColor: "#30505266",
+    },
+  },
+
+  submitButton: {
+    backgroundColor: theme.colors.primary[6],
+    "&:hover": {
+      backgroundColor: theme.colors.primary[8],
+    },
+  },
 }));

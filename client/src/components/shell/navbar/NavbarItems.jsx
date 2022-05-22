@@ -19,7 +19,7 @@ const MenuItems = [
   },
 ];
 
-const NavbarItems = ({ setOpened }) => {
+const NavbarItems = ({ setOpened, openAddTask }) => {
   const { classes } = useNavbarItemsStyles();
   const isXsScreen = useMediaQuery("(min-width: 576px)");
 
@@ -40,6 +40,7 @@ const NavbarItems = ({ setOpened }) => {
         }}
       >
         <Button
+          onClick={openAddTask}
           radius={15}
           className={classes.button}
           rightIcon={<BsPlus size={isXsScreen ? 35 : 26} />}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Image, Text, Button, BackgroundImage } from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
-import SignUpModal from "./SignUpModal";
+import SignUpModal from "../modals/SignUpModal";
 import spanImage from "../../assets/span.png";
 import homeImage from "../../assets/homeImage.svg";
 
