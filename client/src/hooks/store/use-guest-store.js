@@ -62,7 +62,7 @@ export const useGuestStore = () => {
 
     const filteredTasks = tasksInStore.filter((task) => task.taskId !== taskId);
 
-    const updatedTasks = [...filteredTasks, { ...updatedTask }];
+    const updatedTasks = [...filteredTasks, updatedTask];
 
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
