@@ -102,7 +102,7 @@ Deployed on Heroku:
   - You can delete specific task with task_id
   
   
-## Task
+## Label
 
 > ### **POST** `/api/label`
 > 
