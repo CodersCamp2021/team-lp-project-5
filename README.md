@@ -49,9 +49,74 @@ Deployed on Heroku:
 ToDoApp
 All endpoints to ToDoApp
 
-POST Login
-http://localhost:3001/api/user/login
-You can login to the app
+User Endpoints: 
+
+- POST Login
+  http://localhost:3001/api/user/login
+  You can login to the app
+
+- POST register
+  http://localhost:3001/api/user/register
+  You can add user to the app
+  {
+    "username": "test",
+    "first_name": "test1",
+    "second_name": "test2",
+    "password": "Test/1234",
+    "email": "test@test.com"
+}
+
+- GET get user Info
+  http://localhost:3001/api/user/userInfo
+  You can get all information about user who is logged in
+
+- GET Get task with date
+  http://localhost:3001/api/user/tasks/2021-05-30
+  You can get task with specific date
+
+- GET Get Task with until date
+  http://localhost:3001/api/user/tasks/until/2021-05-30
+  You can get tasks until the specific date
+
+
+Task Endpoints: 
+
+- GET Search Task by phrase
+  http://localhost:3001/api/task/search/ang
+  You can search your tasks by phrase in the title or description
+
+- POST Create task
+  http://localhost:3001/api/task
+  You can add task with information about him
+
+- PUT change Taskinfo
+  http://localhost:3001/api/task/1/changeStatus
+  You can change all task information
+
+- DEL Delete task
+  http://localhost:3001/api/task/2
+  You can delete specific task with task_id
+  
+  
+Labels Endpoints: 
+
+- POST Add Label
+  http://localhost:3001/api/label
+  You can add label
+
+- DEL Delete label
+  http://localhost:3001/api/label/1
+  You can delete label and relation with task
+
+- GET get all user labels
+  http://localhost:3001/api/user/labels
+  You can get all user labels
+
+- POST Add relation
+  http://localhost:3001/api/label/relation
+  You can add relation between your task and labels
+
+
 ## 🌎 Global:
 
 - [Husky](https://typicode.github.io/husky/#/)
