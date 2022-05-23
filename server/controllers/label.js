@@ -20,4 +20,19 @@ export default class labelController {
       message: `Task with ID: ${req.body.taskId} is now labeled by label with ID: ${req.body.labelId}`,
     };
   };
+
+  static deleteLabel = async (req) => {
+    const outcome = await pool.query(
+      `DELETE FROM labels WHERE label_id=$1 AND user_id=$2;`,
+      [req.params.labelId, req.session.userId],
+    );
+    if (outcome.rowCount === 1) {
+      await pool.query(`DELETE FROM tasks_labels_relation WHERE label_id=$1;`, [
+        req.params.labelId,
+      ]);
+      return { message: "Label Deleted" };
+    } else {
+      return { message: "No label with that ID" };
+    }
+  };
 }
