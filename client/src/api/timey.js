@@ -65,7 +65,7 @@ class TimeyApiClient {
     const { taskId, title, description, priority, status, dueDate, labels } =
       task;
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/task/${taskId}/changeStatus`,
+      process.env.REACT_APP_SERVER_URL + `/task/${taskId}/changeTaskInfo`,
       {
         method: "PUT",
         credentials: "include",
@@ -85,7 +85,8 @@ class TimeyApiClient {
     return response.json();
   }
 
-  async fetchDeleteTask(taskId) {
+  async fetchDeleteTask(task) {
+    const { taskId } = task;
     const response = await fetch(
       process.env.REACT_APP_SERVER_URL + `/task/${taskId}`,
       {

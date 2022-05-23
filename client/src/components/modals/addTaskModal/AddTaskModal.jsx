@@ -53,7 +53,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
     if (isEdit) {
       store.changeTask({ taskId: task.taskId, ...values });
     } else {
-      store.createTask({ taskId: task.taskId, ...values });
+      store.createTask(values);
     }
     closeContextModal();
   };
@@ -162,7 +162,7 @@ export const AddTaskModal = ({ context, id, innerProps }) => {
         opened={deleteOpened}
         setOpened={setDeleteOpened}
         closeContextModal={closeContextModal}
-        taskId={task?.taskId}
+        task={task}
       />
     </>
   );

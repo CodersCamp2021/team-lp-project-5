@@ -5,12 +5,7 @@ import { useModalStyles } from "../../../hooks/styles/use-modals-styles";
 import { useAddTaskStyles } from "../../../hooks/styles/use-add-task-styles";
 import { UserContext } from "../../../UserContext";
 
-const ConfirmDeleteModal = ({
-  opened,
-  setOpened,
-  closeContextModal,
-  taskId,
-}) => {
+const ConfirmDeleteModal = ({ opened, setOpened, closeContextModal, task }) => {
   const { store } = useContext(UserContext);
   const { classes } = useModalStyles();
   const { classes: addTaskClasses } = useAddTaskStyles();
@@ -46,7 +41,7 @@ const ConfirmDeleteModal = ({
           color="red"
           variant="light"
           onClick={() => {
-            store.deleteTask(taskId);
+            store.deleteTask(task);
             setOpened(false);
             closeContextModal();
           }}

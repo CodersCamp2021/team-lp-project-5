@@ -1,6 +1,9 @@
+import React, { useState } from "react";
+import { showNotification } from "@mantine/notifications";
 import dayjs from "dayjs";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { BsCheckLg } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 
 const TASKS = "tasks";
 const LABELS = "labels";
@@ -41,6 +44,13 @@ export const useGuestStore = () => {
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
+    showNotification({
+      title: "Success",
+      message: "Task created.",
+      icon: <BsCheckLg />,
+      color: "teal",
+    });
+
     return { message: "Task created" };
   };
 
@@ -49,6 +59,15 @@ export const useGuestStore = () => {
       task;
     const tasksInStore = tasks || [];
     const taskToChange = tasksInStore.find((task) => task.taskId === taskId);
+
+    if (!taskToChange) {
+      showNotification({
+        title: "Something went wrong!",
+        message: "Could not find the task.",
+        icon: <ImCross />,
+        color: "red",
+      });
+    }
 
     const updatedTask = {
       ...taskToChange,
@@ -67,18 +86,42 @@ export const useGuestStore = () => {
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
-    return { message: "Task changed" };
+    showNotification({
+      title: "Success",
+      message: "Task updated.",
+      icon: <BsCheckLg />,
+      color: "teal",
+    });
+
+    return { message: "Task updated" };
   };
 
-  const deleteTask = (id) => {
+  const deleteTask = (task) => {
+    const { taskId } = task;
     const tasksInStore = tasks || [];
-    if (tasksInStore.find((task) => task.taskId === id)) {
-      const updatedTasks = tasksInStore.filter((task) => task.taskId !== id);
+    if (tasksInStore.find((task) => task.taskId === taskId)) {
+      const updatedTasks = tasksInStore.filter(
+        (task) => task.taskId !== taskId,
+      );
       setTasks(updatedTasks);
       localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
+      showNotification({
+        title: "Success",
+        message: "Task deleted.",
+        icon: <BsCheckLg />,
+        color: "teal",
+      });
+
       return { message: "Task Deleted" };
     } else {
+      showNotification({
+        title: "Something went wrong!",
+        message: "Could not find the task.",
+        icon: <ImCross />,
+        color: "red",
+      });
+
       return { message: "No task with that ID" };
     }
   };
@@ -88,6 +131,13 @@ export const useGuestStore = () => {
     const labelsInStore = JSON.parse(localStorage.getItem(LABELS)) || [];
     const updatedLabels = [...labelsInStore, { labelId: newId, title }];
     localStorage.setItem(LABELS, JSON.stringify(updatedLabels));
+
+    showNotification({
+      title: "Success",
+      message: "Label created.",
+      icon: <BsCheckLg />,
+      color: "teal",
+    });
 
     return { message: "Label created" };
   };

@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import dayjs from "dayjs";
+import { showNotification } from "@mantine/notifications";
 import { Box, Stack, Text } from "@mantine/core";
+import { ImCross } from "react-icons/im";
+import dayjs from "dayjs";
 
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { UserContext } from "../../UserContext";
-import EmptyTasksTitle from "./EmptyTasksTitle";
 import SingleTask from "../SingleTask";
+import EmptyTasksTitle from "./EmptyTasksTitle";
 import TasksWrapper from "./TasksWrapper";
 
 const Tasks = ({ selectedDate }) => {
@@ -19,7 +21,12 @@ const Tasks = ({ selectedDate }) => {
         const data = await store.getTasks(dayjs(selectedDate));
         setTasks(data);
       } catch (error) {
-        console.error(error);
+        showNotification({
+          title: "Something went wrong!",
+          message: "Failed to fetch tasks",
+          icon: <ImCross />,
+          color: "red",
+        });
       }
     };
     fetchTasks();

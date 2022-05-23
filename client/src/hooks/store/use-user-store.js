@@ -1,5 +1,10 @@
 /* eslint no-console: 0 */
+import React from "react";
+import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "react-query";
+import { ImCross } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
+
 import TimeyApiClient from "../../api/timey";
 
 const timeyApi = new TimeyApiClient();
@@ -14,7 +19,12 @@ export const useUserStore = () => {
       );
       return tasks;
     } catch (error) {
-      console.error(error);
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
       return [];
     }
   };
@@ -26,19 +36,34 @@ export const useUserStore = () => {
       );
       return tasks || [];
     } catch (error) {
-      console.error(error);
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
     }
   };
 
   const { mutate: createTask } = useMutation(
     (task) => timeyApi.postTask(task),
     {
-      onSuccess: (data) => {
-        console.log(data);
-        queryClient.invalidateQueries(["tasks", data.date]);
+      onSuccess: (_, task) => {
+        showNotification({
+          title: "Success",
+          message: "Task created.",
+          icon: <BsCheckLg />,
+          color: "teal",
+        });
+        queryClient.invalidateQueries(["tasks", task.dueDate]);
       },
       onError: (error) => {
-        console.error(error);
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
       },
     },
   );
@@ -46,24 +71,45 @@ export const useUserStore = () => {
   const { mutate: changeTask } = useMutation(
     (task) => timeyApi.updateTask(task),
     {
-      onSuccess: (data) => {
-        console.log(data);
-        queryClient.invalidateQueries(["tasks", data.date]);
+      onSuccess: (_, task) => {
+        showNotification({
+          title: "Success",
+          message: "Task updated.",
+          icon: <BsCheckLg />,
+          color: "teal",
+        });
+        queryClient.invalidateQueries(["tasks", task.dueDate]);
       },
       onError: (error) => {
-        console.error(error);
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
       },
     },
   );
 
   const { mutate: deleteTask } = useMutation(
-    (id) => timeyApi.fetchDeleteTask(id),
+    (task) => timeyApi.fetchDeleteTask(task),
     {
-      onSuccess: (data) => {
-        console.log(data);
+      onSuccess: (_, task) => {
+        showNotification({
+          title: "Success",
+          message: "Task deleted.",
+          icon: <BsCheckLg />,
+          color: "teal",
+        });
+        queryClient.invalidateQueries(["tasks", task.dueDate]);
       },
       onError: (error) => {
-        console.error(error);
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
       },
     },
   );
@@ -76,7 +122,12 @@ export const useUserStore = () => {
         queryClient.invalidateQueries("labels");
       },
       onError: (error) => {
-        console.error(error);
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
       },
     },
   );
