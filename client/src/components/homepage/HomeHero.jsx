@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Image, Text, Button, BackgroundImage } from "@mantine/core";
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  BackgroundImage,
+  Anchor,
+} from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
 import SignUpModal from "./SignUpModal";
 import spanImage from "../../assets/span.png";
@@ -33,13 +40,16 @@ const HomeHero = () => {
             </BackgroundImage>
           </Box>
         </Text>
-        <Button
-          size="sm"
-          className={classes.button}
-          onClick={() => setOpened(true)}
-        >
-          Get started
-        </Button>
+        <Box className={classes.buttonContainer}>
+          <Button
+            size="sm"
+            className={classes.button}
+            onClick={() => setOpened(true)}
+          >
+            Get started
+          </Button>
+          <Anchor className={classes.guestAnchor}>Use as a guest</Anchor>
+        </Box>
       </Box>
       <Box className={classes.imageContainer}>
         <Image className={classes.image} src={homeImage} withPlaceholder />
