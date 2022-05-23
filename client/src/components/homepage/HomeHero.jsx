@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Image,
@@ -9,12 +9,17 @@ import {
 } from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
 import SignUpModal from "./SignUpModal";
+import { UserContext } from "../../UserContext";
 import spanImage from "../../assets/span.png";
 import homeImage from "../../assets/homeImage.svg";
 
 const HomeHero = () => {
   const { classes } = useHomeHeroStyles();
   const [opened, setOpened] = useState(false);
+  const { setGuest } = useContext(UserContext);
+
+  const handleGuestMode = () => setGuest();
+
   return (
     <Box className={classes.container}>
       <Box className={classes.leftSide}>
@@ -48,7 +53,9 @@ const HomeHero = () => {
           >
             Get started
           </Button>
-          <Anchor className={classes.guestAnchor}>Use as a guest</Anchor>
+          <Anchor className={classes.guestAnchor} onClick={handleGuestMode}>
+            Use as a guest
+          </Anchor>
         </Box>
       </Box>
       <Box className={classes.imageContainer}>
