@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mantine/hooks";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
-import NavbarItems from "./NavbarItems";
 import Logo from "../../Logo";
+import NavbarItems from "./NavbarItems";
 import NavbarUser from "./NavbarUser";
 import NavbarLogout from "./NavbarLogout";
 
