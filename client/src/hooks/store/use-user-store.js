@@ -30,7 +30,7 @@ export const useUserStore = () => {
     }
   };
 
-  const { mutate: createTask } = useMutation(
+  const { mutateAsync: createTaskAsync, mutate: createTaskSync } = useMutation(
     (task) => timeyApi.postTask(task),
     {
       onSuccess: (data) => {
@@ -84,7 +84,7 @@ export const useUserStore = () => {
   return {
     getTasks,
     getLeftoverTasks,
-    createTask,
+    createTask: { createTaskAsync, createTaskSync },
     changeTask,
     deleteTask,
     createLabel,

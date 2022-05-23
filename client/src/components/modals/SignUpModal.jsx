@@ -56,10 +56,6 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
     (values) => timeyApi.register(values),
     {
       onSuccess: () => {
-        if (userType !== "user" && store.getTasks().length > 0) {
-          setOpened(false);
-          openImport();
-        }
         showNotification({
           title: "Success",
           message: "Account created.",
@@ -68,6 +64,10 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
         });
       },
       onError: (error) => {
+        if (userType !== "user" && store.getTasks().length > 0) {
+          setOpened(false);
+          openImport();
+        }
         showNotification({
           title: "Something went wrong!",
           message: error.message,

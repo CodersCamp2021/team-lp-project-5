@@ -10,57 +10,70 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { BsCheckLg } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { useUserStore } from "../../hooks/store/use-user-store";
 import { useGuestStore } from "../../hooks/store/use-guest-store";
+import { showNotification } from "@mantine/notifications";
 
 const ImportDataModal = ({ opened, setOpened }) => {
   const [importing, setImporting] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(null);
   const theme = useMantineTheme();
   const { getTasks } = useGuestStore();
   const { createTask } = useUserStore();
+  const { createTaskAsync } = createTask;
   let callback = useRef();
   const { classes } = useModalStyles();
 
   useEffect(() => {
+    let interval, closeModal, resetImporting;
     if (progress < 100 && importing) {
       callback.current = () => {
-        setProgress(progress + 0.5);
+        setProgress(progress + 7);
       };
+      interval = setInterval(() => callback.current(), 150);
+      return () => clearInterval(interval);
     }
-    if (progress === 100) {
-      const closeModal = setTimeout(() => {
+    if (progress >= 100) {
+      closeModal = setTimeout(() => {
         setOpened(false);
       }, 1500);
-      return () => clearTimeout(closeModal);
-    }
-  }, [progress, importing]);
-
-  useEffect(() => {
-    if (progress === 100) {
-      const resetImporting = setTimeout(() => {
+      resetImporting = setTimeout(() => {
         setProgress(0);
         setImporting(false);
       }, 2000);
-      return () => clearTimeout(resetImporting);
+      return () => {
+        clearTimeout(closeModal);
+        clearTimeout(resetImporting);
+      };
     }
-  }, [progress]);
+    return () => {
+      clearTimeout(closeModal);
+      clearTimeout(resetImporting);
+      clearInterval(interval);
+    };
+  }, [progress, importing]);
 
-  useEffect(() => {
-    if (importing) {
-      const interval = setInterval(() => callback.current(), 30);
-      return () => clearInterval(interval);
-    }
-  }, [importing]);
-
-  const handleImportClick = () => {
+  const handleImportClick = async () => {
     setImporting(true);
     const tasks = getTasks();
-    tasks.forEach((task) => {
-      createTask(task);
-    });
+
+    try {
+      for (const task of tasks) {
+        await createTaskAsync(task);
+      }
+    } catch (error) {
+      setError(error);
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
+    }
   };
 
   return (
@@ -74,7 +87,9 @@ const ImportDataModal = ({ opened, setOpened }) => {
       title={
         importing
           ? progress >= 99
-            ? "Completed!"
+            ? error
+              ? "Error"
+              : "Completed!"
             : "Importing your data..."
           : "Hold it right there!"
       }
@@ -96,16 +111,29 @@ const ImportDataModal = ({ opened, setOpened }) => {
           sections={[
             {
               value: progress,
-              color: progress >= 99 ? "teal" : theme.colors.primary[6],
+              color:
+                progress >= 99
+                  ? error
+                    ? "red"
+                    : "teal"
+                  : theme.colors.primary[6],
             },
           ]}
           label={
             progress >= 99 ? (
-              <Center>
-                <ThemeIcon color="teal" variant="light" radius="xl" size="xl">
-                  <BsCheckLg size={22} />
-                </ThemeIcon>
-              </Center>
+              error ? (
+                <Center>
+                  <ThemeIcon color="red" variant="light" radius="xl" size="xl">
+                    <ImCross size={22} />
+                  </ThemeIcon>
+                </Center>
+              ) : (
+                <Center>
+                  <ThemeIcon color="teal" variant="light" radius="xl" size="xl">
+                    <BsCheckLg size={22} />
+                  </ThemeIcon>
+                </Center>
+              )
             ) : (
               <Text
                 color={theme.colors.primary[6]}
