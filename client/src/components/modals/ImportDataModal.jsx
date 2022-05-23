@@ -64,7 +64,16 @@ const ImportDataModal = ({ opened, setOpened }) => {
     try {
       localStorage.removeItem("tasks");
       for (const task of tasks) {
-        await createTaskAsync(task);
+        const { title, description, /** userId */ priority, status, dueDate } =
+          task;
+        await createTaskAsync({
+          title,
+          description,
+          priority,
+          status,
+          dueDate,
+          /** userId */
+        });
       }
     } catch (error) {
       setError(error);
