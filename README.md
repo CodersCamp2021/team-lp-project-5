@@ -46,6 +46,12 @@ Deployed on Heroku:
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 
+ToDoApp
+All endpoints to ToDoApp
+
+POST Login
+http://localhost:3001/api/user/login
+You can login to the app
 ## 🌎 Global:
 
 - [Husky](https://typicode.github.io/husky/#/)
