@@ -12,6 +12,7 @@ import NavbarLogout from "./NavbarLogout";
 const AppNavbar = ({ opened, setOpened }) => {
   const { classes } = useNavbarStyles();
   const smallScreen = useMediaQuery("(max-width: 768px)");
+  const isUser = localStorage.getItem("userType") === "user";
 
   return (
     <Navbar
@@ -39,9 +40,17 @@ const AppNavbar = ({ opened, setOpened }) => {
       <Navbar.Section grow className={classes.navbarItems}>
         <NavbarItems setOpened={setOpened} />
       </Navbar.Section>
-      <Navbar.Section className={classes.navbarBottom} component={Link} to="/">
-        <NavbarLogout />
-      </Navbar.Section>
+      {isUser ? (
+        <Navbar.Section
+          className={classes.navbarBottom}
+          component={Link}
+          to="/"
+        >
+          <NavbarLogout />
+        </Navbar.Section>
+      ) : (
+        <></>
+      )}
     </Navbar>
   );
 };
