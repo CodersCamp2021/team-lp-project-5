@@ -62,6 +62,7 @@ const ImportDataModal = ({ opened, setOpened }) => {
     const tasks = getTasks();
 
     try {
+      localStorage.removeItem("tasks");
       for (const task of tasks) {
         await createTaskAsync(task);
       }
