@@ -13,7 +13,7 @@
 - [Krzysztof Prońko](https://github.com/Ruud1990)
 - [Paweł Stępień](https://github.com/pastepi)
 
-# 🌄 Timey - App Overview
+# 🌄 ToDoApp Overview
 
 This is a monorepo for the frontend and backend of our project.
 
@@ -22,7 +22,7 @@ Deployed on Heroku:
 - Frontend: https://team-lp-project-5.herokuapp.com/
 - Backend: https://team-lp-project-5.herokuapp.com/api
 
-**Timey** allows users to keep tabs on their tasks, manage them efficiently and in the future will provide insights into statistics that have to do with task completion, or lack thereof.
+**ToDoApp** allows users to keep tabs on their tasks, manage them efficiently and in the future will provide insights into statistics that have to do with task completion, or lack thereof.
 
 ### Features:
 
@@ -38,7 +38,6 @@ Deployed on Heroku:
 - [React Query](https://react-query.tanstack.com/)
 - [React Router](https://reactrouter.com/)
 - [Mantine](https://mantine.dev/)
-- [Framer-motion](https://www.framer.com/motion/)
 - [React Testing Library](https://testing-library.com/)
 
 ## 🧰 Backend:
@@ -46,6 +45,47 @@ Deployed on Heroku:
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## 🌎 Global:
+
+- [Husky](https://typicode.github.io/husky/#/)
+- [Lint-staged](https://github.com/okonet/lint-staged)
+- [Heroku](https://www.heroku.com/)
+- [Figma](https://www.figma.com/)
+- [Trello](https://trello.com/)
+
+# 🔑 How to use
+
+### **Installing dependencies**
+
+To install every dependency:
+
+`npm install && cd client && npm install && cd ..`
+
+Backend only:
+
+`npm install`
+
+Frontend only:
+
+`cd client && npm install`
+
+### **Running tests**
+
+`npm test`
+
+### **Starting the app**
+
+Build and run the app:
+
+`npm run build && npm start`
+
+Running backend only:
+
+`npm start`
+
+Running frontend only:
+
+`cd client && npm start`
 
 ## All endpoints ToDoApp
 ## User
@@ -115,49 +155,6 @@ Deployed on Heroku:
 > ### **POST** `/api/label/relation`
 >
   - You can add relation between your task and labels
-
-
-## 🌎 Global:
-
-- [Husky](https://typicode.github.io/husky/#/)
-- [Lint-staged](https://github.com/okonet/lint-staged)
-- [Heroku](https://www.heroku.com/)
-- [Figma](https://www.figma.com/)
-- [Trello](https://trello.com/)
-
-# 🔑 How to use
-
-### **Installing dependencies**
-
-To install every dependency:
-
-`npm install && cd client && npm install && cd ..`
-
-Backend only:
-
-`npm install`
-
-Frontend only:
-
-`cd client && npm install`
-
-### **Running tests**
-
-`npm test`
-
-### **Starting the app**
-
-Build and run the app:
-
-`npm run build && npm start`
-
-Running backend only:
-
-`npm start`
-
-Running frontend only:
-
-`cd client && npm start`
 
 ## *️⃣ Additional info
 
