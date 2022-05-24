@@ -222,7 +222,6 @@ export const useSearchBarStyles = createStyles((theme) => ({
     justifyItems: "center",
     alignItems: "center",
     position: "relative",
-    width: "300px",
 
     svg: {
       [theme.fn.smallerThan("xl")]: {
@@ -240,8 +239,7 @@ export const useSearchBarStyles = createStyles((theme) => ({
     position: "absolute",
     top: 0,
     left: 0,
-    width: "400px",
-    transform: "translate(-50px, 60px)",
+    transform: "translateY(60px)",
     background: theme.colors.dark[7],
     zIndex: 999,
     border: `3px solid ${theme.colors.dark[4]}`,
