@@ -1,6 +1,14 @@
-import React, { useState } from "react";
-import { Box, Image, Text, Button, BackgroundImage } from "@mantine/core";
+import React, { useState, useContext } from "react";
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  BackgroundImage,
+  Anchor,
+} from "@mantine/core";
 import { useHomeHeroStyles } from "../../hooks/styles/use-homepage-styles";
+import { UserContext } from "../../UserContext";
 import SignUpModal from "../modals/SignUpModal";
 import spanImage from "../../assets/span.png";
 import homeImage from "../../assets/homeImage.svg";
@@ -8,6 +16,10 @@ import homeImage from "../../assets/homeImage.svg";
 const HomeHero = () => {
   const { classes } = useHomeHeroStyles();
   const [opened, setOpened] = useState(false);
+  const { setGuest } = useContext(UserContext);
+
+  const handleGuestMode = () => setGuest();
+
   return (
     <Box className={classes.container}>
       <Box className={classes.leftSide}>
@@ -33,13 +45,18 @@ const HomeHero = () => {
             </BackgroundImage>
           </Box>
         </Text>
-        <Button
-          size="sm"
-          className={classes.button}
-          onClick={() => setOpened(true)}
-        >
-          Get started
-        </Button>
+        <Box className={classes.buttonContainer}>
+          <Button
+            size="sm"
+            className={classes.button}
+            onClick={() => setOpened(true)}
+          >
+            Get started
+          </Button>
+          <Anchor className={classes.guestAnchor} onClick={handleGuestMode}>
+            Use as a guest
+          </Anchor>
+        </Box>
       </Box>
       <Box className={classes.imageContainer}>
         <Image className={classes.image} src={homeImage} withPlaceholder />

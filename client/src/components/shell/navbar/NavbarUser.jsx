@@ -3,7 +3,7 @@ import { Anchor, Avatar, Box, Text } from "@mantine/core";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
 import { useMediaQuery } from "@mantine/hooks";
-import SignUpModal from "../../homepage/SignUpModal";
+import SignUpModal from "../../modals/SignUpModal";
 
 const NavbarUser = () => {
   const { classes } = useNavbarStyles();
