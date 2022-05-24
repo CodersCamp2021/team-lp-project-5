@@ -4,13 +4,13 @@ import { useSearchBarStyles } from "../../hooks/styles/use-dashboard-styles";
 import { BsDashLg } from "react-icons/bs";
 
 const SearchItem = ({ task }) => {
-  const { task_id, title, description, priority, isDone } = task;
+  const { taskId, title, description, priority, status } = task;
   const { classes } = useSearchBarStyles();
   const theme = useMantineTheme();
 
   const handleClickTask = () => {
     //TODO: handle click - open task modal
-    console.log("clicked task with id: " + task_id); //eslint-disable-line
+    console.log("clicked task with id: " + taskId); //eslint-disable-line
   };
 
   return (
@@ -26,7 +26,7 @@ const SearchItem = ({ task }) => {
           style={{
             textTransform: "capitalize",
             fontSize: 18,
-            textDecorationLine: isDone ? "line-through" : "",
+            textDecorationLine: status ? "line-through" : "",
             maxWidth: "90%",
           }}
         >
@@ -37,7 +37,7 @@ const SearchItem = ({ task }) => {
           style={{
             textTransform: "capitalize",
             fontSize: 12,
-            textDecorationLine: isDone ? "line-through" : "",
+            textDecorationLine: status ? "line-through" : "",
             maxWidth: "90%",
           }}
         >

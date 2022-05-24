@@ -14,7 +14,7 @@ const SearchItems = ({ tasks, isOpen }) => {
     >
       <TasksWrapper isScroll={tasks.length > 2}>
         {tasks.map((task) => (
-          <SearchItem key={task.task_id} task={task} />
+          <SearchItem key={task.taskId} task={task} />
         ))}
       </TasksWrapper>
     </List>
