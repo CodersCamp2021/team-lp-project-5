@@ -42,4 +42,17 @@ export default class TaskController {
       return { message: "No task with that ID" };
     }
   };
+
+  static searchTask = async (req) => {
+    const searchQuery = "%" + req.params.searchParam + "%";
+    const searchInfo = await pool.query(
+      `SELECT * FROM tasks WHERE description LIKE $2 OR title LIKE $2 AND user_id=$1;`,
+      [req.session.userId, searchQuery],
+    );
+    if (searchInfo.rowCount) {
+      return { tasks: searchInfo.rows };
+    } else {
+      return { message: "No task found" };
+    }
+  };
 }

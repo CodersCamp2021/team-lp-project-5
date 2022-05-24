@@ -43,4 +43,13 @@ router.delete(
   },
 );
 
+router.get("/search/:searchParam", loginRequired, async (req, res) => {
+  try {
+    const response = await TaskController.searchTask(req);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
 export { router as taskRouter };
