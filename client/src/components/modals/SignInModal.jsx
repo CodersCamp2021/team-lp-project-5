@@ -9,9 +9,9 @@ import { ImCross } from "react-icons/im";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { loginSchema } from "../../utils/loginSchema";
-import TimeyApiClient from "../../hooks/api/timey";
+import TimeyApiClient from "../../api/timey";
 import { UserContext } from "../../UserContext";
-import Input from "../homepage/Input";
+import Input from "./Input";
 
 const timeyApi = new TimeyApiClient();
 

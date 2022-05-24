@@ -70,9 +70,9 @@ class TimeyApiClient {
     return response.json();
   }
 
-  async fetchLeftoverTasks() {
+  async fetchLeftoverTasks(dueDate) {
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + "/user/leftoverTasks",
+      process.env.REACT_APP_SERVER_URL + `/user/tasks/until/${dueDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -86,6 +86,7 @@ class TimeyApiClient {
 
   async postTask(task) {
     const { title, description, priority, status, dueDate, labels } = task;
+    const formattedDate = dayjs(dueDate).format("YYYY-MM-DD");
     const response = await fetch(process.env.REACT_APP_SERVER_URL + "/task", {
       method: "POST",
       credentials: "include",
@@ -97,7 +98,7 @@ class TimeyApiClient {
         description,
         priority,
         status,
-        dueDate,
+        dueDate: formattedDate,
         labels,
       }),
     });
@@ -107,6 +108,7 @@ class TimeyApiClient {
   async updateTask(task) {
     const { taskId, title, description, priority, status, dueDate, labels } =
       task;
+    const formattedDate = dayjs(dueDate).format("YYYY-MM-DD");
     const response = await fetch(
       process.env.REACT_APP_SERVER_URL + `/task/${taskId}/changeTaskInfo`,
       {
@@ -120,7 +122,7 @@ class TimeyApiClient {
           description,
           priority,
           status,
-          dueDate,
+          dueDate: formattedDate,
           labels,
         }),
       },

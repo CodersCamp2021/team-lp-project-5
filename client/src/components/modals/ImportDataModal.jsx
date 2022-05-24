@@ -25,9 +25,8 @@ const ImportDataModal = ({ opened, setOpened }) => {
   const [error, setError] = useState(null);
   const theme = useMantineTheme();
   const { getTasks } = useGuestStore();
-  const { createTask } = useUserStore();
+  const { createTaskAsync } = useUserStore();
   const { setUser } = useContext(UserContext);
-  const { createTaskAsync } = createTask;
   let callback = useRef();
   const { classes } = useModalStyles();
   const navigate = useNavigate();

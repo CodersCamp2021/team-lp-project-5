@@ -74,7 +74,14 @@ export default class UserController {
         [tasks.rows[0].task_id],
       );
       tasks.rows[0].labels = labels.rows;
-      return { tasks: tasks.rows };
+
+      return {
+        tasks: tasks.rows.map(({ task_id, due_date, ...rest }) => ({
+          taskId: task_id,
+          dueDate: due_date,
+          ...rest,
+        })),
+      };
     } else {
       return { message: "No tasks found for this user" };
     }
@@ -93,7 +100,13 @@ export default class UserController {
         [tasks.rows[0].task_id],
       );
       tasks.rows[0].labels = labels.rows;
-      return { tasks: tasks.rows };
+      return {
+        tasks: tasks.rows.map(({ task_id, due_date, ...rest }) => ({
+          taskId: task_id,
+          dueDate: due_date,
+          ...rest,
+        })),
+      };
     } else {
       return { message: "No tasks found for this user" };
     }

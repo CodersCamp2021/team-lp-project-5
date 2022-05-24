@@ -14,10 +14,10 @@ export const useUserStore = () => {
 
   const getTasks = async (date) => {
     try {
-      const tasks = await queryClient.fetchQuery(["tasks", date], () =>
+      const data = await queryClient.fetchQuery(["tasks", date], () =>
         timeyApi.fetchTasks(date),
       );
-      return tasks;
+      return data.tasks;
     } catch (error) {
       showNotification({
         title: "Something went wrong!",
@@ -29,12 +29,12 @@ export const useUserStore = () => {
     }
   };
 
-  const getLeftoverTasks = async () => {
+  const getLeftoverTasks = async (dueDate) => {
     try {
-      const tasks = await queryClient.fetchQuery(["tasks", "leftovers"], () =>
-        timeyApi.fetchLeftoverTasks(),
+      const data = await queryClient.fetchQuery(["tasks", "leftovers"], () =>
+        timeyApi.fetchLeftoverTasks(dueDate),
       );
-      return tasks || [];
+      return data.tasks;
     } catch (error) {
       showNotification({
         title: "Something went wrong!",
@@ -42,10 +42,11 @@ export const useUserStore = () => {
         icon: <ImCross />,
         color: "red",
       });
+      return [];
     }
   };
 
-  const { mutateAsync: createTaskAsync, mutate: createTaskSync } = useMutation(
+  const { mutateAsync: createTaskAsync, mutate: createTask } = useMutation(
     (task) => timeyApi.postTask(task),
     {
       onSuccess: (_, task) => {
@@ -117,8 +118,7 @@ export const useUserStore = () => {
   const { mutate: createLabel } = useMutation(
     (title) => timeyApi.postLabel(title),
     {
-      onSuccess: (data) => {
-        console.log(data);
+      onSuccess: () => {
         queryClient.invalidateQueries("labels");
       },
       onError: (error) => {
@@ -135,7 +135,8 @@ export const useUserStore = () => {
   return {
     getTasks,
     getLeftoverTasks,
-    createTask: { createTaskAsync, createTaskSync },
+    createTask,
+    createTaskAsync,
     changeTask,
     deleteTask,
     createLabel,

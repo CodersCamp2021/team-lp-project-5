@@ -29,18 +29,18 @@ const Tasks = ({ selectedDate }) => {
       }
     };
     fetchTasks();
-  }, [tasks]);
-
-  const mappedTasks = tasks?.map((task) => (
-    <SingleTask key={task.taskId} task={task} />
-  ));
+  }, [selectedDate]);
 
   return (
     <Box className={classes.tasks}>
       <Text className={classes.tasksHeader}>Tasks</Text>
-      <TasksWrapper isScroll={mappedTasks.length > 5}>
+      <TasksWrapper isScroll={tasks?.length > 5}>
         <Stack className={classes.tasksContainer}>
-          {mappedTasks.length ? mappedTasks : <EmptyTasksTitle />}
+          {tasks?.length ? (
+            tasks?.map((task) => <SingleTask key={task.taskId} task={task} />)
+          ) : (
+            <EmptyTasksTitle />
+          )}
         </Stack>
       </TasksWrapper>
     </Box>

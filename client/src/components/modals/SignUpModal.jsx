@@ -9,9 +9,9 @@ import { BsCheckLg } from "react-icons/bs";
 
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { registrationSchema } from "../../utils/registrationSchema";
-import TimeyApiClient from "../../hooks/api/timey";
+import TimeyApiClient from "../../api/timey";
 import { UserContext } from "../../UserContext";
-import Input from "../homepage/Input";
+import Input from "./Input";
 
 const timeyApi = new TimeyApiClient();
 
