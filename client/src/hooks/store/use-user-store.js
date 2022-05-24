@@ -132,6 +132,23 @@ export const useUserStore = () => {
     },
   );
 
+  const getTasksByName = async (name) => {
+    try {
+      const tasks = await queryClient.fetchQuery("tasks", () =>
+        timeyApi.fetchTasksByName(name),
+      );
+      return tasks;
+    } catch (error) {
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
+      return [];
+    }
+  };
+
   return {
     getTasks,
     getLeftoverTasks,
@@ -139,5 +156,6 @@ export const useUserStore = () => {
     changeTask,
     deleteTask,
     createLabel,
+    getTasksByName,
   };
 };

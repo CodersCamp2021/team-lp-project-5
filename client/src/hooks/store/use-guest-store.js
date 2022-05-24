@@ -142,6 +142,17 @@ export const useGuestStore = () => {
     return { message: "Label created" };
   };
 
+  const getTasksByName = (name) => {
+    const tasks = JSON.parse(localStorage.getItem(TASKS)) || [];
+    const filteredTasks = tasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(name.toLowerCase().trim()) ||
+        task.description.toLowerCase().includes(name.toLowerCase().trim()),
+    );
+
+    return filteredTasks;
+  };
+
   return {
     getTasks,
     getLeftoverTasks,
@@ -149,5 +160,6 @@ export const useGuestStore = () => {
     changeTask,
     deleteTask,
     createLabel,
+    getTasksByName,
   };
 };
