@@ -47,9 +47,8 @@ const SearchBar = () => {
   }, [debounced]);
 
   return (
-    <Box className={classes.searchBarWrapper}>
+    <Box ref={ref} className={classes.searchBarWrapper}>
       <TextInput
-        ref={ref}
         value={name}
         onChange={setName}
         variant="unstyled"

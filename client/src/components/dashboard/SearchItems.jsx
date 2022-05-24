@@ -4,7 +4,7 @@ import { useSearchBarStyles } from "../../hooks/styles/use-dashboard-styles";
 import TasksWrapper from "../calendar/TasksWrapper";
 import SearchItem from "./SearchItem";
 
-const SearchItems = ({ tasks, isOpen }) => {
+const SearchItems = ({ tasks, isOpen, setIsOpen }) => {
   const { classes } = useSearchBarStyles();
 
   return (
@@ -14,7 +14,7 @@ const SearchItems = ({ tasks, isOpen }) => {
     >
       <TasksWrapper isScroll={tasks.length > 2}>
         {tasks.map((task) => (
-          <SearchItem key={task.taskId} task={task} />
+          <SearchItem key={task.taskId} task={task} setIsOpen={setIsOpen} />
         ))}
       </TasksWrapper>
     </List>
