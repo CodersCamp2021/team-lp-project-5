@@ -1,14 +1,21 @@
 import { Group, Text, useMantineTheme } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 import React from "react";
 import { BsCheckCircleFill, BsCircle, BsDashLg } from "react-icons/bs";
 
 const SingleTask = ({ task, isLeftover }) => {
   const theme = useMantineTheme();
+  const modals = useModals();
   const { title, priority, status } = task;
 
-  const handleClick = () => {
-    //TODO: handle onClick - mark task as done/undone
-  };
+  const openAddTaskModal = () =>
+    modals.openContextModal("addTaskModal", {
+      title: "Edit Task",
+      innerProps: {
+        task: task,
+        isEdit: true,
+      },
+    });
 
   const icon = status ? (
     <BsCheckCircleFill size="24px" />
@@ -18,7 +25,7 @@ const SingleTask = ({ task, isLeftover }) => {
 
   return (
     <Group
-      onClick={handleClick}
+      onClick={openAddTaskModal}
       style={{
         alignItems: "center",
         padding: 20,
@@ -49,7 +56,6 @@ const SingleTask = ({ task, isLeftover }) => {
       <Text
         lineClamp={1}
         style={{
-          textTransform: "capitalize",
           fontSize: 18,
           color: "#eeeeee",
           textDecorationLine: status ? "line-through" : "",

@@ -46,6 +46,77 @@ Deployed on Heroku:
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## All endpoints ToDoApp
+
+## User
+
+> ### **POST** `/api/user/login`
+
+- You can login to the app
+
+> ### **POST** `/api/user/register`
+
+- You can add user to the app
+- Example request:
+
+```
+{
+  "username": "test",
+  "first_name": "test1",
+  "second_name": "test2",
+  "password": "Test/1234",
+  "email": "test@test.com"
+}
+```
+
+> ### **GET** `/api/user/userInfo`
+
+- You can get all information about user who is logged in
+
+> ### **GET** `/api/user/tasks/:dueDate`
+
+- You can get task with specific date
+
+> ### **GET** `/api/user/tasks/until/:dueDate`
+
+- You can get tasks until the specific date
+
+> ### **GET** `/api/user/labels`
+
+- You can get all user labels
+
+## Task
+
+> ### **GET** `/api/task/search/:searchPhrase`
+
+- You can search your tasks by phrase in the title or description
+
+> ### **POST** `/api/task`
+
+- You can add task with information about him
+
+> ### **PUT** `/api/task/:task_id/changeStatus`
+
+- You can change all task information
+
+> ### **DELETE** `/api/task/:task_id`
+
+- You can delete specific task with task_id
+
+## Label
+
+> ### **POST** `/api/label`
+
+- You can add label
+
+> ### **DELETE** `/api/label/:label_id`
+
+- You can delete label and relation with task
+
+> ### **POST** `/api/label/relation`
+
+- You can add relation between your task and labels
+
 ## 🌎 Global:
 
 - [Husky](https://typicode.github.io/husky/#/)
@@ -88,7 +159,7 @@ Running frontend only:
 
 `cd client && npm start`
 
-## *️⃣ Additional info
+## \*️⃣ Additional info
 
 This monorepo was set up by following the guide by Reed Barger:
 

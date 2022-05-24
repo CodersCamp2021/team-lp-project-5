@@ -85,8 +85,7 @@ class TimeyApiClient {
   }
 
   async postTask(task) {
-    const { title, description, priority, status, date, labels } = task;
-    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    const { title, description, priority, status, dueDate, labels } = task;
     const response = await fetch(process.env.REACT_APP_SERVER_URL + "/task", {
       method: "POST",
       credentials: "include",
@@ -98,16 +97,18 @@ class TimeyApiClient {
         description,
         priority,
         status,
-        dueDate: formattedDate,
+        dueDate,
         labels,
       }),
     });
     return response.json();
   }
 
-  async updateTask(id, priority, status) {
+  async updateTask(task) {
+    const { taskId, title, description, priority, status, dueDate, labels } =
+      task;
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/task/${id}/changeStatus`,
+      process.env.REACT_APP_SERVER_URL + `/task/${taskId}/changeTaskInfo`,
       {
         method: "PUT",
         credentials: "include",
@@ -115,17 +116,22 @@ class TimeyApiClient {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          title,
+          description,
           priority,
           status,
+          dueDate,
+          labels,
         }),
       },
     );
     return response.json();
   }
 
-  async fetchDeleteTask(id) {
+  async fetchDeleteTask(task) {
+    const { taskId } = task;
     const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/task/${id}`,
+      process.env.REACT_APP_SERVER_URL + `/task/${taskId}`,
       {
         method: "DELETE",
         credentials: "include",

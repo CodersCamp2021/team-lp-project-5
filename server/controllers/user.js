@@ -61,11 +61,38 @@ export default class UserController {
     return { message: "Logged in successfully.", userId: user.rows[0].user_id };
   };
 
-  static getUserTasks = async (req) => {
-    const tasks = await pool.query(`SELECT * FROM tasks WHERE user_id=$1;`, [
-      req.session.userId,
-    ]);
+  static getUserTasksForDay = async (req) => {
+    const tasks = await pool.query(
+      `SELECT * FROM tasks WHERE user_id=$1 AND due_date=$2;`,
+      [req.session.userId, req.params.dueDate],
+    );
     if (tasks.rowCount) {
+      const labels = await pool.query(
+        `SELECT labels.title
+        FROM  labels, tasks, tasks_labels_relation
+        WHERE tasks.task_id = $1 AND tasks.task_id = tasks_labels_relation.task_id AND tasks_labels_relation.label_id = labels.label_id;`,
+        [tasks.rows[0].task_id],
+      );
+      tasks.rows[0].labels = labels.rows;
+      return { tasks: tasks.rows };
+    } else {
+      return { message: "No tasks found for this user" };
+    }
+  };
+
+  static getUserTasksUntilDay = async (req) => {
+    const tasks = await pool.query(
+      `SELECT * FROM tasks WHERE user_id=$1 AND due_date<$2 AND status=$3;`,
+      [req.session.userId, req.params.dueDate, false],
+    );
+    if (tasks.rowCount) {
+      const labels = await pool.query(
+        `SELECT labels.title
+        FROM  labels, tasks, tasks_labels_relation
+        WHERE tasks.task_id = $1 AND tasks.task_id = tasks_labels_relation.task_id AND tasks_labels_relation.label_id = labels.label_id;`,
+        [tasks.rows[0].task_id],
+      );
+      tasks.rows[0].labels = labels.rows;
       return { tasks: tasks.rows };
     } else {
       return { message: "No tasks found for this user" };
@@ -88,6 +115,18 @@ export default class UserController {
       return { userInfo: userInfo.rows[0] };
     } else {
       return { message: "No user found" };
+    }
+  };
+
+  static getUserLabels = async (req) => {
+    const labelsInfo = await pool.query(
+      `SELECT title FROM labels WHERE user_id=$1;`,
+      [req.session.userId],
+    );
+    if (labelsInfo.rowCount) {
+      return { labels: labelsInfo.rows };
+    } else {
+      return { message: "No labels found" };
     }
   };
 }

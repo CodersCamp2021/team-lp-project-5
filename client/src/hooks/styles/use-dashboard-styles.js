@@ -221,6 +221,7 @@ export const useSearchBarStyles = createStyles((theme) => ({
     display: "flex",
     justifyItems: "center",
     alignItems: "center",
+    position: "relative",
 
     svg: {
       [theme.fn.smallerThan("xl")]: {
@@ -232,6 +233,59 @@ export const useSearchBarStyles = createStyles((theme) => ({
         height: 26,
         width: 26,
       },
+    },
+  },
+  searchList: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    transform: "translateY(60px)",
+    background: theme.colors.dark[7],
+    zIndex: 999,
+    border: `3px solid ${theme.colors.dark[4]}`,
+    borderRadius: "10px",
+
+    [theme.fn.smallerThan(500)]: {
+      width: "100%",
+      transform: "translate(0, 50px)",
+    },
+  },
+  searchListScroll: {
+    height: "400px",
+  },
+  searchListItem: {
+    listStyleType: "none",
+    padding: "15px",
+    borderRadius: "10px",
+
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: theme.colors.dark[3],
+      color: theme.colors.primary[2],
+    },
+  },
+  searchListItemContent: {
+    width: "100%",
+    position: "relative",
+    cursor: "pointer",
+    padding: "0 20px",
+
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    flexWrap: "nowrap",
+    gap: "5px",
+  },
+  searchListItemDash: {
+    position: "absolute",
+    left: "0",
+    top: "50%",
+    transform: "rotate(90deg) translate(-50%, 50%)",
+  },
+  searchIcon: {
+    [theme.fn.largerThan(1200)]: {
+      minHeight: "34px",
+      minWidth: "34px",
     },
   },
 }));

@@ -3,9 +3,9 @@ import { AppShell, Box, useMantineTheme } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 import { useShellStyles } from "../../hooks/styles/use-shell-styles";
 import Dashboard from "../dashboard/Dashboard";
+import CalendarPage from "../calendar/CalendarPage";
 import Header from "./header/Header";
 import Navbar from "./navbar/Navbar.jsx";
-import CalendarPage from "../calendar/CalendarPage";
 
 const Shell = () => {
   const [opened, setOpened] = useState(false);
@@ -38,7 +38,6 @@ const Shell = () => {
       <Box>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/statistics" element={<div>Statistics</div>} />
           <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </Box>

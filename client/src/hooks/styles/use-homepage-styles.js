@@ -70,6 +70,21 @@ export const useHomeHeroStyles = createStyles((theme) => ({
     lineHeight: "80px",
     letterSpacing: "3px",
   },
+  guestAnchor: {
+    [theme.fn.smallerThan("md")]: {
+      marginTop: "20px",
+    },
+    paddingLeft: "20px",
+    color: theme.colors.primary[6],
+  },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    [theme.fn.smallerThan("sm")]: {
+      justifyContent: "center",
+    },
+  },
   button: {
     [theme.fn.smallerThan("sm")]: {
       alignSelf: "center",

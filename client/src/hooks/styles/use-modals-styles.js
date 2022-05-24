@@ -9,6 +9,7 @@ export const useModalStyles = createStyles((theme) => ({
       paddingTop: "4px",
     },
   },
+
   modal: {
     ".mantine-Modal-modal": {
       backgroundColor: theme.colors.dark[4],
@@ -20,6 +21,7 @@ export const useModalStyles = createStyles((theme) => ({
       letterSpacing: "2px",
     },
   },
+
   button: {
     "&:hover": {
       backgroundColor: theme.colors.primary[8],
