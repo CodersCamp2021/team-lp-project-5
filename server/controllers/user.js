@@ -3,20 +3,31 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 
 export default class UserController {
-  static register = async (body) => {
+  static register = async (req, res) => {
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(body.password, salt);
-    await pool.query(
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const user = await pool.query(
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
-        body.username,
-        body.firstName,
-        body.lastName,
+        req.body.username,
+        req.body.firstName,
+        req.body.lastName,
         hashedPassword,
-        body.email,
+        req.body.email,
       ],
     );
-    return { message: "User created" };
+    const userSessionIdExist = user.rows[0].session;
+    if (userSessionIdExist) {
+      res.cookie("team-lp-project-5", userSessionIdExist);
+    } else {
+      const sessionToken = crypto.randomBytes(64).toString("base64");
+      await pool.query(`UPDATE users SET session=$1 WHERE email=$2;`, [
+        sessionToken,
+        req.body.email,
+      ]);
+      res.cookie("team-lp-project-5", sessionToken);
+    }
+    return { message: "User created", userId: user.rows[0].user_id };
   };
 
   static login = async (req, res) => {
