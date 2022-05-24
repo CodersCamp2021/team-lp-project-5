@@ -6,7 +6,7 @@ export default class UserController {
   static register = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    const user = await pool.query(
+    await pool.query(
       `INSERT INTO users (username, first_name, second_name, password, email) VALUES ($1, $2, $3, $4, $5);`,
       [
         req.body.username,
@@ -16,6 +16,9 @@ export default class UserController {
         req.body.email,
       ],
     );
+    const user = await pool.query(`SELECT * FROM users WHERE email=$1;`, [
+      req.body.email,
+    ]);
     const userSessionIdExist = user.rows[0].session;
     if (userSessionIdExist) {
       res.cookie("team-lp-project-5", userSessionIdExist);
