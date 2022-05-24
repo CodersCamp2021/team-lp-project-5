@@ -111,6 +111,20 @@ class TimeyApiClient {
     });
     return response.json();
   }
+
+  async fetchTasksByName(name) {
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + `/task/search/${name}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.json();
+  }
 }
 
 export default TimeyApiClient;
