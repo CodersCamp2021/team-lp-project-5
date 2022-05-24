@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
@@ -39,7 +40,8 @@ const forms = [
 
 const SignUpModal = ({ opened, setOpened, openImport }) => {
   const { classes } = useModalStyles();
-  const { store, userType } = useContext(UserContext);
+  const { store, userType, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const form = useForm({
     schema: yupResolver(registrationSchema),
     initialValues: {
@@ -62,12 +64,15 @@ const SignUpModal = ({ opened, setOpened, openImport }) => {
           icon: <BsCheckLg />,
           color: "teal",
         });
-      },
-      onError: (error) => {
         if (userType !== "user" && store.getTasks().length > 0) {
           setOpened(false);
           openImport();
+        } else {
+          setUser();
+          navigate(0);
         }
+      },
+      onError: (error) => {
         showNotification({
           title: "Something went wrong!",
           message: error.message,

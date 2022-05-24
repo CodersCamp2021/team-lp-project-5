@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Button,
   Modal,
@@ -16,6 +16,8 @@ import { useModalStyles } from "../../hooks/styles/use-modals-styles";
 import { useUserStore } from "../../hooks/store/use-user-store";
 import { useGuestStore } from "../../hooks/store/use-guest-store";
 import { showNotification } from "@mantine/notifications";
+import { UserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const ImportDataModal = ({ opened, setOpened }) => {
   const [importing, setImporting] = useState(false);
@@ -24,9 +26,11 @@ const ImportDataModal = ({ opened, setOpened }) => {
   const theme = useMantineTheme();
   const { getTasks } = useGuestStore();
   const { createTask } = useUserStore();
+  const { setUser } = useContext(UserContext);
   const { createTaskAsync } = createTask;
   let callback = useRef();
   const { classes } = useModalStyles();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let interval, closeModal, resetImporting;
@@ -64,17 +68,17 @@ const ImportDataModal = ({ opened, setOpened }) => {
     try {
       localStorage.removeItem("tasks");
       for (const task of tasks) {
-        const { title, description, /** userId */ priority, status, dueDate } =
-          task;
+        const { title, description, priority, status, dueDate } = task;
         await createTaskAsync({
           title,
           description,
           priority,
           status,
           dueDate,
-          /** userId */
         });
       }
+      setUser();
+      navigate(0);
     } catch (error) {
       setError(error);
       showNotification({
