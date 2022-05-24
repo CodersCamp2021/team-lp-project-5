@@ -6,6 +6,7 @@ import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import cors from "cors";
 import "dotenv/config";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +17,12 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  }),
+);
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
@@ -36,5 +43,6 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Server listening on ${PORT}`);
 });

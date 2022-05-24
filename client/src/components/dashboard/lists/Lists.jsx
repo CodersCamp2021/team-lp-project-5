@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Divider, ScrollArea, Title } from "@mantine/core";
 import dayjs from "dayjs";
 
@@ -7,16 +7,25 @@ import { UserContext } from "../../../UserContext";
 import TaskList from "./TaskList";
 
 const Lists = () => {
+  const [todayList, setTodayList] = useState([]);
+  const [tomorrowList, setTomorrowList] = useState([]);
+  const [leftoversList, setLeftoversList] = useState([]);
   const { store } = useContext(UserContext);
   const { classes } = useListsStyles();
-  const today = dayjs();
-  const tomorrow = dayjs().add(1, "day");
+  const today = dayjs().format("YYYY-MM-DD");
+  const tomorrow = dayjs().add(1, "day").format("YYYY-MM-DD");
 
-  const todayList = store.getTasks(today);
-
-  const tomorrowList = store.getTasks(tomorrow);
-
-  const leftoversList = store.getLeftoverTasks();
+  useEffect(() => {
+    const getTasks = async () => {
+      const todayList = await store.getTasks(today);
+      const tomorrowList = await store.getTasks(tomorrow);
+      const leftoversList = await store.getLeftoverTasks(today);
+      setTodayList(todayList);
+      setTomorrowList(tomorrowList);
+      setLeftoversList(leftoversList);
+    };
+    getTasks();
+  }, []);
 
   return (
     <Box className={classes.listsWrapper}>

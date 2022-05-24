@@ -1,5 +1,4 @@
-import React from "react";
-import { createContext } from "react";
+import React, { createContext } from "react";
 import { useStore } from "./hooks/store/use-store";
 
 export const UserContext = createContext();

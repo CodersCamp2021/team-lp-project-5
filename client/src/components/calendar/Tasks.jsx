@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { showNotification } from "@mantine/notifications";
 import { Box, Stack, Text } from "@mantine/core";
 import { ImCross } from "react-icons/im";
-import dayjs from "dayjs";
 
 import { useCalendarPageStyles } from "../../hooks/styles/use-calendar-page-styles";
 import { UserContext } from "../../UserContext";
@@ -18,7 +17,7 @@ const Tasks = ({ selectedDate }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const data = await store.getTasks(dayjs(selectedDate));
+        const data = await store.getTasks(selectedDate);
         setTasks(data);
       } catch (error) {
         showNotification({
@@ -30,18 +29,18 @@ const Tasks = ({ selectedDate }) => {
       }
     };
     fetchTasks();
-  }, [tasks]);
-
-  const mappedTasks = tasks?.map((task) => (
-    <SingleTask key={task.taskId} task={task} />
-  ));
+  }, [selectedDate]);
 
   return (
     <Box className={classes.tasks}>
       <Text className={classes.tasksHeader}>Tasks</Text>
-      <TasksWrapper isScroll={mappedTasks.length > 5}>
+      <TasksWrapper isScroll={tasks?.length > 5}>
         <Stack className={classes.tasksContainer}>
-          {mappedTasks.length ? mappedTasks : <EmptyTasksTitle />}
+          {tasks?.length ? (
+            tasks?.map((task) => <SingleTask key={task.taskId} task={task} />)
+          ) : (
+            <EmptyTasksTitle />
+          )}
         </Stack>
       </TasksWrapper>
     </Box>

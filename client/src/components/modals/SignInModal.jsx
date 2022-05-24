@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Modal, Button, Group, PasswordInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { loginSchema } from "../../utils/loginSchema";
-import Input from "./Input";
-import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import { showNotification } from "@mantine/notifications";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { BsCheckLg } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 
-const handleSubmit = (values) => {
-  console.log(values);
-};
+import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import { loginSchema } from "../../utils/loginSchema";
+import TimeyApiClient from "../../api/timey";
+import { UserContext } from "../../UserContext";
+import Input from "./Input";
+
+const timeyApi = new TimeyApiClient();
 
 const SignInModal = ({ opened, setOpened }) => {
   const { classes } = useModalStyles();
+  const { setUser } = useContext(UserContext);
+  let navigate = useNavigate();
+
   const form = useForm({
     schema: yupResolver(loginSchema),
     initialValues: {
@@ -18,6 +27,31 @@ const SignInModal = ({ opened, setOpened }) => {
       password: "",
     },
   });
+
+  const { mutate: login } = useMutation((values) => timeyApi.login(values), {
+    onSuccess: (data) => {
+      showNotification({
+        title: "Success",
+        message: data.message,
+        icon: <BsCheckLg />,
+        color: "teal",
+      });
+      setUser();
+      navigate("/", { replace: true });
+    },
+    onError: (error) => {
+      showNotification({
+        title: "Something went wrong!",
+        message: error.message,
+        icon: <ImCross />,
+        color: "red",
+      });
+    },
+  });
+
+  const handleSubmit = (values) => {
+    login(values);
+  };
 
   return (
     <Modal

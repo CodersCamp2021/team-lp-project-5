@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Anchor, Avatar, Box, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { useNavbarStyles } from "../../../hooks/styles/use-navbar-styles";
-import { useMediaQuery } from "@mantine/hooks";
 import SignUpModal from "../../modals/SignUpModal";
+import ImportDataModal from "../../modals/ImportDataModal";
 
 const NavbarUser = () => {
   const { classes } = useNavbarStyles();
   const [opened, setOpened] = useState(false);
+  const [importOpened, setImportOpened] = useState(false);
   const isUser = window.localStorage.getItem("userType") === "user";
   const isXsScreen = useMediaQuery("(max-width: 576px)");
+
+  const openImportModal = () => setImportOpened(true);
 
   return (
     <Box sx={{ paddingTop: 10 }}>
@@ -43,7 +47,12 @@ const NavbarUser = () => {
               .
             </Text>
           </Box>
-          <SignUpModal opened={opened} setOpened={setOpened} />
+          <ImportDataModal opened={importOpened} setOpened={setImportOpened} />
+          <SignUpModal
+            opened={opened}
+            setOpened={setOpened}
+            openImport={openImportModal}
+          />
         </>
       )}
     </Box>

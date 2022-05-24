@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal, Button, PasswordInput, Group, SimpleGrid } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { registrationSchema } from "../../utils/registrationSchema";
+import { showNotification } from "@mantine/notifications";
+import { useMutation } from "react-query";
+import { ImCross } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
+
 import { useModalStyles } from "../../hooks/styles/use-modals-styles";
+import { registrationSchema } from "../../utils/registrationSchema";
+import TimeyApiClient from "../../api/timey";
+import { UserContext } from "../../UserContext";
 import Input from "./Input";
+
+const timeyApi = new TimeyApiClient();
 
 const forms = [
   {
@@ -28,12 +38,10 @@ const forms = [
   },
 ];
 
-const handleSubmit = (values) => {
-  console.log(values);
-};
-
-const SignUpModal = ({ opened, setOpened }) => {
+const SignUpModal = ({ opened, setOpened, openImport }) => {
   const { classes } = useModalStyles();
+  const { store, userType, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const form = useForm({
     schema: yupResolver(registrationSchema),
     initialValues: {
@@ -45,6 +53,39 @@ const SignUpModal = ({ opened, setOpened }) => {
       confirmPassword: "",
     },
   });
+
+  const { mutate: register } = useMutation(
+    (values) => timeyApi.register(values),
+    {
+      onSuccess: () => {
+        showNotification({
+          title: "Success",
+          message: "Account created.",
+          icon: <BsCheckLg />,
+          color: "teal",
+        });
+        if (userType !== "user" && store.getTasks().length > 0) {
+          setOpened(false);
+          openImport();
+        } else {
+          setUser();
+          navigate(0);
+        }
+      },
+      onError: (error) => {
+        showNotification({
+          title: "Something went wrong!",
+          message: error.message,
+          icon: <ImCross />,
+          color: "red",
+        });
+      },
+    },
+  );
+
+  const handleSubmit = (values) => {
+    register(values);
+  };
 
   return (
     <Modal

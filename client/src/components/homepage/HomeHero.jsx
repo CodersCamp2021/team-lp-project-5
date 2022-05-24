@@ -12,10 +12,14 @@ import { UserContext } from "../../UserContext";
 import SignUpModal from "../modals/SignUpModal";
 import spanImage from "../../assets/span.png";
 import homeImage from "../../assets/homeImage.svg";
+import ImportDataModal from "../modals/ImportDataModal";
 
 const HomeHero = () => {
-  const { classes } = useHomeHeroStyles();
+  const [importOpened, setImportOpened] = useState(false);
   const [opened, setOpened] = useState(false);
+  const { classes } = useHomeHeroStyles();
+
+  const openImportModal = () => setImportOpened(true);
   const { setGuest } = useContext(UserContext);
 
   const handleGuestMode = () => setGuest();
@@ -61,7 +65,12 @@ const HomeHero = () => {
       <Box className={classes.imageContainer}>
         <Image className={classes.image} src={homeImage} withPlaceholder />
       </Box>
-      <SignUpModal opened={opened} setOpened={setOpened} />
+      <ImportDataModal opened={importOpened} setOpened={setImportOpened} />
+      <SignUpModal
+        opened={opened}
+        setOpened={setOpened}
+        openImport={openImportModal}
+      />
     </Box>
   );
 };
