@@ -2,43 +2,58 @@ import dayjs from "dayjs";
 class TimeyApiClient {
   async register(newUser) {
     const { firstName, lastName, username, email, password } = newUser;
-    const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/user/register`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + `/user/register`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          username,
-          email,
-          password,
-        }),
-      },
-    );
-    return response.json();
+      );
+      if (!response.ok) {
+        throw new Error("Incorrect email/password.");
+      }
+      return response.json();
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async login(credentials) {
     const { email, password } = credentials;
-    const response = await fetch(
-      process.env.REACT_APP_SERVER_URL + `/user/login`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + `/user/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      },
-    );
-    return response.json();
+      );
+      if (!response.ok) {
+        throw new Error("Incorrect email/password.");
+      }
+
+      return response.json();
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async fetchTasks(date) {
