@@ -15,7 +15,7 @@ const Tasks = ({ selectedDate }) => {
   const { store } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const getTasks = async () => {
       try {
         const data = await store.getTasks(selectedDate);
         setTasks(data);
@@ -28,8 +28,8 @@ const Tasks = ({ selectedDate }) => {
         });
       }
     };
-    fetchTasks();
-  }, [selectedDate]);
+    getTasks();
+  }, [selectedDate, store.taskState]);
 
   return (
     <Box className={classes.tasks}>
