@@ -90,13 +90,13 @@ Running frontend only:
 
 ## Timey endpoints
 
-### User
+## User
 
-> ## **POST** `/api/user/login`
+> #### **POST** `/api/user/login`
 
 - You can login to the app
 
-> ## **POST** `/api/user/register`
+> #### **POST** `/api/user/register`
 
 - You can add user to the app
 - Example request:
@@ -111,51 +111,51 @@ Running frontend only:
 }
 ```
 
-> ## **GET** `/api/user/userInfo`
+> #### **GET** `/api/user/userInfo`
 
 - You can get all information about user who is logged in
 
-> ## **GET** `/api/user/tasks/:dueDate`
+> #### **GET** `/api/user/tasks/:dueDate`
 
 - You can get task with specific date
 
-> ## **GET** `/api/user/tasks/until/:dueDate`
+> #### **GET** `/api/user/tasks/until/:dueDate`
 
 - You can get tasks until the specific date
 
-> ## **GET** `/api/user/labels`
+> #### **GET** `/api/user/labels`
 
 - You can get all user labels
 
-### Task
+## Task
 
-> ## **GET** `/api/task/search/:searchPhrase`
+> #### **GET** `/api/task/search/:searchPhrase`
 
 - You can search your tasks by phrase in the title or description
 
-> ## **POST** `/api/task`
+> #### **POST** `/api/task`
 
 - You can add task with information about him
 
-> ## **PUT** `/api/task/:task_id/changeStatus`
+> #### **PUT** `/api/task/:task_id/changeStatus`
 
 - You can change all task information
 
-> ## **DELETE** `/api/task/:task_id`
+> #### **DELETE** `/api/task/:task_id`
 
 - You can delete specific task with task_id
 
-### Label
+## Label
 
-> ## **POST** `/api/label`
+> #### **POST** `/api/label`
 
 - You can add label
 
-> ## **DELETE** `/api/label/:label_id`
+> #### **DELETE** `/api/label/:label_id`
 
 - You can delete label and relation with task
 
-> ## **POST** `/api/label/relation`
+> #### **POST** `/api/label/relation`
 
 - You can add relation between your task and labels
 
