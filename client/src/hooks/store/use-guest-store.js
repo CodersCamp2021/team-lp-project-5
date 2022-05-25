@@ -9,6 +9,7 @@ const TASKS = "tasks";
 const LABELS = "labels";
 
 export const useGuestStore = () => {
+  const [taskState, setTaskState] = useState({});
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem(TASKS)) || [],
   );
@@ -39,7 +40,8 @@ export const useGuestStore = () => {
   const createTask = (newTask) => {
     const newId = uuidv4();
     const tasksInStore = tasks || [];
-    const updatedTasks = [...tasksInStore, { ...newTask, taskId: newId }];
+    const createdTask = { ...newTask, taskId: newId };
+    const updatedTasks = [...tasksInStore, createdTask];
 
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
@@ -50,7 +52,10 @@ export const useGuestStore = () => {
       icon: <BsCheckLg />,
       color: "teal",
     });
-
+    setTaskState((prevTaskState) => ({
+      prevTaskState,
+      dueDate: [prevTaskState[createdTask.dueDate], createdTask],
+    }));
     return { message: "Task created" };
   };
 
@@ -83,6 +88,10 @@ export const useGuestStore = () => {
 
     const updatedTasks = [...filteredTasks, updatedTask];
 
+    setTaskState((prevTaskState) => ({
+      prevTaskState,
+      dueDate: [prevTaskState[updatedTask.dueDate], updatedTask],
+    }));
     setTasks(updatedTasks);
     localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
@@ -104,6 +113,14 @@ export const useGuestStore = () => {
         (task) => task.taskId !== taskId,
       );
       setTasks(updatedTasks);
+      setTaskState((prevTaskState) => ({
+        prevTaskState,
+        dueDate: [
+          prevTaskState[task.dueDate]?.filter(
+            ({ taskId }) => taskId !== task.taskId,
+          ),
+        ],
+      }));
       localStorage.setItem(TASKS, JSON.stringify(updatedTasks));
 
       showNotification({
@@ -143,6 +160,7 @@ export const useGuestStore = () => {
   };
 
   return {
+    taskState,
     getTasks,
     getLeftoverTasks,
     createTask,

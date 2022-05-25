@@ -1,15 +1,15 @@
 /* eslint no-console: 0 */
-import React from "react";
+import React, { useState } from "react";
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "react-query";
 import { ImCross } from "react-icons/im";
 import { BsCheckLg } from "react-icons/bs";
-
 import TimeyApiClient from "../../api/timey";
 
 const timeyApi = new TimeyApiClient();
 
 export const useUserStore = () => {
+  const [taskState, setTaskState] = useState({});
   const queryClient = useQueryClient();
 
   const getTasks = async (date) => {
@@ -56,7 +56,13 @@ export const useUserStore = () => {
           icon: <BsCheckLg />,
           color: "teal",
         });
-        queryClient.invalidateQueries(["tasks", task.dueDate]);
+        setTaskState((prevTaskState) => {
+          console.log(prevTaskState);
+          return {
+            prevTaskState,
+            dueDate: [prevTaskState[task.dueDate], task],
+          };
+        });
       },
       onError: (error) => {
         showNotification({
@@ -79,7 +85,10 @@ export const useUserStore = () => {
           icon: <BsCheckLg />,
           color: "teal",
         });
-        queryClient.invalidateQueries(["tasks", task.dueDate]);
+        setTaskState((prevTaskState) => ({
+          prevTaskState,
+          dueDate: [prevTaskState[task.dueDate], task],
+        }));
       },
       onError: (error) => {
         showNotification({
@@ -102,7 +111,14 @@ export const useUserStore = () => {
           icon: <BsCheckLg />,
           color: "teal",
         });
-        queryClient.invalidateQueries(["tasks", task.dueDate]);
+        setTaskState((prevTaskState) => ({
+          prevTaskState,
+          dueDate: [
+            prevTaskState[task.dueDate]?.filter(
+              ({ taskId }) => taskId !== task.taskId,
+            ),
+          ],
+        }));
       },
       onError: (error) => {
         showNotification({
@@ -133,6 +149,7 @@ export const useUserStore = () => {
   );
 
   return {
+    taskState,
     getTasks,
     getLeftoverTasks,
     createTask,

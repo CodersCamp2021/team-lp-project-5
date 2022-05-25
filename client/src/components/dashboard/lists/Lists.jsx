@@ -25,7 +25,7 @@ const Lists = () => {
       setLeftoversList(leftoversList);
     };
     getTasks();
-  }, []);
+  }, [store.taskState]);
 
   return (
     <Box className={classes.listsWrapper}>
