@@ -21,7 +21,7 @@ class TimeyApiClient {
         },
       );
       if (!response.ok) {
-        throw new Error("Incorrect email/password.");
+        throw new Error("Something went wrong");
       }
       return response.json();
     } catch (error) {
@@ -47,13 +47,27 @@ class TimeyApiClient {
         },
       );
       if (!response.ok) {
-        throw new Error("Incorrect email/password.");
+        throw new Error("Something went wrong");
       }
 
       return response.json();
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async logout() {
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + `/user/logout`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.json();
   }
 
   async fetchTasks(date) {
