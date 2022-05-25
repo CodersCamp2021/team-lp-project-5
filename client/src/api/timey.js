@@ -171,6 +171,21 @@ class TimeyApiClient {
     });
     return response.json();
   }
+
+  async getUser() {
+    const response = await fetch(
+      process.env.REACT_APP_SERVER_URL + "/user/userInfo",
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const data = await response.json();
+    return data.userInfo;
+  }
 }
 
 export default TimeyApiClient;
