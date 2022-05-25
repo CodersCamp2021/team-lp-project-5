@@ -37,7 +37,7 @@ const SignInModal = ({ opened, setOpened }) => {
         color: "teal",
       });
       setUser();
-      navigate("/", { replace: true });
+      navigate(0);
     },
     onError: (error) => {
       showNotification({
