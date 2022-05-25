@@ -88,7 +88,11 @@ Running frontend only:
 
 ## \*️⃣ Additional info
 
-## Timey endpoints
+This monorepo was set up by following the guide by Reed Barger:
+
+> https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/
+
+## 📭 Timey endpoints
 
 ## User
 
@@ -158,8 +162,3 @@ Running frontend only:
 > #### **POST** `/api/label/relation`
 
 - You can add relation between your task and labels
-
-
-This monorepo was set up by following the guide by Reed Barger:
-
-> https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/
